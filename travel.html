@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Planning</title>
+<style>
+:root {
+  --ochre:    #D8B47A;
+  --ochre-dk: #C39A5D;
+  --ochre-lt: #EAD7AA;
+  --tan-dk:   #B89D80;
+  --tan-md:   #CBB49A;
+  --tan-lt:   #E2D3BD;
+  --ink:      #2e2218;
+  --ink-mid:  #5a4a38;
+  --ink-light:#9a8870;
+  --cream:    #f7f2eb;
+  --white:    #ffffff;
+  --border:   rgba(46,34,24,0.12);
+  --border-s: rgba(46,34,24,0.20);
+  --shadow:   0 1px 6px rgba(46,34,24,0.08);
+  --shadow-h: 0 4px 18px rgba(46,34,24,0.14);
+  --radius:   10px;
+  /* obs = dusty lavender */
+  --obs-photo:#867594;
+  --obs-bg:   #A89AB5;
+  --obs-dark: #2e2238;
+  --obs-loc:  #D5CBDD;
+  /* tgt = dusty rose */
+  --tgt-photo:#B576A6;
+  --tgt-bg:   #CFA2BF;
+  --tgt-dark: #4a1e35;
+  --tgt-loc:  #E8C9D8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+/* ── HEADER ─────────────────────────────────────────────────────── */
+.header {
+  background: #4a6e68;
+  padding: 14px 28px;
+  display: flex; align-items: center; gap: 16px;
+  flex-shrink: 0; border-bottom: 3px solid #6F928A;
+}
+.header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 20px; font-weight: 400; letter-spacing: .01em;
+  color: #C4D4C8;
+  flex: 1;
+}
+.header h1 span { color: #e8f0ee; font-weight: 600; }
+.hcount { font-size: 11px; color: #95B5AB; font-weight: 500; white-space: nowrap; }
+
+/* ── TOOLBAR ─────────────────────────────────────────────────────── */
+.toolbar { background: var(--white); border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.trow {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  padding: 8px 22px; border-bottom: 1px solid var(--border);
+}
+.trow:last-child { border-bottom: none; }
+.fl {
+  font-size: 10px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600; text-transform: uppercase;
+  letter-spacing: .07em; color: var(--ink-light); white-space: nowrap;
+}
+/* Search */
+.sw { position: relative; }
+.sw input {
+  font-size: 11px; padding: 5px 10px 5px 28px;
+  border: 1px solid var(--border-s); border-radius: 99px;
+  background: var(--cream); color: var(--ink);
+  outline: none; width: 200px;
+}
+.sw input:focus { border-color: var(--ochre-dk); }
+.sw svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); opacity: .4; pointer-events: none; }
+
+/* Status chips */
+.chip {
+  font-size: 11px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500; padding: 4px 12px;
+  border-radius: 99px; border: 1px solid var(--border-s);
+  background: var(--cream); color: var(--ink-mid);
+  cursor: pointer; white-space: nowrap;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.chip:hover { border-color: var(--ochre-dk); color: var(--ink); }
+.chip.on { background: #6F928A; color: var(--white); border-color: #6F928A; }
+.chip-new.on { background: #D8B47A; border-color: #C39A5D; color: #3a2a10; }
+
+/* Location chips */
+.loc-chip {
+  font-size: 11px; font-weight: 500; padding: 4px 11px;
+  border-radius: 99px; border: 1px solid var(--border-s);
+  background: var(--cream); color: var(--ink-mid);
+  cursor: pointer; white-space: nowrap;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.loc-chip:hover { border-color: #95B5AB; }
+.loc-chip.on { background: #C4D4C8; color: var(--ink); border-color: #C4D4C8; }
+
+/* rbar */
+.rbar {
+  padding: 5px 22px; font-size: 11px; color: var(--ink-light);
+  border-bottom: 1px solid var(--border); background: var(--white); flex-shrink: 0;
+}
+.rbar strong { color: var(--ink); }
+
+/* ── GRID ─────────────────────────────────────────────────────────── */
+.grid-wrap { flex: 1; overflow-y: auto; padding: 16px 22px 40px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 10px; }
+
+/* ── PLANNING TILE ───────────────────────────────────────────────── */
+.scene { height: 104px; perspective: 900px; cursor: default; }
+.pt-inner {
+  position: relative; width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .45s cubic-bezier(.4,0,.2,1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.pt-inner:hover { box-shadow: var(--shadow-h); }
+.scene.flipped .pt-inner { transform: rotateY(180deg); }
+.face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  border-radius: var(--radius); border: .5px solid rgba(0,0,0,.12);
+  overflow: hidden; display: flex;
+}
+.face-back { transform: rotateY(180deg); }
+
+/* Photo */
+.pt-photo {
+  flex-shrink: 0; width: 104px; height: 104px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 600; color: rgba(255,255,255,.9);
+  font-family: Georgia, serif;
+}
+.pt-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Front right */
+.pt-right { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.pt-hdr { display: flex; align-items: center; padding: 7px 8px 1px 9px; gap: 5px; }
+.pt-name {
+  font-size: 12.5px; font-weight: 600; flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; font-family: Georgia, serif;
+}
+.pt-ob {
+  width: 20px; height: 20px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; flex-shrink: 0;
+  cursor: pointer; transition: all .15s; user-select: none; z-index: 2;
+}
+.pt-ob:hover { opacity: .8; transform: scale(1.1); }
+.pt-fam-row { display: flex; align-items: center; gap: 4px; padding: 1px 8px 4px 9px; }
+.pt-fam { font-size: 10px; opacity: .65; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pt-new-pill {
+  font-size: 8.5px; font-weight: 700; padding: 1px 6px;
+  border-radius: 99px; letter-spacing: .03em; flex-shrink: 0;
+}
+.pt-grid { display: flex; border-top: .5px solid rgba(0,0,0,.10); margin-top: auto; }
+.pt-col { flex: 1; display: flex; flex-direction: column; border-right: .5px solid rgba(0,0,0,.08); }
+.pt-col:last-child { border-right: none; }
+.pt-loc {
+  font-size: 7.5px; font-weight: 600; padding: 3px 2px 2px;
+  text-align: center; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-bottom: .5px solid rgba(0,0,0,.08);
+}
+.pt-rar {
+  font-size: 7.5px; font-weight: 500; padding: 3px 2px;
+  text-align: center; background: #e4e2de; color: #5a5854;
+}
+.pt-col-empty .pt-loc { background: #f0ece8; color: #b8a898; }
+.pt-col-empty .pt-rar { background: #f5f2ee; color: #c0b8b0; }
+
+/* Back */
+.back-full { flex: 1; display: flex; flex-direction: column; padding: 9px 11px 10px; }
+.back-hdr { display: flex; align-items: center; gap: 5px; margin-bottom: 7px; padding-bottom: 6px; border-bottom: .5px solid rgba(0,0,0,.10); }
+.back-name { font-size: 12.5px; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; font-family: Georgia, serif; }
+.back-row { display: flex; align-items: baseline; gap: 6px; margin-bottom: 5px; }
+.back-row:last-child { margin-bottom: 0; }
+.back-lbl { font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; opacity: .5; white-space: nowrap; flex-shrink: 0; width: 44px; }
+.back-val { font-size: 9.5px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex: 1; min-width: 0; }
+
+.pt-cat-pills { display:flex; flex-wrap:wrap; gap:3px; padding:2px 8px 4px 9px; }
+.pt-cat-pill {
+  font-size:8.5px; font-weight:700; padding:2px 7px; border-radius:99px;
+  letter-spacing:.03em; color:#fff;
+}
+
+.empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; font-size: 14px; font-style: italic; color: var(--ink-light); }
+
+.nav-btn {
+  font-size: 12px; font-weight: 500; padding: 7px 14px; border-radius: 99px;
+  border: 1px solid rgba(234,215,170,.3); background: rgba(255,255,255,.08);
+  color: #C4D4C8; cursor: pointer; letter-spacing: .02em;
+  transition: background .15s, border-color .15s; white-space: nowrap;
+}
+.nav-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(196,212,200,.5); }
+
+.sort-select {
+  font-size: 11px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500; padding: 4px 28px 4px 10px;
+  border-radius: 99px; border: 1px solid var(--border-s);
+  background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8870'/%3E%3C/svg%3E") no-repeat right 10px center;
+  -webkit-appearance: none; appearance: none;
+  color: var(--ink-mid); cursor: pointer; outline: none;
+}
+.sort-select:focus { border-color: #6F928A; }
+.count-input {
+  font-size: 11px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  width: 44px; padding: 4px 6px; text-align: center;
+  border-radius: 99px; border: 1px solid var(--border-s);
+  background: var(--cream); color: var(--ink-mid); outline: none;
+  -moz-appearance: textfield;
+}
+.count-input::-webkit-inner-spin-button,
+.count-input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.count-input:focus { border-color: #6F928A; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Travel Planning: <span id="trip-title" style="font-weight:400">—</span></h1>
+  <span class="hcount" id="hcount"></span>
+  <button class="nav-btn" onclick="document.getElementById('fi').click()">&#8593; Load CSV</button>
+  <button class="nav-btn" id="reset-btn" onclick="resetToCSV()" style="display:none">&#8635; Reset to CSV</button>
+  <input type="file" id="fi" accept=".csv" style="display:none">
+</div>
+
+<div class="toolbar">
+  <div class="trow">
+    <div class="sw">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Search species or families...">
+    </div>
+    <span class="fl" style="margin-left:8px">Status</span>
+    <button class="chip on" id="st-all"    onclick="setStatus('all')">All</button>
+    <button class="chip"    id="st-seen"   onclick="setStatus('seen')">Observed ✓</button>
+    <button class="chip"    id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
+    <button class="chip chip-new" id="st-new" onclick="toggleNew()">New Families</button>
+    <span class="fl" style="margin-left:8px">Sort</span>
+    <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
+      <option value="taxo">Taxo order ↓</option>
+      <option value="rarity">Rarity ↓</option>
+      <option value="name">Name A–Z</option>
+    </select>
+    <span class="fl" style="margin-left:12px">C &#8805;</span>
+    <input type="number" class="count-input" id="min-c" value="0" min="0" max="99" oninput="render()">
+    <span class="fl" style="margin-left:8px">C+I &#8805;</span>
+    <input type="number" class="count-input" id="min-ci" value="0" min="0" max="99" oninput="render()">
+  </div>
+  <div class="trow">
+    <span class="fl">Location</span>
+    <div id="loc-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+  </div>
+  <div class="trow" id="cat-row" style="display:none;">
+    <span class="fl">Category</span>
+    <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+  </div>
+  <div class="trow" id="cat-row" style="display:none">
+    <span class="fl">Category</span>
+    <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+  </div>
+</div>
+
+<div class="rbar" id="rbar" style="display:none">
+  <span id="rbar-txt"></span>
+</div>
+
+<div class="grid-wrap">
+  <div class="grid" id="grid"></div>
+</div>
+
+
+<script>
+var ALL = [];
+var STATUS = 'all', NEW_FAM = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
+var CATS = [];
+var LOCS = [];
+var LOCAL_KEY = 'travel_observed_';
+var TITLE = '';
+
+/* ── Abbrev ── */
+function abbrevName(name, threshold) {
+  if (!threshold) threshold = 29;
+  if (name.length <= threshold) return name;
+  var map = [
+    [/\bBlack-and-yellow\b/g,'Blk-yel'],
+    [/\bBlack-and-white\b/g,'Blk-wht'],
+    [/\bRufous-backed\b/g,'Rf-backed'],
+    [/\bChestnut-backed\b/g,'Ch-backed'],
+    [/\bMalaysian\b/g,'Malay.'],
+    [/\bMalayan\b/g,'Malay.'],
+    [/\bBorneo\b/g,'Born.'],
+    [/\bBornean\b/g,'Born.'],
+    [/\bOriental\b/g,'Orient.'],
+    [/\bGreater\b/g,'Gr.'],
+    [/\bLesser\b/g,'Lr.'],
+    [/\bCommon\b/g,'C.'],
+    [/\bNorthern\b/g,'N.'],
+    [/\bSouthern\b/g,'S.'],
+    [/\bEastern\b/g,'E.'],
+    [/\bWestern\b/g,'W.'],
+    [/\bRufous\b/g,'Rf.'],
+    [/\bChestnut\b/g,'Ches.'],
+    [/\bBlue-throated\b/g,'Bl-thr'],
+    [/\bBlue-banded\b/g,'Bl-bnd'],
+    [/\bBlue-backed\b/g,'Bl-bck'],
+    [/\bGolden-naped\b/g,'Gld-np'],
+    [/\bFlycatcher-Shrike\b/g,'Fly-Shrike'],
+    [/\bFlycatcher-shrike\b/g,'Fly-Shrike'],
+    [/\bSpiderhunter\b/g,'Spider.'],
+  ];
+  var s = name;
+  for (var i = 0; i < map.length; i++) {
+    if (s.length <= threshold) break;
+    s = s.replace(map[i][0], map[i][1]);
+  }
+  return s;
+}
+
+/* ── Abbrev family name ── */
+function abbrevFamily(name) {
+  // Always: " and " → " & " (word boundary so we don't mangle words containing "and")
+  var s = name.replace(/ and /g, ' & ');
+  // If still too long and ends with "& Allies", drop it
+  // Approximate threshold: family field is ~220px at 9px font ≈ 36 chars
+  if (s.length > 34 && /\s*&\s*Allies$/.test(s)) {
+    s = s.replace(/\s*&\s*Allies$/, '');
+  }
+  return s;
+}
+
+
+/* ── Initials ── */
+function initials(n) {
+  return n.split(/[\s\-]+/).slice(0,2).map(function(w){return (w[0]||'').toUpperCase();}).join('');
+}
+
+/* ── localStorage observed overrides ── */
+function storageKey() { return LOCAL_KEY + TITLE.replace(/\s/g,'_'); }
+function getOverrides() {
+  try { return JSON.parse(localStorage.getItem(storageKey()) || '{}'); } catch(e){ return {}; }
+}
+function setOverride(name, val) {
+  var o = getOverrides(); o[name] = val;
+  try { localStorage.setItem(storageKey(), JSON.stringify(o)); } catch(e){}
+}
+function isObserved(sp) {
+  var o = getOverrides();
+  return o.hasOwnProperty(sp.name) ? o[sp.name] : sp.observed;
+}
+
+/* ── Status toggle ── */
+function setStatus(s) {
+  STATUS = s;
+  ['all','seen','unseen'].forEach(function(k){
+    document.getElementById('st-'+k).classList.toggle('on', k===s);
+  });
+  render();
+}
+function toggleNew() {
+  NEW_FAM = !NEW_FAM;
+  document.getElementById('st-new').classList.toggle('on', NEW_FAM);
+  render();
+}
+function setSort(val) {
+  SORT_BY = val;
+  render();
+}
+
+/* ── Location chips ── */
+function buildLocChips() {
+  var c = document.getElementById('loc-chips');
+  c.innerHTML = '';
+
+  // All pill — starts selected, showing all
+  var allBtn = document.createElement('button');
+  allBtn.className = 'loc-chip on';
+  allBtn.id = 'loc-all';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', function() {
+    // Re-select All, deselect individuals
+    ACTIVE_LOCS = LOCS.slice();
+    document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){ x.classList.remove('on'); });
+    allBtn.classList.add('on');
+    render();
+  });
+  c.appendChild(allBtn);
+
+  LOCS.forEach(function(loc) {
+    var b = document.createElement('button');
+    b.className = 'loc-chip';   // start unselected
+    b.textContent = loc;
+    b.dataset.loc = loc;
+    b.addEventListener('click', function() {
+      // Deselect All when picking individual locs
+      allBtn.classList.remove('on');
+      b.classList.toggle('on');
+      ACTIVE_LOCS = Array.from(document.querySelectorAll('.loc-chip[data-loc].on')).map(function(x){return x.dataset.loc;});
+      // If nothing selected, fall back to All
+      if (ACTIVE_LOCS.length === 0) {
+        allBtn.classList.add('on');
+        ACTIVE_LOCS = LOCS.slice();
+      }
+      render();
+    });
+    c.appendChild(b);
+  });
+  ACTIVE_LOCS = LOCS.slice(); // All selected by default
+}
+
+/* ── Build category chips ── */
+
+/* ── Category colors (stable random assignment) ── */
+var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','#D9C3A6','#D98F77'];
+var CAT_COLOR_MAP = {};
+function getCatColor(cat) {
+  if (cat === 'Widespread') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
+  if (cat === 'Sing only')  return '#D98F77';  // fixed: terracotta
+  if (!CAT_COLOR_MAP[cat]) {
+    var idx = Object.keys(CAT_COLOR_MAP).length % CAT_PALETTE.length;
+    CAT_COLOR_MAP[cat] = CAT_PALETTE[idx];
+  }
+  return CAT_COLOR_MAP[cat];
+}
+
+/* ── Build tile ── */
+function buildTile(sp) {
+  var obs = isObserved(sp);
+  var photo = obs ? 'var(--obs-photo)' : 'var(--tgt-photo)';
+  var bg    = obs ? 'var(--obs-bg)'    : 'var(--tgt-bg)';
+  var dark  = obs ? 'var(--obs-dark)'  : 'var(--tgt-dark)';
+  var loc   = obs ? 'var(--obs-loc)'   : 'var(--tgt-loc)';
+  var obStyle = obs
+    ? 'background:var(--obs-photo);color:#fff;border:none;'
+    : 'background:transparent;color:transparent;border:2px solid var(--tgt-photo);';
+  var obTxt = obs ? '✓' : '';
+  var catPill = sp.category
+    ? '<div class="pt-cat-pill" style="background:'+loc+';color:'+dark+';">'+sp.category+'</div>'
+    : '';
+  var newPill = sp.famNew
+    ? '<span class="pt-new-pill" style="background:'+loc+';color:'+dark+'">New</span>' : '';
+  var ini = initials(sp.name);
+  var slug = sp.name.toLowerCase().replace(/[\u2018\u2019']/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+
+  var gridHTML = '<div class="pt-grid">';
+  for (var i = 0; i < 6; i++) {
+    var l = sp.locs[i];
+    if (l) {
+      gridHTML += '<div class="pt-col">'
+        + '<div class="pt-loc" style="background:'+loc+';color:'+dark+'">'+l[0]+'</div>'
+        + '<div class="pt-rar">'+l[1]+'</div>'
+        + '</div>';
+    } else {
+      gridHTML += '<div class="pt-col pt-col-empty"><div class="pt-loc">—</div><div class="pt-rar">—</div></div>';
+    }
+  }
+  gridHTML += '</div>';
+
+  var scene = document.createElement('div');
+  scene.className = 'scene';
+  scene.dataset.name = sp.name;
+
+  var inner = document.createElement('div');
+  inner.className = 'pt-inner';
+
+  var front = document.createElement('div');
+  front.className = 'face';
+  front.innerHTML =
+    '<div class="pt-photo" style="background:'+photo+'">'
+    + '<img src="photos/'+slug+'.jpg" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" style="display:block">'
+    + '<div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:17px;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.04em;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;">'+ini+'</div>'
+    + '</div>'
+    + '<div class="pt-right" style="background:'+bg+'">'
+    +   '<div class="pt-hdr">'
+    +     '<span class="pt-name" style="color:'+dark+'">'+abbrevName(sp.name, 29)+'</span>'
+    +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
+    +   '</div>'
+    +   '<div class="pt-fam-row"><span class="pt-fam" style="color:'+dark+'">'+abbrevFamily(sp.family)+'</span>'+newPill+'</div>'
+    +   (sp.cats&&sp.cats.length ? '<div class="pt-cat-pills">'+sp.cats.map(function(c){var isWide = c === 'Widespread'; return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('')+'</div>' : '')
+    +   gridHTML
+    + '</div>';
+
+  var back = document.createElement('div');
+  back.className = 'face face-back';
+  back.innerHTML =
+    '<div class="back-full" style="background:'+bg+'">'
+    +   '<div class="back-hdr" style="border-color:rgba(0,0,0,.1)">'
+    +     '<span class="back-name" style="color:'+dark+'">'+abbrevName(sp.name, 32)+'</span>'
+    +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
+    +   '</div>'
+    +   '<div class="back-row"><span class="back-lbl" style="color:'+dark+'">Features</span><span class="back-val" style="color:'+dark+'">'+(sp.features||'—')+'</span></div>'
+    +   '<div class="back-row"><span class="back-lbl" style="color:'+dark+'">Spots</span><span class="back-val" style="color:'+dark+'">'+(sp.spots||'—')+'</span></div>'
+    +   '<div class="back-row"><span class="back-lbl" style="color:'+dark+'">Similar</span><span class="back-val" style="color:'+dark+'">'+(sp.lookalikes||'—')+'</span></div>'
+    + '</div>';
+
+  inner.appendChild(front);
+  inner.appendChild(back);
+  scene.appendChild(inner);
+
+  /* Click: circle toggles observed, lower-right flips */
+  scene.addEventListener('click', function(e) {
+    var obBtn = e.target.closest('.pt-ob');
+    if (obBtn) {
+      var name = obBtn.dataset.name;
+      var sp2 = ALL.filter(function(s){return s.name===name;})[0];
+      if (!sp2) return;
+      var cur = isObserved(sp2);
+      setOverride(name, !cur);
+      var wasFlipped = scene.classList.contains('flipped');
+      var newTile = buildTile(sp2);
+      if (wasFlipped) newTile.classList.add('flipped');
+      scene.parentNode.replaceChild(newTile, scene);
+      updateCount();
+      return;
+    }
+    var rect = scene.getBoundingClientRect();
+    var x = e.clientX - rect.left, y = e.clientY - rect.top;
+    if (x > rect.width * 0.6 && y > rect.height * 0.5) {
+      scene.classList.toggle('flipped');
+    }
+  });
+
+  return scene;
+}
+
+/* ── Render ── */
+function render() {
+  var q = document.getElementById('search').value.toLowerCase();
+  var f = ALL.filter(function(sp) {
+    if (q && sp.name.toLowerCase().indexOf(q) < 0 && sp.family.toLowerCase().indexOf(q) < 0) return false;
+    var obs = isObserved(sp);
+    if (STATUS === 'seen'   && !obs) return false;
+    if (STATUS === 'unseen' && obs)  return false;
+    if (NEW_FAM && !sp.famNew) return false;
+    /* Location filter: species must have at least one loc in ACTIVE_LOCS */
+    var hasLoc = sp.locs.some(function(l){ return l && ACTIVE_LOCS.indexOf(l[0]) >= 0; });
+    if (!hasLoc) return false;
+    /* Category filter */
+    if (CATS.length && ACTIVE_CATS.length < CATS.length) {
+      var spCats = sp.cats || []; var hasCat = spCats.length === 0 ? false : spCats.some(function(c){ return ACTIVE_CATS.indexOf(c) >= 0; });
+      if (!hasCat) return false;
+    }
+    /* C≥ and C+I≥ filters */
+    var minC  = parseInt(document.getElementById('min-c').value)  || 0;
+    var minCI = parseInt(document.getElementById('min-ci').value) || 0;
+    if (minC > 0 || minCI > 0) {
+      var cCount = 0, ciCount = 0;
+      sp.locs.forEach(function(l) {
+        if (!l || ACTIVE_LOCS.indexOf(l[0]) < 0) return;
+        if (l[1].charAt(0) === 'C') cCount++;
+        ciCount++;
+      });
+      if (minC  > 0 && cCount  < minC)  return false;
+      if (minCI > 0 && ciCount < minCI) return false;
+    }
+    return true;
+  });
+
+  // Sort BEFORE rendering
+  function bestRarity(sp) {
+    var best = null;
+    sp.locs.forEach(function(l) {
+      if (!l) return;
+      if (ACTIVE_LOCS.indexOf(l[0]) < 0) return;
+      var prefix = l[1].startsWith('C') ? 0 : 1;
+      var num = parseInt(l[1].split('-')[1] || 9999);
+      if (!best || prefix < best[0] || (prefix === best[0] && num < best[1])) {
+        best = [prefix, num, l[0]];
+      }
+    });
+    return best || [9, 9999, 'z'];
+  }
+  if (SORT_BY === 'name') {
+    f.sort(function(a,b){ return a.name.localeCompare(b.name); });
+  } else if (SORT_BY === 'rarity') {
+    f.sort(function(a,b) {
+      var ra = bestRarity(a), rb = bestRarity(b);
+      if (ra[0] !== rb[0]) return ra[0] - rb[0];
+      if (ra[1] !== rb[1]) return ra[1] - rb[1];
+      return ra[2].localeCompare(rb[2]);
+    });
+  }
+  // taxo: ALL is already sorted by id, filter preserves order
+
+  var grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  if (!f.length) {
+    grid.innerHTML = '<div class="empty-state">No species match these filters.</div>';
+  } else {
+    f.forEach(function(sp) { grid.appendChild(buildTile(sp)); });
+  }
+
+  document.getElementById('rbar').style.display = 'flex';
+  document.getElementById('rbar-txt').innerHTML =
+    'Showing <strong>' + f.length + '</strong> of <strong>' + ALL.length + '</strong> species';
+  updateCount();
+}
+
+function updateCount() {
+  var obs = ALL.filter(function(sp){return isObserved(sp);}).length;
+  document.getElementById('hcount').textContent =
+    obs + ' observed · ' + (ALL.length - obs) + ' targets';
+}
+
+/* ── Load CSV ── */
+function parseCSV(txt) {
+  var lines = txt.split(/\r?\n/);
+  if (lines.length < 2) return [];
+  var heads = splitRow(lines[0]).map(function(h){return h.trim().toLowerCase();});
+  function col() {
+    var names = Array.prototype.slice.call(arguments);
+    for (var n=0; n<names.length; n++)
+      for (var i=0; i<heads.length; i++)
+        if (heads[i] === names[n].toLowerCase()) return i;
+    return -1;
+  }
+  var iName=col('malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
+      iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
+      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat=col('categories');
+
+  var map = {};
+  for (var i=1; i<lines.length; i++) {
+    var c = splitRow(lines[i]);
+    if (!c || !c[iName] || !c[iName].trim()) continue;
+    var name = c[iName].trim();
+    if (!map[name]) {
+      map[name] = {
+        name: name,
+        observed: (c[iNew]||'').trim().toLowerCase() === 'no',
+        family: (c[iFamily]||'').trim(),
+        famNew: (c[iFam]||'').trim().toLowerCase() === 'new',
+        id: parseInt((c[iID]||'9999').trim()) || 9999,
+        locs: [],
+        cats: [],
+        features: (c[iFeat]||'').trim(),
+        spots: (c[iSpots]||'').trim(),
+        lookalikes: (c[iLook]||'').trim()
+      };
+    } else if ((c[iNew]||'').trim().toLowerCase() === 'no') {
+      map[name].observed = true;
+    }
+    // First-encountered text wins for features/spots/lookalikes/category
+    if (!map[name].features && (c[iFeat]||'').trim()) map[name].features = c[iFeat].trim();
+    if (!map[name].spots   && (c[iSpots]||'').trim()) map[name].spots    = c[iSpots].trim();
+    if (!map[name].lookalikes && (c[iLook]||'').trim()) map[name].lookalikes = c[iLook].trim();
+    if (!map[name].category && (c[iCat]||'').trim()) map[name].category = c[iCat].trim();
+    var locName = (c[iLoc]||'').trim(), rarVal = (c[iRar]||'').trim();
+    if (locName && rarVal) map[name].locs.push([locName, rarVal]);
+    // First non-empty wins for text fields
+    if (!map[name].features && iFeat>=0) map[name].features = (c[iFeat]||'').trim();
+    if (!map[name].spots    && iSpots>=0) map[name].spots   = (c[iSpots]||'').trim();
+    if (!map[name].lookalikes && iLook>=0) map[name].lookalikes = (c[iLook]||'').trim();
+    // Categories — collect unique values
+    if (iCat>=0) {
+      var catVal = (c[iCat]||'').trim();
+      if (catVal && map[name].cats.indexOf(catVal) < 0) map[name].cats.push(catVal);
+    }
+  }
+
+  var list = Object.values(map);
+  list.forEach(function(sp) {
+    sp.locs.sort(function(a,b){
+      var ap = a[1].startsWith('C') ? 0 : 1, bp = b[1].startsWith('C') ? 0 : 1;
+      if (ap !== bp) return ap - bp;
+      return parseInt(a[1].split('-')[1]||0) - parseInt(b[1].split('-')[1]||0);
+    });
+    while (sp.locs.length < 6) sp.locs.push(null);
+    sp.locs = sp.locs.slice(0,6);
+  });
+  list.sort(function(a,b){return a.id - b.id;});
+  return list;
+}
+
+function splitRow(line) {
+  var out=[], cur='', inQ=false;
+  for (var i=0; i<line.length; i++) {
+    var ch = line[i];
+    if (ch==='"') { inQ=!inQ; }
+    else if (ch===',' && !inQ) { out.push(cur); cur=''; }
+    else cur+=ch;
+  }
+  out.push(cur);
+  return out;
+}
+
+function loadCSV(txt) {
+  ALL = parseCSV(txt);
+  /* derive title from first column header */
+  var firstLine = txt.split(/\r?\n/)[0];
+  TITLE = splitRow(firstLine)[0].trim();
+  document.getElementById('trip-title').textContent = TITLE;
+
+  /* unique locations */
+  var locSet = {};
+  ALL.forEach(function(sp){
+    sp.locs.forEach(function(l){ if(l) locSet[l[0]]=1; });
+  });
+  LOCS = Object.keys(locSet).sort();
+  buildLocChips();
+
+  /* unique categories */
+  var catSet = {};
+  ALL.forEach(function(sp){ sp.cats.forEach(function(c){ catSet[c]=1; }); });
+  CATS = Object.keys(catSet).sort();
+  ACTIVE_CATS = CATS.slice();
+  buildCatChips();
+
+  /* unique categories */
+  var catSet = {};
+  ALL.forEach(function(sp){ if (sp.category) catSet[sp.category] = 1; });
+  CATS = Object.keys(catSet).sort();
+  buildCatChips();
+
+  document.getElementById('rbar').style.display = 'flex';
+  document.getElementById('reset-btn').style.display = '';
+  render();
+}
+
+/* ── Category chips ── */
+function buildCatChips() {
+  var c = document.getElementById('cat-chips');
+  if (!c) return;
+  c.innerHTML = '';
+  if (!CATS.length) {
+    document.getElementById('cat-row').style.display = 'none';
+    return;
+  }
+  document.getElementById('cat-row').style.display = 'flex';
+
+  var allBtn = document.createElement('button');
+  allBtn.className = 'loc-chip on';
+  allBtn.id = 'cat-all';
+  allBtn.textContent = 'All';
+  allBtn.addEventListener('click', function() {
+    ACTIVE_CATS = CATS.slice();
+    document.querySelectorAll('.cat-chip[data-cat]').forEach(function(x){ x.classList.remove('on'); });
+    allBtn.classList.add('on');
+    render();
+  });
+  c.appendChild(allBtn);
+
+  CATS.forEach(function(cat) {
+    var b = document.createElement('button');
+    b.className = 'cat-chip loc-chip';
+    b.textContent = cat;
+    b.dataset.cat = cat;
+    b.dataset.color = getCatColor(cat);
+    b.style.setProperty('--cat-color', getCatColor(cat));
+    b.addEventListener('click', function() {
+      allBtn.classList.remove('on');
+      b.classList.toggle('on');
+      b.style.background = b.classList.contains('on') ? getCatColor(cat) : '';
+      b.style.borderColor = b.classList.contains('on') ? getCatColor(cat) : '';
+      b.style.color = b.classList.contains('on') ? '#fff' : '';
+      ACTIVE_CATS = Array.from(document.querySelectorAll('.cat-chip[data-cat].on')).map(function(x){return x.dataset.cat;});
+      if (ACTIVE_CATS.length === 0) {
+        allBtn.classList.add('on');
+        ACTIVE_CATS = CATS.slice();
+      }
+      render();
+    });
+    c.appendChild(b);
+  });
+  ACTIVE_CATS = CATS.slice();
+}
+
+/* ── Reset to CSV ── */
+function resetToCSV() {
+  try { localStorage.removeItem(storageKey()); } catch(e) {}
+  render();
+  updateCount();
+}
+
+/* ── Search ── */
+document.getElementById('search').addEventListener('input', function(){
+  QUERY = this.value;
+  render();
+});
+
+/* ── File input handler ── */
+document.getElementById('fi').addEventListener('change', function() {
+  var file = this.files[0];
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e) { loadCSV(e.target.result); };
+  reader.readAsText(file);
+  this.value = '';
+});
+
+/* ── Auto-load CSV ── */
+(function(){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'location.csv');
+  xhr.onload = function(){ if (xhr.status===200) loadCSV(xhr.responseText); };
+  xhr.onerror = function(){};
+  try { xhr.send(); } catch(e){}
+})();
+</script>
+</body>
+</html>
