@@ -147,7 +147,7 @@ body {
   background: var(--tan-lt); flex-shrink: 0;
   box-shadow: var(--shadow-h); position: relative;
 }
-.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .photo-initials {
   position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-size: 52px; font-weight: 600; color: rgba(46,34,24,.35);
@@ -205,16 +205,16 @@ body {
   background: var(--white); overflow: hidden; margin-bottom: 12px;
 }
 .info-row {
-  display: grid; grid-template-columns: 72px 1fr;
-  border-bottom: .5px solid var(--border); align-items: baseline;
+  display: grid; grid-template-columns: 82px 1fr;
+  border-bottom: .5px solid var(--border); align-items: start;
 }
 .info-row:last-child { border-bottom: none; }
 .info-lbl {
   font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
-  color: var(--ink-light); padding: 8px 8px 8px 12px; align-self: start; padding-top: 10px;
+  color: var(--ink-light); padding: 10px 8px 10px 12px;
 }
-.info-val { font-size: 12.5px; color: var(--ink); padding: 8px 12px 8px 0; line-height: 1.45; }
-.info-val.empty { color: var(--ink-light); font-style: italic; }
+.info-val { font-size: 12.5px; color: var(--ink); padding: 10px 12px 10px 0; line-height: 1.45; }
+.info-val.empty { color: var(--ink-light); }
 
 .next-btn {
   width: 100%; font-size: 13px; font-weight: 600; padding: 9px;
@@ -243,6 +243,23 @@ body {
 .done-btn.secondary { border: 1px solid var(--border-s); background: transparent; color: var(--ink-mid); }
 .done-btn.secondary:hover { background: var(--tan-lt); }
 
+/* Star button */
+.star-btn {
+  position: absolute; top: 10px; right: 10px;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,0.82);
+  font-size: 18px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: transparent; text-shadow: 0 0 0 rgba(180,170,160,0.7);
+  transition: color .15s, background .15s, text-shadow .15s;
+  box-shadow: 0 1px 4px rgba(46,34,24,0.18);
+  backdrop-filter: blur(2px);
+  -webkit-text-stroke: 1.5px rgba(160,150,140,0.7);
+}
+.star-btn:hover { background: rgba(255,255,255,0.96); -webkit-text-stroke: 1.5px rgba(120,110,100,0.9); }
+.star-btn.starred { color: var(--ochre-dk); -webkit-text-stroke: 0; }
+.star-mode-pill.active { background: rgba(255,255,255,.18); border-color: var(--ochre-lt); color: var(--ochre-lt); }
+
 /* Fade transitions */
 .fade-in { animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -260,6 +277,7 @@ body {
     <span class="mode-label">Mode:</span>
     <button class="mode-pill active" id="mode-easy" onclick="setMode('easy')">Easy</button>
     <button class="mode-pill" id="mode-hard" onclick="setMode('hard')">Hard</button>
+    <button class="mode-pill star-mode-pill" id="mode-starred" onclick="toggleStarredMode()" title="Only shuffle starred species">★ Starred</button>
   </div>
   <button class="nav-btn" onclick="resetGame()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
@@ -301,6 +319,7 @@ body {
         <div class="photo-frame" id="photo-frame">
           <img id="card-photo" src="" alt="Species to identify" style="display:none">
           <div class="photo-initials" id="card-initials"></div>
+          <button class="star-btn" id="star-btn" onclick="toggleStar()" style="display:none" aria-label="Star this species">★</button>
         </div>
 
         <div class="input-wrap" id="input-wrap">
@@ -364,6 +383,37 @@ var mode = 'easy';   /* 'easy' | 'hard' */
 var acHighlight = -1;
 var TITLE = '';
 var submitted = false;
+var starredOnly = false;
+var STAR_KEY = 'fc_starred_';
+
+/* ── Star helpers ── */
+function starKey() { return STAR_KEY + TITLE.replace(/\s/g,'_'); }
+function getStarred() {
+  try { return JSON.parse(localStorage.getItem(starKey()) || '[]'); } catch(e){ return []; }
+}
+function saveStarred(arr) {
+  try { localStorage.setItem(starKey(), JSON.stringify(arr)); } catch(e){} 
+}
+function isStarred(name) { return getStarred().indexOf(name) >= 0; }
+function toggleStar() {
+  if (!currentCard) return;
+  var starred = getStarred();
+  var idx = starred.indexOf(currentCard.name);
+  if (idx >= 0) { starred.splice(idx, 1); } else { starred.push(currentCard.name); }
+  saveStarred(starred);
+  updateStarBtn();
+}
+function updateStarBtn() {
+  var btn = document.getElementById('star-btn');
+  if (!btn || !currentCard) return;
+  var on = isStarred(currentCard.name);
+  btn.classList.toggle('starred', on);
+  btn.title = on ? 'Unstar this species' : 'Star this species';
+}
+function toggleStarredMode() {
+  starredOnly = !starredOnly;
+  document.getElementById('mode-starred').classList.toggle('active', starredOnly);
+}
 
 /* ── Mode ── */
 function setMode(m) {
@@ -381,6 +431,16 @@ function shuffle(arr) {
     var t = a[i]; a[i] = a[j]; a[j] = t;
   }
   return a;
+}
+
+/* ── Abbrev family name ── */
+function abbrevFamily(name) {
+  if (!name) return name;
+  var s = name.replace(/ and /g, ' & ');
+  if (s.length > 34 && /,?\s*&\s*Allies$/.test(s)) {
+    s = s.replace(/,?\s*&\s*Allies$/, '');
+  }
+  return s;
 }
 
 /* ── Photo slug (matches index.html logic) ── */
@@ -420,6 +480,9 @@ function showCard(sp) {
   input.placeholder = 'Type species name…';
   input.focus();
   document.getElementById('submit-btn').disabled = false;
+
+  /* hide star until answered */
+  document.getElementById('star-btn').style.display = 'none';
 
   /* hide result */
   document.getElementById('result-panel').style.display = 'none';
@@ -546,7 +609,7 @@ function submitGuess() {
   /* info card */
   var sp = currentCard;
   var rows = [
-    { label: 'Family',     val: sp.family },
+    { label: 'Family',     val: abbrevFamily(sp.family) },
     { label: 'Features',   val: sp.features },
     { label: 'Spots',      val: sp.spots },
     { label: 'Lookalikes', val: sp.lookalikes }
@@ -556,7 +619,7 @@ function submitGuess() {
     var empty = !r.val;
     html += '<div class="info-row">'
       + '<div class="info-lbl">' + r.label + '</div>'
-      + '<div class="info-val' + (empty ? ' empty' : '') + '">' + (r.val || 'none noted') + '</div>'
+      + '<div class="info-val' + (empty ? ' empty' : '') + '">' + (r.val || '—') + '</div>'
       + '</div>';
   });
   document.getElementById('info-card').innerHTML = html;
@@ -571,6 +634,11 @@ function submitGuess() {
   rp.classList.remove('fade-in');
   void rp.offsetWidth;
   rp.classList.add('fade-in');
+
+  /* show star button */
+  var starBtn = document.getElementById('star-btn');
+  starBtn.style.display = 'flex';
+  updateStarBtn();
 
   updateProgress();
 }
@@ -623,10 +691,19 @@ function redealWrongFromDone() {
 /* ── Begin game ── */
 function beginGame() {
   if (!ALL.length) return;
+  var pool = ALL;
+  if (starredOnly) {
+    var starred = getStarred();
+    pool = ALL.filter(function(sp){ return starred.indexOf(sp.name) >= 0; });
+    if (!pool.length) {
+      alert('No starred species yet. Star some species during a round first, then use Starred mode.');
+      return;
+    }
+  }
   document.getElementById('pre-game').style.display = 'none';
   document.getElementById('arena').style.display = 'block';
   document.getElementById('done-screen').style.display = 'none';
-  deck = shuffle(ALL);
+  deck = shuffle(pool);
   correctCards = [];
   wrongCards = [];
   currentCard = null;
@@ -651,7 +728,11 @@ function resetGame() {
 function updatePreCount() {
   var el = document.getElementById('pre-count');
   if (ALL.length) {
-    el.textContent = ALL.length + ' species with photos ready';
+    var starredCount = getStarred().filter(function(n){
+      return ALL.some(function(sp){ return sp.name === n; });
+    }).length;
+    var base = ALL.length + ' species with photos ready';
+    el.textContent = starredCount > 0 ? base + ' · ' + starredCount + ' starred' : base;
   } else {
     el.textContent = 'No photos found yet';
   }

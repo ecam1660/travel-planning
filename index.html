@@ -335,8 +335,8 @@ function abbrevFamily(name) {
   var s = name.replace(/ and /g, ' & ');
   // If still too long and ends with "& Allies", drop it
   // Approximate threshold: family field is ~220px at 9px font ≈ 36 chars
-  if (s.length > 34 && /\s*&\s*Allies$/.test(s)) {
-    s = s.replace(/\s*&\s*Allies$/, '');
+  if (s.length > 34 && /,?\s*&\s*Allies$/.test(s)) {
+    s = s.replace(/,?\s*&\s*Allies$/, '');
   }
   return s;
 }
