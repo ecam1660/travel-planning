@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="travelfav_3.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ID Flashcards – Travel Planning</title>
+<style>
+:root {
+  --ochre:    #D8B47A;
+  --ochre-dk: #C39A5D;
+  --ochre-lt: #EAD7AA;
+  --tan-dk:   #B89D80;
+  --tan-md:   #CBB49A;
+  --tan-lt:   #E2D3BD;
+  --ink:      #2e2218;
+  --ink-mid:  #5a4a38;
+  --ink-light:#9a8870;
+  --cream:    #f7f2eb;
+  --white:    #ffffff;
+  --border:   rgba(46,34,24,0.12);
+  --border-s: rgba(46,34,24,0.20);
+  --shadow:   0 1px 6px rgba(46,34,24,0.08);
+  --shadow-h: 0 4px 18px rgba(46,34,24,0.14);
+  --radius:   10px;
+  --green:    #4a7c5e;
+  --green-lt: #d4eadc;
+  --green-dk: #2a5c3e;
+  --red:      #a03030;
+  --red-lt:   #f0d4d4;
+  --red-dk:   #7a1818;
+  --header-bg:#4a6e68;
+  --header-border:#6F928A;
+  --header-text:#C4D4C8;
+  --header-text-strong:#e8f0ee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--header-bg);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; border-bottom: 3px solid var(--header-border);
+}
+.header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px; font-weight: 400; letter-spacing: .01em;
+  color: var(--header-text); flex: 1;
+}
+.header h1 span { color: var(--header-text-strong); font-weight: 600; }
+.nav-btn {
+  font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 99px;
+  border: 1px solid rgba(234,215,170,.3); background: rgba(255,255,255,.08);
+  color: var(--header-text); cursor: pointer; letter-spacing: .02em;
+  transition: background .15s, border-color .15s; white-space: nowrap;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(196,212,200,.5); }
+.nav-btn svg { flex-shrink: 0; }
+
+.mode-wrap { display: flex; align-items: center; gap: 6px; }
+.mode-label { font-size: 11px; color: #95B5AB; font-weight: 500; }
+.mode-pill {
+  font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 99px;
+  border: 1px solid rgba(234,215,170,.25); background: rgba(255,255,255,.06);
+  color: #95B5AB; cursor: pointer; transition: all .15s; letter-spacing: .02em;
+}
+.mode-pill.active {
+  background: rgba(255,255,255,.18); border-color: rgba(196,212,200,.55);
+  color: var(--header-text-strong);
+}
+
+/* ── MAIN CONTENT ── */
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 20px 40px; }
+
+/* ── PRE-GAME ── */
+#pre-game {
+  display: flex; flex-direction: column; align-items: center; gap: 18px;
+  padding: 60px 20px; text-align: center;
+}
+.pre-count { font-size: 15px; color: var(--ink-mid); }
+.begin-btn {
+  font-size: 15px; font-weight: 600; padding: 12px 36px; border-radius: 99px;
+  border: 1.5px solid var(--ochre-dk); background: var(--ochre-lt);
+  color: var(--ink); cursor: pointer; letter-spacing: .02em;
+  transition: background .15s, box-shadow .15s;
+  box-shadow: var(--shadow);
+}
+.begin-btn:hover { background: var(--ochre); box-shadow: var(--shadow-h); }
+.pre-sub { font-size: 13px; color: var(--ink-light); font-style: italic; }
+
+/* ── ARENA ── */
+#arena { display: none; width: 100%; max-width: 820px; }
+
+.progress-bar-wrap { margin-bottom: 18px; }
+.progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.progress-label { font-size: 12px; color: var(--ink-light); }
+.progress-track { height: 4px; background: var(--tan-lt); border-radius: 99px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--ochre-dk); border-radius: 99px; transition: width .4s ease; }
+
+.arena-row { display: grid; grid-template-columns: 100px 1fr 100px; gap: 16px; align-items: start; }
+
+/* ── PILES ── */
+.pile { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 8px; }
+.pile-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-light); }
+.pile-stack {
+  width: 80px; height: 80px; border-radius: var(--radius);
+  border: 1.5px solid var(--border-s); background: var(--white);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative; cursor: default; transition: box-shadow .15s;
+}
+.pile-stack::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: var(--radius); border: 1.5px solid var(--border);
+  background: var(--white); top: -4px; left: 3px; z-index: -1;
+}
+.pile-count { font-size: 26px; font-weight: 600; line-height: 1; }
+.pile-sublabel { font-size: 10px; color: var(--ink-light); margin-top: 2px; }
+.pile.correct .pile-stack { border-color: rgba(74,124,94,.4); background: var(--green-lt); }
+.pile.correct .pile-stack::after { border-color: rgba(74,124,94,.2); background: var(--green-lt); }
+.pile.correct .pile-count { color: var(--green); }
+.pile.wrong .pile-stack { border-color: rgba(160,48,48,.4); background: var(--red-lt); }
+.pile.wrong .pile-stack::after { border-color: rgba(160,48,48,.2); background: var(--red-lt); }
+.pile.wrong .pile-count { color: var(--red); }
+.pile-redeal {
+  font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 99px;
+  border: 1px solid rgba(160,48,48,.35); background: transparent;
+  color: var(--red); cursor: pointer; letter-spacing: .02em;
+  transition: background .15s; display: none;
+}
+.pile-redeal:hover { background: var(--red-lt); }
+
+/* ── CENTER ── */
+.card-center { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+/* Photo frame */
+.photo-frame {
+  width: 360px; height: 360px; border-radius: 12px;
+  border: .5px solid var(--border-s); overflow: hidden;
+  background: var(--tan-lt); flex-shrink: 0;
+  box-shadow: var(--shadow-h); position: relative;
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-initials {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 52px; font-weight: 600; color: rgba(46,34,24,.35);
+  font-family: Georgia, serif; letter-spacing: .04em;
+}
+
+/* Input area */
+.input-wrap { width: 360px; position: relative; }
+.species-input {
+  width: 100%; font-size: 14px; padding: 9px 80px 9px 14px;
+  border-radius: 99px; border: 1.5px solid var(--border-s);
+  background: var(--white); color: var(--ink); outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: border-color .15s;
+}
+.species-input:focus { border-color: var(--ochre-dk); }
+.species-input:disabled { background: var(--cream); color: var(--ink-light); }
+.submit-btn {
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  font-size: 12px; font-weight: 600; padding: 5px 14px; border-radius: 99px;
+  border: 1px solid var(--ochre-dk); background: var(--ochre-lt);
+  color: var(--ink); cursor: pointer; transition: background .12s;
+  letter-spacing: .02em;
+}
+.submit-btn:hover { background: var(--ochre); }
+.submit-btn:disabled { opacity: .45; cursor: default; }
+
+/* Autocomplete */
+.autocomplete-list {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 10;
+  background: var(--white); border: 1px solid var(--border-s);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow-h); display: none;
+}
+.ac-item {
+  padding: 8px 14px; font-size: 13px; color: var(--ink); cursor: pointer;
+  border-bottom: .5px solid var(--border); transition: background .1s;
+}
+.ac-item:last-child { border-bottom: none; }
+.ac-item:hover, .ac-item.highlighted { background: var(--cream); }
+
+/* Result panel */
+#result-panel { display: none; width: 360px; }
+.result-badge {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 600; padding: 0 2px; margin-bottom: 12px;
+}
+.result-badge.correct { color: var(--green); }
+.result-badge.wrong { color: var(--red); }
+.result-badge svg { flex-shrink: 0; }
+.result-answer { font-size: 13px; color: var(--ink-mid); margin-left: 28px; margin-top: -6px; margin-bottom: 12px; }
+
+.info-card {
+  border: .5px solid var(--border-s); border-radius: var(--radius);
+  background: var(--white); overflow: hidden; margin-bottom: 12px;
+}
+.info-row {
+  display: grid; grid-template-columns: 72px 1fr;
+  border-bottom: .5px solid var(--border); align-items: baseline;
+}
+.info-row:last-child { border-bottom: none; }
+.info-lbl {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em;
+  color: var(--ink-light); padding: 8px 8px 8px 12px; align-self: start; padding-top: 10px;
+}
+.info-val { font-size: 12.5px; color: var(--ink); padding: 8px 12px 8px 0; line-height: 1.45; }
+.info-val.empty { color: var(--ink-light); font-style: italic; }
+
+.next-btn {
+  width: 100%; font-size: 13px; font-weight: 600; padding: 9px;
+  border-radius: 99px; border: 1.5px solid var(--ochre-dk);
+  background: var(--ochre-lt); color: var(--ink); cursor: pointer;
+  transition: background .12s; letter-spacing: .02em;
+}
+.next-btn:hover { background: var(--ochre); }
+
+/* ── DONE SCREEN ── */
+#done-screen { display: none; flex-direction: column; align-items: center; gap: 18px; padding: 50px 20px; text-align: center; }
+.done-title { font-family: Georgia, serif; font-size: 22px; font-weight: 400; color: var(--ink); }
+.done-stats { display: flex; gap: 32px; justify-content: center; }
+.done-stat { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.done-stat-n { font-size: 36px; font-weight: 600; line-height: 1; }
+.done-stat-l { font-size: 12px; color: var(--ink-light); text-transform: uppercase; letter-spacing: .06em; }
+.done-correct .done-stat-n { color: var(--green); }
+.done-wrong .done-stat-n { color: var(--red); }
+.done-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.done-btn {
+  font-size: 13px; font-weight: 600; padding: 9px 22px; border-radius: 99px;
+  cursor: pointer; transition: background .12s; letter-spacing: .02em;
+}
+.done-btn.primary { border: 1.5px solid var(--ochre-dk); background: var(--ochre-lt); color: var(--ink); }
+.done-btn.primary:hover { background: var(--ochre); }
+.done-btn.secondary { border: 1px solid var(--border-s); background: transparent; color: var(--ink-mid); }
+.done-btn.secondary:hover { background: var(--tan-lt); }
+
+/* Fade transitions */
+.fade-in { animation: fadeIn .3s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a class="nav-btn" href="index.html">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    Home
+  </a>
+  <h1>Travel Planning: <span id="trip-title">—</span> · ID Flashcards</h1>
+  <div class="mode-wrap">
+    <span class="mode-label">Mode:</span>
+    <button class="mode-pill active" id="mode-easy" onclick="setMode('easy')">Easy</button>
+    <button class="mode-pill" id="mode-hard" onclick="setMode('hard')">Hard</button>
+  </div>
+  <button class="nav-btn" onclick="resetGame()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
+    Reset
+  </button>
+</div>
+
+<div class="main">
+
+  <!-- PRE-GAME -->
+  <div id="pre-game">
+    <div class="pre-count" id="pre-count">Loading species…</div>
+    <button class="begin-btn" onclick="beginGame()">▶&nbsp; Begin IDing</button>
+    <div class="pre-sub">Cards will be shuffled randomly each round</div>
+  </div>
+
+  <!-- ARENA -->
+  <div id="arena">
+    <div class="progress-bar-wrap">
+      <div class="progress-top">
+        <span class="progress-label" id="progress-label">Card 1 of 0</span>
+        <span class="progress-label" id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="arena-row">
+      <!-- Correct pile -->
+      <div class="pile correct" id="pile-correct">
+        <div class="pile-label">Correct</div>
+        <div class="pile-stack">
+          <div class="pile-count" id="correct-count">0</div>
+          <div class="pile-sublabel">✓</div>
+        </div>
+      </div>
+
+      <!-- Center -->
+      <div class="card-center">
+        <div class="photo-frame" id="photo-frame">
+          <img id="card-photo" src="" alt="Species to identify" style="display:none">
+          <div class="photo-initials" id="card-initials"></div>
+        </div>
+
+        <div class="input-wrap" id="input-wrap">
+          <input type="text" class="species-input" id="species-input"
+            placeholder="Type species name…"
+            autocomplete="off" spellcheck="false"
+            oninput="onTypeInput()" onkeydown="onInputKey(event)">
+          <button class="submit-btn" id="submit-btn" onclick="submitGuess()">Submit</button>
+          <div class="autocomplete-list" id="ac-list"></div>
+        </div>
+
+        <div id="result-panel">
+          <div class="result-badge" id="result-badge"></div>
+          <div class="result-answer" id="result-answer"></div>
+          <div class="info-card" id="info-card"></div>
+          <button class="next-btn" id="next-btn" onclick="nextCard()">Next card →</button>
+        </div>
+      </div>
+
+      <!-- Wrong pile -->
+      <div class="pile wrong" id="pile-wrong">
+        <div class="pile-label">Incorrect</div>
+        <div class="pile-stack">
+          <div class="pile-count" id="wrong-count">0</div>
+          <div class="pile-sublabel">✗</div>
+        </div>
+        <button class="pile-redeal" id="redeal-btn" onclick="redealWrong()">Redeal ↺</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DONE SCREEN -->
+  <div id="done-screen">
+    <div class="done-title">Round complete!</div>
+    <div class="done-stats">
+      <div class="done-stat done-correct">
+        <div class="done-stat-n" id="done-correct-n">0</div>
+        <div class="done-stat-l">Correct</div>
+      </div>
+      <div class="done-stat done-wrong">
+        <div class="done-stat-n" id="done-wrong-n">0</div>
+        <div class="done-stat-l">Incorrect</div>
+      </div>
+    </div>
+    <div class="done-actions">
+      <button class="done-btn primary" onclick="redealWrongFromDone()">Redeal incorrect ↺</button>
+      <button class="done-btn secondary" onclick="resetGame()">Shuffle all &amp; restart</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* ── State ── */
+var ALL = [];
+var deck = [];       /* remaining cards to show */
+var correctCards = [];
+var wrongCards = [];
+var currentCard = null;
+var mode = 'easy';   /* 'easy' | 'hard' */
+var acHighlight = -1;
+var TITLE = '';
+var submitted = false;
+
+/* ── Mode ── */
+function setMode(m) {
+  mode = m;
+  document.getElementById('mode-easy').classList.toggle('active', m === 'easy');
+  document.getElementById('mode-hard').classList.toggle('active', m === 'hard');
+  hideAutocomplete();
+}
+
+/* ── Shuffle ── */
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+/* ── Photo slug (matches index.html logic) ── */
+function photoSlug(name) {
+  return name.toLowerCase()
+    .replace(/[\u2018\u2019']/g, '')
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_|_$/, '');
+}
+
+/* ── Initials ── */
+function initials(name) {
+  return name.split(/[\s\-]+/).slice(0, 2).map(function(w){ return (w[0]||'').toUpperCase(); }).join('');
+}
+
+/* ── Show card ── */
+function showCard(sp) {
+  currentCard = sp;
+  submitted = false;
+
+  /* photo */
+  var slug = photoSlug(sp.name);
+  var img = document.getElementById('card-photo');
+  var ini = document.getElementById('card-initials');
+  img.style.display = 'block';
+  ini.textContent = '';
+  img.src = 'photos/' + slug + '.jpg';
+  img.onerror = function() {
+    img.style.display = 'none';
+    ini.textContent = initials(sp.name);
+  };
+
+  /* input */
+  var input = document.getElementById('species-input');
+  input.value = '';
+  input.disabled = false;
+  input.placeholder = 'Type species name…';
+  input.focus();
+  document.getElementById('submit-btn').disabled = false;
+
+  /* hide result */
+  document.getElementById('result-panel').style.display = 'none';
+  document.getElementById('input-wrap').style.display = 'block';
+
+  hideAutocomplete();
+  updateProgress();
+}
+
+/* ── Progress ── */
+function updateProgress() {
+  var total = correctCards.length + wrongCards.length + deck.length + (currentCard ? 1 : 0);
+  var done = correctCards.length + wrongCards.length;
+  var cardNum = done + 1;
+  document.getElementById('progress-label').textContent = 'Card ' + cardNum + ' of ' + total;
+  var pct = total > 0 ? Math.round(done / total * 100) : 0;
+  document.getElementById('progress-pct').textContent = pct + '%';
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('correct-count').textContent = correctCards.length;
+  document.getElementById('wrong-count').textContent = wrongCards.length;
+  var redeal = document.getElementById('redeal-btn');
+  redeal.style.display = wrongCards.length > 0 ? 'block' : 'none';
+}
+
+/* ── Autocomplete ── */
+function onTypeInput() {
+  if (submitted) return;
+  acHighlight = -1;
+  var val = document.getElementById('species-input').value.trim();
+  if (!val || mode === 'hard') { hideAutocomplete(); return; }
+  var lower = val.toLowerCase();
+  var matches = ALL.filter(function(sp) {
+    return sp.name.toLowerCase().indexOf(lower) === 0;
+  }).slice(0, 5);
+  if (!matches.length) { hideAutocomplete(); return; }
+  var list = document.getElementById('ac-list');
+  list.innerHTML = '';
+  matches.forEach(function(sp, idx) {
+    var d = document.createElement('div');
+    d.className = 'ac-item';
+    d.textContent = sp.name;
+    d.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      document.getElementById('species-input').value = sp.name;
+      hideAutocomplete();
+      submitGuess();
+    });
+    list.appendChild(d);
+  });
+  list.style.display = 'block';
+}
+
+function hideAutocomplete() {
+  document.getElementById('ac-list').style.display = 'none';
+  acHighlight = -1;
+}
+
+function onInputKey(e) {
+  var list = document.getElementById('ac-list');
+  var items = list.querySelectorAll('.ac-item');
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    acHighlight = Math.min(acHighlight + 1, items.length - 1);
+    items.forEach(function(it, i){ it.classList.toggle('highlighted', i === acHighlight); });
+    if (acHighlight >= 0) document.getElementById('species-input').value = items[acHighlight].textContent;
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    acHighlight = Math.max(acHighlight - 1, -1);
+    items.forEach(function(it, i){ it.classList.toggle('highlighted', i === acHighlight); });
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    hideAutocomplete();
+    submitGuess();
+  } else if (e.key === 'Escape') {
+    hideAutocomplete();
+  }
+}
+
+/* ── Normalize for comparison ── */
+function normalize(s) {
+  return s.trim()
+    .toLowerCase()
+    .replace(/[-–—]/g, '-')   /* normalize dashes */
+    .replace(/\s+/g, ' ');
+}
+
+/* ── Submit ── */
+function submitGuess() {
+  if (submitted || !currentCard) return;
+  var input = document.getElementById('species-input');
+  var guess = input.value.trim();
+  if (!guess) return;
+  submitted = true;
+  hideAutocomplete();
+  input.disabled = true;
+  document.getElementById('submit-btn').disabled = true;
+
+  var correct = normalize(guess) === normalize(currentCard.name);
+
+  if (correct) {
+    correctCards.push(currentCard);
+  } else {
+    wrongCards.push(currentCard);
+  }
+
+  /* show result */
+  var badge = document.getElementById('result-badge');
+  if (correct) {
+    badge.className = 'result-badge correct';
+    badge.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Correct!';
+  } else {
+    badge.className = 'result-badge wrong';
+    badge.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Incorrect';
+  }
+
+  var answerEl = document.getElementById('result-answer');
+  if (!correct) {
+    answerEl.textContent = 'Answer: ' + currentCard.name;
+    answerEl.style.display = 'block';
+  } else {
+    answerEl.style.display = 'none';
+  }
+
+  /* info card */
+  var sp = currentCard;
+  var rows = [
+    { label: 'Family',     val: sp.family },
+    { label: 'Features',   val: sp.features },
+    { label: 'Spots',      val: sp.spots },
+    { label: 'Lookalikes', val: sp.lookalikes }
+  ];
+  var html = '';
+  rows.forEach(function(r) {
+    var empty = !r.val;
+    html += '<div class="info-row">'
+      + '<div class="info-lbl">' + r.label + '</div>'
+      + '<div class="info-val' + (empty ? ' empty' : '') + '">' + (r.val || 'none noted') + '</div>'
+      + '</div>';
+  });
+  document.getElementById('info-card').innerHTML = html;
+
+  /* show/hide next button text */
+  var isLast = deck.length === 0;
+  document.getElementById('next-btn').textContent = isLast ? 'Finish round →' : 'Next card →';
+
+  document.getElementById('input-wrap').style.display = 'none';
+  var rp = document.getElementById('result-panel');
+  rp.style.display = 'block';
+  rp.classList.remove('fade-in');
+  void rp.offsetWidth;
+  rp.classList.add('fade-in');
+
+  updateProgress();
+}
+
+/* ── Next card ── */
+function nextCard() {
+  currentCard = null;
+  if (deck.length === 0) {
+    showDone();
+    return;
+  }
+  var sp = deck.shift();
+  showCard(sp);
+}
+
+/* ── Done ── */
+function showDone() {
+  document.getElementById('arena').style.display = 'none';
+  var ds = document.getElementById('done-screen');
+  ds.style.display = 'flex';
+  ds.classList.add('fade-in');
+  document.getElementById('done-correct-n').textContent = correctCards.length;
+  document.getElementById('done-wrong-n').textContent = wrongCards.length;
+  /* hide redeal btn if no wrong cards */
+  ds.querySelector('.done-btn.primary').style.display = wrongCards.length > 0 ? '' : 'none';
+}
+
+/* ── Redeal wrong (from pile during game) ── */
+function redealWrong() {
+  if (!wrongCards.length) return;
+  /* shuffle wrong back into deck */
+  var reshuffled = shuffle(wrongCards);
+  wrongCards = [];
+  deck = deck.concat(reshuffled);
+  updateProgress();
+}
+
+/* ── Redeal wrong (from done screen) ── */
+function redealWrongFromDone() {
+  if (!wrongCards.length) return;
+  deck = shuffle(wrongCards);
+  wrongCards = [];
+  correctCards = [];
+  document.getElementById('done-screen').style.display = 'none';
+  document.getElementById('arena').style.display = 'block';
+  var sp = deck.shift();
+  showCard(sp);
+}
+
+/* ── Begin game ── */
+function beginGame() {
+  if (!ALL.length) return;
+  document.getElementById('pre-game').style.display = 'none';
+  document.getElementById('arena').style.display = 'block';
+  document.getElementById('done-screen').style.display = 'none';
+  deck = shuffle(ALL);
+  correctCards = [];
+  wrongCards = [];
+  currentCard = null;
+  updateProgress();
+  var sp = deck.shift();
+  showCard(sp);
+}
+
+/* ── Reset ── */
+function resetGame() {
+  document.getElementById('arena').style.display = 'none';
+  document.getElementById('done-screen').style.display = 'none';
+  document.getElementById('pre-game').style.display = 'flex';
+  deck = [];
+  correctCards = [];
+  wrongCards = [];
+  currentCard = null;
+  submitted = false;
+  updatePreCount();
+}
+
+function updatePreCount() {
+  var el = document.getElementById('pre-count');
+  if (ALL.length) {
+    el.textContent = ALL.length + ' species with photos ready';
+  } else {
+    el.textContent = 'No photos found yet';
+  }
+}
+
+/* ── CSV parsing (reused from index.html) ── */
+function splitRow(line) {
+  var out = [], cur = '', inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (ch === '"') { inQ = !inQ; }
+    else if (ch === ',' && !inQ) { out.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+
+function parseCSV(txt) {
+  var lines = txt.split(/\r?\n/);
+  if (lines.length < 2) return [];
+  var heads = splitRow(lines[0]).map(function(h){ return h.trim().toLowerCase(); });
+  function col() {
+    var names = Array.prototype.slice.call(arguments);
+    for (var n = 0; n < names.length; n++)
+      for (var i = 0; i < heads.length; i++)
+        if (heads[i] === names[n].toLowerCase()) return i;
+    return -1;
+  }
+  var iName = col('malaysia & singapore'), iFamily = col('family'),
+      iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes');
+
+  var map = {};
+  for (var i = 1; i < lines.length; i++) {
+    var c = splitRow(lines[i]);
+    if (!c || !c[iName] || !c[iName].trim()) continue;
+    var name = c[iName].trim();
+    if (!map[name]) {
+      map[name] = {
+        name: name,
+        family: (c[iFamily] || '').trim(),
+        id: parseInt((c[iID] || '9999').trim()) || 9999,
+        features: (c[iFeat] || '').trim(),
+        spots: (c[iSpots] || '').trim(),
+        lookalikes: (c[iLook] || '').trim()
+      };
+    }
+    if (!map[name].features && iFeat >= 0) map[name].features = (c[iFeat] || '').trim();
+    if (!map[name].spots    && iSpots >= 0) map[name].spots    = (c[iSpots] || '').trim();
+    if (!map[name].lookalikes && iLook >= 0) map[name].lookalikes = (c[iLook] || '').trim();
+  }
+  var list = Object.values(map);
+  list.sort(function(a, b){ return a.id - b.id; });
+  return list;
+}
+
+function loadCSV(txt) {
+  var firstLine = txt.split(/\r?\n/)[0];
+  TITLE = splitRow(firstLine)[0].trim();
+  document.getElementById('trip-title').textContent = TITLE;
+  var parsed = parseCSV(txt);
+  return parsed;
+}
+
+/* ── Photo pre-check ── */
+function checkPhotos(species, callback) {
+  var withPhotos = [];
+  var remaining = species.length;
+  if (!remaining) { callback([]); return; }
+  species.forEach(function(sp) {
+    var img = new Image();
+    img.onload = function() {
+      withPhotos.push(sp);
+      if (--remaining === 0) {
+        /* preserve original sort order */
+        withPhotos.sort(function(a, b){ return a.id - b.id; });
+        callback(withPhotos);
+      }
+    };
+    img.onerror = function() {
+      if (--remaining === 0) {
+        withPhotos.sort(function(a, b){ return a.id - b.id; });
+        callback(withPhotos);
+      }
+    };
+    img.src = 'photos/' + photoSlug(sp.name) + '.jpg';
+  });
+}
+
+/* ── Auto-load CSV ── */
+(function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'location.csv');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      var parsed = loadCSV(xhr.responseText);
+      document.getElementById('pre-count').textContent = 'Checking photos…';
+      checkPhotos(parsed, function(withPhotos) {
+        ALL = withPhotos;
+        updatePreCount();
+      });
+    }
+  };
+  xhr.onerror = function() {};
+  try { xhr.send(); } catch(e) {}
+})();
+</script>
+</body>
+</html>
