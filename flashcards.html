@@ -423,6 +423,21 @@ function setMode(m) {
   hideAutocomplete();
 }
 
+/* ── Category colors ── */
+var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','#D9C3A6','#D98F77'];
+var CAT_MAP = {};
+function getCatColor(cat) {
+  if (cat === 'Widespread') return '#D9C3A6';
+  if (cat === 'Sing only')  return '#D98F77';
+  if (!CAT_MAP[cat]) { CAT_MAP[cat] = CAT_PALETTE[Object.keys(CAT_MAP).length % CAT_PALETTE.length]; }
+  return CAT_MAP[cat];
+}
+function catPillHTML(cat) {
+  if (!cat) return '';
+  if (cat === 'Widespread') return '<span style="display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:99px;background:transparent;border:1px solid #D9C3A6;color:#8a7a60;opacity:.75;letter-spacing:.03em">'+cat+'</span>';
+  return '<span style="display:inline-block;font-size:8px;font-weight:700;padding:2px 6px;border-radius:99px;background:'+getCatColor(cat)+';color:#fff;letter-spacing:.03em">'+cat+'</span>';
+}
+
 /* ── Shuffle ── */
 function shuffle(arr) {
   var a = arr.slice();
@@ -610,9 +625,7 @@ function submitGuess() {
   var sp = currentCard;
   var rows = [
     { label: 'Family',     val: abbrevFamily(sp.family) },
-    { label: 'Features',   val: sp.features },
-    { label: 'Spots',      val: sp.spots },
-    { label: 'Lookalikes', val: sp.lookalikes }
+    { label: 'Features',   val: sp.features }
   ];
   var html = '';
   rows.forEach(function(r) {
@@ -622,6 +635,11 @@ function submitGuess() {
       + '<div class="info-val' + (empty ? ' empty' : '') + '">' + (r.val || '—') + '</div>'
       + '</div>';
   });
+  // Category row
+  if (sp.cats && sp.cats.length) {
+    html += '<div class="info-row"><span class="info-label">Category</span>'
+          + '<span class="info-value">' + sp.cats.map(catPillHTML).join(' ') + '</span></div>';
+  }
   document.getElementById('info-card').innerHTML = html;
 
   /* show/hide next button text */
@@ -763,7 +781,7 @@ function parseCSV(txt) {
     return -1;
   }
   var iName = col('malaysia & singapore'), iFamily = col('family'),
-      iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes');
+      iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes'), iCat = col('categories');
 
   var map = {};
   for (var i = 1; i < lines.length; i++) {
@@ -777,12 +795,14 @@ function parseCSV(txt) {
         id: parseInt((c[iID] || '9999').trim()) || 9999,
         features: (c[iFeat] || '').trim(),
         spots: (c[iSpots] || '').trim(),
-        lookalikes: (c[iLook] || '').trim()
+        lookalikes: (c[iLook] || '').trim(),
+        cats: []
       };
     }
     if (!map[name].features && iFeat >= 0) map[name].features = (c[iFeat] || '').trim();
     if (!map[name].spots    && iSpots >= 0) map[name].spots    = (c[iSpots] || '').trim();
     if (!map[name].lookalikes && iLook >= 0) map[name].lookalikes = (c[iLook] || '').trim();
+    if (iCat >= 0) { var cv = (c[iCat] || '').trim(); if (cv && map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv); }
   }
   var list = Object.values(map);
   list.sort(function(a, b){ return a.id - b.id; });
