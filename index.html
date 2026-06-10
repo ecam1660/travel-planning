@@ -426,7 +426,7 @@ function buildLocChips() {
 var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','#D9C3A6','#D98F77'];
 var CAT_COLOR_MAP = {};
 function getCatColor(cat) {
-  if (cat === 'Widespread') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
+  if (cat === 'Widespread' || cat === 'Infrequent') return '#D9C3A6';  // subtle: tan
   if (cat === 'Sing only')  return '#D98F77';  // fixed: terracotta
   if (!CAT_COLOR_MAP[cat]) {
     var idx = Object.keys(CAT_COLOR_MAP).length % CAT_PALETTE.length;
@@ -488,7 +488,7 @@ function buildTile(sp) {
     +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
     +   '</div>'
     +   '<div class="pt-fam-row"><span class="pt-fam" style="color:'+dark+'">'+abbrevFamily(sp.family)+'</span>'+newPill+'</div>'
-    +   (sp.cats&&sp.cats.length ? '<div class="pt-cat-pills">'+sp.cats.map(function(c){var isWide = c === 'Widespread'; return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('')+'</div>' : '')
+    +   (sp.cats&&sp.cats.length ? '<div class="pt-cat-pills">'+sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('')+'</div>' : '')
     +   gridHTML
     + '</div>';
 
@@ -626,9 +626,9 @@ function parseCSV(txt) {
         if (heads[i] === names[n].toLowerCase()) return i;
     return -1;
   }
-  var iName=col('malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
+  var iName=col('name','malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
       iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
-      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat=col('categories');
+      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2');
 
   var map = {};
   for (var i=1; i<lines.length; i++) {
@@ -663,10 +663,11 @@ function parseCSV(txt) {
     if (!map[name].spots    && iSpots>=0) map[name].spots   = (c[iSpots]||'').trim();
     if (!map[name].lookalikes && iLook>=0) map[name].lookalikes = (c[iLook]||'').trim();
     // Categories — collect unique values
-    if (iCat>=0) {
-      var catVal = (c[iCat]||'').trim();
-      if (catVal && map[name].cats.indexOf(catVal) < 0) map[name].cats.push(catVal);
-    }
+    [iCat1, iCat2].forEach(function(ic) {
+      if (ic < 0) return;
+      var cv = (c[ic]||'').trim();
+      if (cv && map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv);
+    });
   }
 
   var list = Object.values(map);
@@ -699,8 +700,17 @@ function loadCSV(txt) {
   ALL = parseCSV(txt);
   /* derive title from first column header */
   var firstLine = txt.split(/\r?\n/)[0];
-  TITLE = splitRow(firstLine)[0].trim();
-  document.getElementById('trip-title').textContent = TITLE;
+  var rawTitle = splitRow(firstLine)[0].trim();
+  TITLE = (rawTitle.toLowerCase() === 'name') ? '' : rawTitle;
+  // If no title from header, try to derive from first Full Location value
+  if (!TITLE) {
+    var titleLines = txt.split(/\r?\n/);
+    var titleHeads = splitRow(titleLines[0]).map(function(h){return h.trim().toLowerCase();});
+    var iTitle = -1;
+    for (var ti=0; ti<titleHeads.length; ti++) { if (titleHeads[ti]==='title') { iTitle=ti; break; } }
+    if (iTitle >= 0 && titleLines[1]) TITLE = (splitRow(titleLines[1])[iTitle]||'').trim();
+  }
+  document.getElementById('trip-title').textContent = TITLE || 'Malaysia & Singapore';
 
   /* unique locations */
   var locSet = {};
