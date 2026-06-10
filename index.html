@@ -267,10 +267,7 @@ body {
     <span class="fl">Category</span>
     <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
   </div>
-  <div class="trow" id="cat-row" style="display:none">
-    <span class="fl">Category</span>
-    <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
-  </div>
+  
 </div>
 
 <div class="rbar" id="rbar" style="display:none">
@@ -643,7 +640,7 @@ function parseCSV(txt) {
         famNew: (c[iFam]||'').trim().toLowerCase() === 'new',
         id: parseInt((c[iID]||'9999').trim()) || 9999,
         locs: [],
-        cats: [],
+        cats: [], cat1s: [], cat2s: [],
         features: (c[iFeat]||'').trim(),
         spots: (c[iSpots]||'').trim(),
         lookalikes: (c[iLook]||'').trim()
@@ -662,10 +659,14 @@ function parseCSV(txt) {
     if (!map[name].spots    && iSpots>=0) map[name].spots   = (c[iSpots]||'').trim();
     if (!map[name].lookalikes && iLook>=0) map[name].lookalikes = (c[iLook]||'').trim();
     // Categories — collect unique values
-    [iCat1, iCat2].forEach(function(ic) {
+    [[iCat1, 'cat1s'], [iCat2, 'cat2s']].forEach(function(pair) {
+      var ic = pair[0], arr = pair[1];
       if (ic < 0) return;
       var cv = (c[ic]||'').trim();
-      if (cv && map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv);
+      if (cv) {
+        if (map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv);
+        if (map[name][arr].indexOf(cv) < 0) map[name][arr].push(cv);
+      }
     });
   }
 
@@ -711,18 +712,17 @@ function loadCSV(txt) {
   LOCS = Object.keys(locSet).sort();
   buildLocChips();
 
-  /* unique categories */
-  var catSet = {};
-  ALL.forEach(function(sp){ sp.cats.forEach(function(c){ catSet[c]=1; }); });
-  CATS = Object.keys(catSet).sort();
+  /* unique categories — Cat1 options first (alpha), then Cat2 options (alpha) */
+  var cat1Set = {}, cat2Set = {};
+  ALL.forEach(function(sp) {
+    (sp.cat1s||[]).forEach(function(c){ cat1Set[c]=1; });
+    (sp.cat2s||[]).forEach(function(c){ if(!cat1Set[c]) cat2Set[c]=1; });
+  });
+  CATS = Object.keys(cat1Set).sort().concat(Object.keys(cat2Set).sort());
   ACTIVE_CATS = CATS.slice();
   buildCatChips();
 
-  /* unique categories */
-  var catSet = {};
-  ALL.forEach(function(sp){ if (sp.category) catSet[sp.category] = 1; });
-  CATS = Object.keys(catSet).sort();
-  buildCatChips();
+
 
   document.getElementById('rbar').style.display = 'flex';
   document.getElementById('reset-btn').style.display = '';
