@@ -426,7 +426,7 @@ function buildLocChips() {
 var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','#D9C3A6','#D98F77'];
 var CAT_COLOR_MAP = {};
 function getCatColor(cat) {
-  if (cat === 'Widespread' || cat === 'Infrequent') return '#D9C3A6';  // subtle: tan
+  if (cat === 'Widespread' || cat === 'Infrequent') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
   if (cat === 'Sing only')  return '#D98F77';  // fixed: terracotta
   if (!CAT_COLOR_MAP[cat]) {
     var idx = Object.keys(CAT_COLOR_MAP).length % CAT_PALETTE.length;
@@ -655,7 +655,6 @@ function parseCSV(txt) {
     if (!map[name].features && (c[iFeat]||'').trim()) map[name].features = c[iFeat].trim();
     if (!map[name].spots   && (c[iSpots]||'').trim()) map[name].spots    = c[iSpots].trim();
     if (!map[name].lookalikes && (c[iLook]||'').trim()) map[name].lookalikes = c[iLook].trim();
-    if (!map[name].category && (c[iCat]||'').trim()) map[name].category = c[iCat].trim();
     var locName = (c[iLoc]||'').trim(), rarVal = (c[iRar]||'').trim();
     if (locName && rarVal) map[name].locs.push([locName, rarVal]);
     // First non-empty wins for text fields
@@ -701,16 +700,8 @@ function loadCSV(txt) {
   /* derive title from first column header */
   var firstLine = txt.split(/\r?\n/)[0];
   var rawTitle = splitRow(firstLine)[0].trim();
-  TITLE = (rawTitle.toLowerCase() === 'name') ? '' : rawTitle;
-  // If no title from header, try to derive from first Full Location value
-  if (!TITLE) {
-    var titleLines = txt.split(/\r?\n/);
-    var titleHeads = splitRow(titleLines[0]).map(function(h){return h.trim().toLowerCase();});
-    var iTitle = -1;
-    for (var ti=0; ti<titleHeads.length; ti++) { if (titleHeads[ti]==='title') { iTitle=ti; break; } }
-    if (iTitle >= 0 && titleLines[1]) TITLE = (splitRow(titleLines[1])[iTitle]||'').trim();
-  }
-  document.getElementById('trip-title').textContent = TITLE || 'Malaysia & Singapore';
+  TITLE = (rawTitle.toLowerCase() === 'name') ? 'Malaysia & Singapore' : rawTitle;
+  document.getElementById('trip-title').textContent = TITLE;
 
   /* unique locations */
   var locSet = {};
