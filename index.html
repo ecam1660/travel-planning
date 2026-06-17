@@ -248,6 +248,7 @@ body {
     <button class="chip"    id="st-seen"   onclick="setStatus('seen')">Observed ✓</button>
     <button class="chip"    id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
     <button class="chip chip-new" id="st-new" onclick="toggleNew()">New Families</button>
+    <button class="chip" id="st-nophoto" onclick="toggleNoPhoto()" title="No photo yet" style="padding:5px 12px;display:inline-flex;align-items:center;"><svg width="14" height="11" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;"><rect x="1.5" y="5.5" width="21" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M8.5 5.5V4a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 4v1.5" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="3" x2="21" y2="17" stroke="currentColor" stroke-width="1.8"/></svg></button>
     <span class="fl" style="margin-left:8px">Sort</span>
     <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
       <option value="taxo">Taxo order ↓</option>
@@ -281,7 +282,7 @@ body {
 
 <script>
 var ALL = [];
-var STATUS = 'all', NEW_FAM = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
+var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
 var CATS = [];
 var LOCS = [];
 var LOCAL_KEY = 'travel_observed_';
@@ -346,6 +347,18 @@ function initials(n) {
 
 /* ── localStorage observed overrides ── */
 function storageKey() { return LOCAL_KEY + TITLE.replace(/\s/g,'_'); }
+function camKey() { return 'travel_photo_' + TITLE.replace(/\s/g,'_'); }
+function getCamOverrides() {
+  try { return JSON.parse(localStorage.getItem(camKey()) || '{}'); } catch(e){ return {}; }
+}
+function setCamOverride(name, val) {
+  var o = getCamOverrides(); o[name] = val;
+  try { localStorage.setItem(camKey(), JSON.stringify(o)); } catch(e){}
+}
+function hasPhoto(sp) {
+  var o = getCamOverrides();
+  return o.hasOwnProperty(sp.name) ? o[sp.name] : sp.photo;
+}
 function getOverrides() {
   try { return JSON.parse(localStorage.getItem(storageKey()) || '{}'); } catch(e){ return {}; }
 }
@@ -369,6 +382,11 @@ function setStatus(s) {
 function toggleNew() {
   NEW_FAM = !NEW_FAM;
   document.getElementById('st-new').classList.toggle('on', NEW_FAM);
+  render();
+}
+function toggleNoPhoto() {
+  NO_PHOTO = !NO_PHOTO;
+  document.getElementById('st-nophoto').classList.toggle('on', NO_PHOTO);
   render();
 }
 function setSort(val) {
@@ -475,9 +493,10 @@ function buildTile(sp) {
   var front = document.createElement('div');
   front.className = 'face';
   front.innerHTML =
-    '<div class="pt-photo" style="background:'+photo+'">'
+    '<div class="pt-photo" style="background:'+photo+';position:relative;">'
     + '<img src="photos/'+slug+'.jpg" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" style="display:block">'
     + '<div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;font-size:17px;font-weight:500;color:rgba(255,255,255,0.9);letter-spacing:0.04em;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif;">'+ini+'</div>'
+    + (hasPhoto(sp) ? '<div style="position:absolute;bottom:5px;left:6px;opacity:.65;"><svg width=\"18\" height=\"14\" viewBox=\"0 0 24 19\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"1.5\" y=\"5.5\" width=\"21\" height=\"13\" rx=\"2\" stroke=\"white\" stroke-width=\"1.8\"/><circle cx=\"12\" cy=\"12\" r=\"4\" stroke=\"white\" stroke-width=\"1.8\"/><circle cx=\"12\" cy=\"12\" r=\"1.5\" fill=\"white\"/><path d=\"M8.5 5.5V4a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 4v1.5\" stroke=\"white\" stroke-width=\"1.8\"/><rect x=\"18.5\" y=\"7.5\" width=\"2.5\" height=\"1.5\" rx=\".5\" fill=\"white\"/></svg></div>' : '')
     + '</div>'
     + '<div class="pt-right" style="background:'+bg+'">'
     +   '<div class="pt-hdr">'
@@ -524,6 +543,18 @@ function buildTile(sp) {
     }
     var rect = scene.getBoundingClientRect();
     var x = e.clientX - rect.left, y = e.clientY - rect.top;
+    // Lower-left corner (within photo width ~104px, bottom 35%) → toggle camera
+    if (x < 104 && y > rect.height * 0.65) {
+      var sp3 = ALL.filter(function(s){ return s.name === scene.dataset.name; })[0];
+      if (sp3) {
+        setCamOverride(sp3.name, !hasPhoto(sp3));
+        var wasFlipped = scene.classList.contains('flipped');
+        var newTile = buildTile(sp3);
+        if (wasFlipped) newTile.classList.add('flipped');
+        scene.parentNode.replaceChild(newTile, scene);
+      }
+      return;
+    }
     if (x > rect.width * 0.6 && y > rect.height * 0.5) {
       scene.classList.toggle('flipped');
     }
@@ -541,6 +572,7 @@ function render() {
     if (STATUS === 'seen'   && !obs) return false;
     if (STATUS === 'unseen' && obs)  return false;
     if (NEW_FAM && !sp.famNew) return false;
+    if (NO_PHOTO && hasPhoto(sp)) return false;
     /* Location filter: species must have at least one loc in ACTIVE_LOCS */
     var hasLoc = sp.locs.some(function(l){ return l && ACTIVE_LOCS.indexOf(l[0]) >= 0; });
     if (!hasLoc) return false;
@@ -625,7 +657,7 @@ function parseCSV(txt) {
   }
   var iName=col('name','malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
       iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
-      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2');
+      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2'), iPhoto=col('photo');
 
   var map = {};
   for (var i=1; i<lines.length; i++) {
@@ -643,6 +675,7 @@ function parseCSV(txt) {
         cats: [], cat1s: [], cat2s: [],
         features: (c[iFeat]||'').trim(),
         spots: (c[iSpots]||'').trim(),
+        photo: iPhoto>=0 && (c[iPhoto]||'').trim().toLowerCase()==='yes',
         lookalikes: (c[iLook]||'').trim()
       };
     } else if ((c[iNew]||'').trim().toLowerCase() === 'no') {
