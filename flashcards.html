@@ -530,7 +530,7 @@ function onTypeInput() {
   if (!val || mode === 'hard') { hideAutocomplete(); return; }
   var lower = val.toLowerCase();
   var matches = ALL.filter(function(sp) {
-    return sp.name.toLowerCase().indexOf(lower) === 0;
+    return sp.name.toLowerCase().indexOf(lower) >= 0;
   }).slice(0, 5);
   if (!matches.length) { hideAutocomplete(); return; }
   var list = document.getElementById('ac-list');
