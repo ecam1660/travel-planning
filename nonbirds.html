@@ -130,6 +130,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
 .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px;
   font-size: 14px; font-style: italic; color: var(--ink-light); }
+.sort-select {
+  font-size: 11px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500; padding: 4px 28px 4px 10px; border-radius: 99px;
+  border: 1px solid var(--border-s);
+  background: var(--cream) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239a8870'/%3E%3C/svg%3E") no-repeat right 10px center;
+  -webkit-appearance: none; appearance: none; color: var(--ink-mid); cursor: pointer; outline: none;
+}
+.sort-select:focus { border-color: #6F928A; }
+.lightbox{position:fixed;inset:0;background:rgba(30,34,32,.88);display:none;align-items:center;justify-content:center;z-index:1000;backdrop-filter:blur(3px);}
+.lightbox.open{display:flex;}
+.lightbox-inner{position:relative;max-width:86vw;max-height:86vh;display:flex;flex-direction:column;align-items:center;}
+.lightbox img{max-width:86vw;max-height:78vh;border-radius:12px;box-shadow:0 12px 48px rgba(0,0,0,.5);display:block;}
+.lightbox-cap{margin-top:14px;text-align:center;color:#fff;}
+.lightbox-cap .lb-name{font-family:Georgia,serif;font-size:18px;font-weight:600;}
+.lightbox-cap .lb-fam{font-size:12px;opacity:.7;margin-top:2px;}
+.lightbox-close{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;background:#fff;border:none;font-size:18px;color:#2e2238;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;}
 </style>
 </head>
 <body>
@@ -150,6 +166,11 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     <button class="chip on" id="st-all" onclick="setStatus('all')">All</button>
     <button class="chip" id="st-seen" onclick="setStatus('seen')">Observed ✓</button>
     <button class="chip" id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
+    <span class="fl" style="margin-left:8px">Sort</span>
+    <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
+      <option value="obs">Total obs ↓</option>
+      <option value="name">Name A–Z</option>
+    </select>
   </div>
   <div class="trow">
     <span class="fl">Site</span>
@@ -172,7 +193,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 <input type="file" id="fi" accept=".csv" style="display:none">
 
 <script>
-var ALL = [], STATUS = 'all', ACTIVE_SITES = [], ACTIVE_CATS = [], QUERY = '';
+var ALL = [], STATUS = 'all', ACTIVE_SITES = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'obs';
 var SITES = [], CATS = [];
 var LOCAL_KEY = 'nonbirds_observed_';
 var TITLE = '';
@@ -230,6 +251,20 @@ function abbrevName(name, threshold) {
   for (var i=0;i<map.length;i++){if(s.length<=threshold)break;s=s.replace(map[i][0],map[i][1]);}
   return s;
 }
+
+
+/* Lightbox */
+function openLightbox(sp) {
+  var sl = slug(sp.name);
+  var img = document.getElementById('lb-img');
+  img.src = 'photos/' + sl + '.jpg';
+  img.onerror = function(){ var e=['png','webp'],i=0;(function t(){ if(i>=e.length){closeLightbox();return;} img.onerror=t; img.src='photos/'+sl+'.'+e[i++]; })(); };
+  document.getElementById('lb-name').textContent = sp.name;
+  document.getElementById('lb-fam').textContent = sp.sub ? sp.cat + ': ' + sp.sub : sp.cat;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLightbox(); });
 
 /* Build tile */
 function buildTile(sp) {
@@ -307,6 +342,12 @@ function buildTile(sp) {
     }
     var rect = scene.getBoundingClientRect();
     var x = e.clientX - rect.left, y = e.clientY - rect.top;
+    // Click on photo (left 104px) → expand image
+    if (x < 104) {
+      var spE = ALL.filter(function(s){ return s.name === scene.dataset.name; })[0];
+      if (spE) openLightbox(spE);
+      return;
+    }
     if (x > rect.width * 0.6 && y > rect.height * 0.5) {
       scene.classList.toggle('flipped');
     }
@@ -316,6 +357,7 @@ function buildTile(sp) {
 }
 
 /* Status */
+function setSort(val) { SORT_BY = val; render(); }
 function setStatus(s) {
   STATUS = s;
   ['all','seen','unseen'].forEach(function(k){document.getElementById('st-'+k).classList.toggle('on',k===s);});
@@ -395,6 +437,11 @@ function render() {
     }
     return true;
   });
+  // Sort
+  function totalObs(sp) { return sp.locs.reduce(function(s,l){return s+(l?l[1]:0);},0); }
+  if (SORT_BY === 'obs') { f.sort(function(a,b){return totalObs(b)-totalObs(a);}); }
+  else { f.sort(function(a,b){return a.name.localeCompare(b.name);}); }
+
   var grid = document.getElementById('grid');
   grid.innerHTML = '';
   if (!f.length) {
@@ -496,5 +543,12 @@ document.getElementById('search').addEventListener('input', function(){ render()
   try{xhr.send();}catch(e){}
 })();
 </script>
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-inner" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img id="lb-img" src="">
+    <div class="lightbox-cap"><div class="lb-name" id="lb-name"></div><div class="lb-fam" id="lb-fam"></div></div>
+  </div>
+</div>
 </body>
 </html>
