@@ -214,6 +214,7 @@ body {
   color: var(--ink-light); padding: 10px 8px 10px 12px;
 }
 .info-val { font-size: 12.5px; color: var(--ink); padding: 10px 12px 10px 0; line-height: 1.45; }
+.info-notes { font-size: 11px; line-height: 1.5; color: var(--ink-mid, #4a5548); padding: 8px 14px 4px; }
 .info-val.empty { color: var(--ink-light); }
 
 .next-btn {
@@ -530,7 +531,7 @@ function onTypeInput() {
   if (!val || mode === 'hard') { hideAutocomplete(); return; }
   var lower = val.toLowerCase();
   var matches = ALL.filter(function(sp) {
-    return sp.name.toLowerCase().indexOf(lower) >= 0;
+    return sp.name.toLowerCase().indexOf(lower) === 0;
   }).slice(0, 5);
   if (!matches.length) { hideAutocomplete(); return; }
   var list = document.getElementById('ac-list');
@@ -623,22 +624,20 @@ function submitGuess() {
 
   /* info card */
   var sp = currentCard;
-  var rows = [
-    { label: 'Family',     val: abbrevFamily(sp.family) },
-    { label: 'Features',   val: sp.features }
-  ];
   var html = '';
-  rows.forEach(function(r) {
-    var empty = !r.val;
-    html += '<div class="info-row">'
-      + '<div class="info-lbl">' + r.label + '</div>'
-      + '<div class="info-val' + (empty ? ' empty' : '') + '">' + (r.val || '—') + '</div>'
-      + '</div>';
-  });
-  // Category row
+  // Family row (labeled)
+  html += '<div class="info-row">'
+    + '<div class="info-lbl">Family</div>'
+    + '<div class="info-val">' + abbrevFamily(sp.family) + '</div>'
+    + '</div>';
+  // Category row (pills)
   if (sp.cats && sp.cats.length) {
     html += '<div class="info-row"><span class="info-label">Category</span>'
           + '<span class="info-value">' + sp.cats.map(catPillHTML).join(' ') + '</span></div>';
+  }
+  // Features: unlabeled text block, wrapping, only if present
+  if (sp.features) {
+    html += '<div class="info-notes">' + sp.features + '</div>';
   }
   document.getElementById('info-card').innerHTML = html;
 
