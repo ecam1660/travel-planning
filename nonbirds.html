@@ -107,9 +107,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   cursor: pointer; transition: all .15s; user-select: none; z-index: 2; }
 .pt-ob:hover { opacity: .8; transform: scale(1.1); }
 .pt-fam-row { padding: 1px 8px 4px 9px; }
+.pt-sci { font-size: 9.5px; font-style: italic; opacity: .6; color: var(--cd); padding: 0 8px 2px 9px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .pt-fam { font-size: 10px; opacity: .65; color: var(--cd); }
 .pt-grid { display: flex; border-top: .5px solid rgba(0,0,0,.10); margin-top: auto; }
-.pt-col { flex: 1; display: flex; flex-direction: column; border-right: .5px solid rgba(0,0,0,.08); }
+.pt-col { flex: 0 0 16.6667%; max-width: 16.6667%; display: flex; flex-direction: column; border-right: .5px solid rgba(0,0,0,.08); }
 .pt-col:last-child { border-right: none; }
 .pt-loc { font-size: 7.5px; font-weight: 600; padding: 3px 2px 2px; text-align: center;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -307,6 +308,7 @@ function buildTile(sp) {
     + '<div class="pt-right">'
     +   '<div class="pt-hdr"><span class="pt-name">' + abbrevName(sp.name,29) + '</span>'
     +   '<div class="pt-ob" style="' + obStyle + '" data-name="' + sp.name + '">' + obTxt + '</div></div>'
+    +   (sp.sci ? '<div class="pt-sci">' + sp.sci + '</div>' : '')
     +   '<div class="pt-fam-row"><span class="pt-fam">' + catline + '</span></div>'
     +   gridHTML
     + '</div>';
@@ -319,6 +321,7 @@ function buildTile(sp) {
     +     '<span class="back-name">' + abbrevName(sp.name,32) + '</span>'
     +     '<div class="pt-ob" style="' + obStyle + '" data-name="' + sp.name + '">' + obTxt + '</div>'
     +   '</div>'
+    +   (sp.sci ? '<div style="font-size:9px;font-style:italic;opacity:.6;color:var(--cd);margin-bottom:4px;">' + sp.sci + '</div>' : '')
     +   (sp.notes ? '<div class="back-notes">' + sp.notes + '</div>' : '')
     + '</div>';
 
@@ -476,7 +479,7 @@ function parseCSV(txt) {
     return -1;
   }
   var iName=col('name'), iCat=col('category'), iSub=col('subcategory'), iObs=col('observed'),
-      iSite=col('site'), iCnt=col('obs count'), iNotes=col('notes');
+      iSite=col('site'), iCnt=col('obs count'), iNotes=col('notes'), iSci=col('scientific name');
 
   var map = {};
   for (var i=1; i<lines.length; i++) {
@@ -486,6 +489,7 @@ function parseCSV(txt) {
     if (!map[name]) {
       map[name] = {
         name: name,
+        sci:  iSci>=0 ? (c[iSci]||'').trim() : '',
         cat:  iCat>=0 ? (c[iCat]||'').trim() : '',
         sub:  iSub>=0 ? (c[iSub]||'').trim() : '',
         observed: iObs>=0 && (c[iObs]||'').trim().toLowerCase() === 'yes',
