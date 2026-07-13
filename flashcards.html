@@ -94,7 +94,51 @@ body {
   box-shadow: var(--shadow);
 }
 .begin-btn:hover { background: var(--ochre); box-shadow: var(--shadow-h); }
+.begin-btn:disabled { opacity: .45; cursor: default; box-shadow: none; }
 .pre-sub { font-size: 13px; color: var(--ink-light); font-style: italic; }
+
+/* ── SUB-STACK SELECTOR ── */
+.select-wrap { width: 100%; max-width: 620px; }
+.select-title { font-family: Georgia, serif; font-size: 18px; font-weight: 400; text-align: center; margin-bottom: 4px; }
+.select-sub { font-size: 12.5px; color: var(--ink-light); text-align: center; margin-bottom: 20px; }
+.all-clear-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
+.chip-all, .chip-clear {
+  font-size: 13px; font-weight: 700; padding: 9px 22px; border-radius: 99px;
+  border: 1.5px solid var(--ochre-dk); background: var(--white); color: var(--ink);
+  cursor: pointer; letter-spacing: .03em; transition: background .15s, color .15s;
+}
+.chip-all.active { background: var(--ochre-dk); color: var(--white); }
+.chip-clear { border-color: var(--border-s); color: var(--ink-mid); }
+.chip-clear:hover { background: var(--tan-lt); }
+.substack-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.chip {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  padding: 10px 14px; border-radius: var(--radius);
+  border: 1.5px solid var(--border-s); background: var(--white);
+  cursor: pointer; transition: border-color .15s, background .15s, box-shadow .15s;
+  position: relative;
+}
+.chip:hover { box-shadow: var(--shadow); }
+.chip-name { font-size: 13px; font-weight: 600; color: var(--ink); padding-right: 18px; }
+.chip-count { font-size: 11px; color: var(--ink-light); }
+.chip.selected { border-color: var(--ochre-dk); background: var(--ochre-lt); }
+.chip.selected .chip-count { color: var(--ink-mid); }
+.chip-check {
+  position: absolute; top: 8px; right: 10px; width: 15px; height: 15px;
+  border-radius: 4px; border: 1.5px solid var(--border-s); background: var(--white);
+  display: flex; align-items: center; justify-content: center;
+}
+.chip.selected .chip-check { background: var(--ochre-dk); border-color: var(--ochre-dk); }
+.chip.selected .chip-check svg { display: block; }
+.chip-check svg { display: none; width: 10px; height: 10px; }
+.select-summary {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  font-size: 13.5px; color: var(--ink-mid); margin-bottom: 18px;
+}
+.select-summary b { color: var(--ink); font-size: 14.5px; }
 
 /* ── ARENA ── */
 #arena { display: none; width: 100%; max-width: 820px; }
@@ -291,7 +335,17 @@ body {
   <!-- PRE-GAME -->
   <div id="pre-game">
     <div class="pre-count" id="pre-count">Loading species…</div>
-    <button class="begin-btn" onclick="beginGame()">▶&nbsp; Begin IDing</button>
+    <div class="select-wrap" id="select-wrap" style="display:none">
+      <div class="select-title">Choose your sub-stacks</div>
+      <div class="select-sub">Pick one or more groups, or select All to shuffle the whole deck</div>
+      <div class="all-clear-row">
+        <button class="chip-all active" id="chip-all" onclick="toggleAllGroups()">All birds · <span id="all-count">0</span></button>
+        <button class="chip-clear" id="chip-clear" onclick="clearAllGroups()">Clear</button>
+      </div>
+      <div class="substack-grid" id="substack-grid"></div>
+      <div class="select-summary"><b id="selected-count">0</b>&nbsp;species selected</div>
+    </div>
+    <button class="begin-btn" id="begin-btn" onclick="beginGame()">▶&nbsp; Begin IDing</button>
     <div class="pre-sub">Cards will be shuffled randomly each round</div>
   </div>
 
@@ -386,6 +440,14 @@ var TITLE = '';
 var submitted = false;
 var starredOnly = false;
 var STAR_KEY = 'fc_starred_';
+
+/* ── Sub-stack (SGroup) selection ── */
+var GROUP_ORDER = [
+  'Groundbirds', 'Cuckoos', 'Swifts & Nightjars', 'Waterbirds', 'Raptors',
+  'Woodpeckers', 'Parrots', 'Broadbills & Pittas', 'Reed & Leaf',
+  'Stately Perchers', 'Bulbul & Star', 'Babblers', 'Flower & Spider', 'Others'
+];
+var selectedGroups = null; /* Set of group names currently selected; null until initialized */
 
 /* ── Star helpers ── */
 function starKey() { return STAR_KEY + TITLE.replace(/\s/g,'_'); }
@@ -709,11 +771,18 @@ function redealWrongFromDone() {
 function beginGame() {
   if (!ALL.length) return;
   var pool = ALL;
+  if (selectedGroups) {
+    pool = pool.filter(function(sp){ return selectedGroups[sp.sgroup]; });
+    if (!pool.length) {
+      alert('Select at least one sub-stack (or click All) before starting.');
+      return;
+    }
+  }
   if (starredOnly) {
     var starred = getStarred();
-    pool = ALL.filter(function(sp){ return starred.indexOf(sp.name) >= 0; });
+    pool = pool.filter(function(sp){ return starred.indexOf(sp.name) >= 0; });
     if (!pool.length) {
-      alert('No starred species yet. Star some species during a round first, then use Starred mode.');
+      alert('No starred species yet in this sub-stack selection. Star some species during a round first, then use Starred mode.');
       return;
     }
   }
@@ -755,6 +824,90 @@ function updatePreCount() {
   }
 }
 
+/* ── Sub-stack group chips ── */
+function groupsPresent() {
+  var present = {};
+  ALL.forEach(function(sp){ if (sp.sgroup) present[sp.sgroup] = true; });
+  var ordered = GROUP_ORDER.filter(function(g){ return present[g]; });
+  /* append any groups not in the known order, just in case */
+  Object.keys(present).forEach(function(g){ if (ordered.indexOf(g) < 0) ordered.push(g); });
+  return ordered;
+}
+
+function groupCount(name) {
+  return ALL.filter(function(sp){ return sp.sgroup === name; }).length;
+}
+
+function renderGroupChips() {
+  var wrap = document.getElementById('select-wrap');
+  var grid = document.getElementById('substack-grid');
+  if (!ALL.length) { wrap.style.display = 'none'; return; }
+  var groups = groupsPresent();
+  if (!groups.length) { wrap.style.display = 'none'; return; }
+  wrap.style.display = 'block';
+
+  if (selectedGroups === null) {
+    /* default: everything selected */
+    selectedGroups = {};
+    groups.forEach(function(g){ selectedGroups[g] = true; });
+  }
+
+  grid.innerHTML = '';
+  groups.forEach(function(g) {
+    var count = groupCount(g);
+    var on = !!selectedGroups[g];
+    var chip = document.createElement('div');
+    chip.className = 'chip' + (on ? ' selected' : '');
+    chip.onclick = function(){ toggleGroup(g); };
+    chip.innerHTML =
+      '<div class="chip-check"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>' +
+      '<div class="chip-name">' + g + '</div>' +
+      '<div class="chip-count">' + count + ' species</div>';
+    grid.appendChild(chip);
+  });
+
+  updateSelectionSummary();
+}
+
+function toggleGroup(name) {
+  if (!selectedGroups) return;
+  selectedGroups[name] = !selectedGroups[name];
+  renderGroupChips();
+}
+
+function toggleAllGroups() {
+  var groups = groupsPresent();
+  var allOn = groups.every(function(g){ return selectedGroups && selectedGroups[g]; });
+  selectedGroups = {};
+  groups.forEach(function(g){ selectedGroups[g] = !allOn; });
+  renderGroupChips();
+}
+
+function clearAllGroups() {
+  selectedGroups = {};
+  renderGroupChips();
+}
+
+function selectedSpeciesCount() {
+  if (!selectedGroups) return ALL.length;
+  return ALL.filter(function(sp){ return selectedGroups[sp.sgroup]; }).length;
+}
+
+function updateSelectionSummary() {
+  var groups = groupsPresent();
+  var total = ALL.length;
+  var count = selectedSpeciesCount();
+  var allOn = groups.length > 0 && groups.every(function(g){ return selectedGroups && selectedGroups[g]; });
+
+  document.getElementById('all-count').textContent = total;
+  document.getElementById('selected-count').textContent = count;
+  document.getElementById('chip-all').classList.toggle('active', allOn);
+
+  var beginBtn = document.getElementById('begin-btn');
+  beginBtn.disabled = count === 0;
+  beginBtn.textContent = count === 0 ? '▶  Begin IDing' : '▶  Begin IDing (' + count + ')';
+}
+
 /* ── CSV parsing (reused from index.html) ── */
 function splitRow(line) {
   var out = [], cur = '', inQ = false;
@@ -780,7 +933,8 @@ function parseCSV(txt) {
     return -1;
   }
   var iName = col('malaysia & singapore'), iFamily = col('family'),
-      iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes'), iCat = col('categories');
+      iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes'), iCat = col('categories'),
+      iSGroup = col('sgroup');
 
   var map = {};
   for (var i = 1; i < lines.length; i++) {
@@ -795,6 +949,7 @@ function parseCSV(txt) {
         features: (c[iFeat] || '').trim(),
         spots: (c[iSpots] || '').trim(),
         lookalikes: (c[iLook] || '').trim(),
+        sgroup: (iSGroup >= 0 ? (c[iSGroup] || '').trim() : ''),
         cats: []
       };
     }
@@ -852,6 +1007,7 @@ function checkPhotos(species, callback) {
       checkPhotos(parsed, function(withPhotos) {
         ALL = withPhotos;
         updatePreCount();
+        renderGroupChips();
       });
     }
   };
