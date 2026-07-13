@@ -677,12 +677,8 @@ function submitGuess() {
   }
 
   var answerEl = document.getElementById('result-answer');
-  if (!correct) {
-    answerEl.textContent = 'Answer: ' + currentCard.name;
-    answerEl.style.display = 'block';
-  } else {
-    answerEl.style.display = 'none';
-  }
+  answerEl.textContent = (correct ? 'Species: ' : 'Answer: ') + currentCard.name;
+  answerEl.style.display = 'block';
 
   /* info card */
   var sp = currentCard;
