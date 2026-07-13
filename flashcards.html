@@ -677,7 +677,7 @@ function submitGuess() {
   }
 
   var answerEl = document.getElementById('result-answer');
-  answerEl.textContent = (correct ? 'Species: ' : 'Answer: ') + currentCard.name;
+  answerEl.textContent = correct ? currentCard.name : ('Answer: ' + currentCard.name);
   answerEl.style.display = 'block';
 
   /* info card */
