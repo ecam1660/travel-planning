@@ -198,6 +198,14 @@ body {
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
   overflow: hidden; text-overflow: ellipsis;
 }
+.back-info-input {
+  flex: 1; min-width: 0; height: 25px; font-size: 9.5px; line-height: 1.35;
+  font-family: inherit; color: inherit; background: transparent; border: none; outline: none;
+  resize: none; padding: 1px 3px; margin: -1px -3px; border-radius: 4px; overflow-y: auto;
+}
+.back-info-input::placeholder { color: inherit; opacity: .45; font-style: italic; }
+.back-info-row:hover .back-info-input { background: rgba(255,255,255,.35); }
+.back-info-input:focus { background: rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
 
 .pt-cat-pills { display:flex; flex-wrap:wrap; gap:3px; padding:2px 8px 4px 9px; }
 .pt-cat-pill {
@@ -395,6 +403,30 @@ function isObserved(sp) {
   return o.hasOwnProperty(sp.name) ? o[sp.name] : sp.observed;
 }
 
+/* ── Editable back-of-tile text (Features / Where), overriding the CSV ── */
+function textKey() { return 'travel_text_' + TITLE.replace(/\s/g,'_'); }
+function getTextOverrides() {
+  try { return JSON.parse(localStorage.getItem(textKey()) || '{}'); } catch(e){ return {}; }
+}
+function setTextOverride(name, field, val) {
+  var o = getTextOverrides();
+  if (!o[name]) o[name] = {};
+  o[name][field] = val;
+  try { localStorage.setItem(textKey(), JSON.stringify(o)); } catch(e){}
+}
+function getFeaturesText(sp) {
+  var o = getTextOverrides();
+  return (o[sp.name] && typeof o[sp.name].features === 'string') ? o[sp.name].features : (sp.features || '');
+}
+function getWhereText(sp) {
+  var o = getTextOverrides();
+  return (o[sp.name] && typeof o[sp.name].where === 'string') ? o[sp.name].where : (sp.where || '');
+}
+
+/* ── Escaping ── */
+function escAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escHTML(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 /* ── Status toggle ── */
 function setStatus(s) {
   STATUS = s;
@@ -546,12 +578,12 @@ function buildTile(sp) {
     +   gridHTML
     + '</div>';
 
-  var featuresRow = sp.features
-    ? '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Features">'+ICON_MAGNIFIER+'</span><span class="back-info-text" style="color:'+dark+'" title="'+sp.features.replace(/"/g,'&quot;')+'">'+sp.features+'</span></div>'
-    : '';
-  var whereRow = sp.where
-    ? '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Likely location">'+ICON_PIN+'</span><span class="back-info-text" style="color:'+dark+'" title="'+sp.where.replace(/"/g,'&quot;')+'">'+sp.where+'</span></div>'
-    : '';
+  var featuresVal = getFeaturesText(sp);
+  var whereVal = getWhereText(sp);
+  var featuresRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Features">'+ICON_MAGNIFIER+'</span>'
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="features" placeholder="Add features&hellip;">'+escHTML(featuresVal)+'</textarea></div>';
+  var whereRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Likely location">'+ICON_PIN+'</span>'
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="where" placeholder="Add likely location&hellip;">'+escHTML(whereVal)+'</textarea></div>';
 
   var back = document.createElement('div');
   back.className = 'face face-back';
@@ -561,8 +593,13 @@ function buildTile(sp) {
     +     '<span class="back-name" style="color:'+dark+'">'+abbrevName(sp.name, 32)+'</span>'
     +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
     +   '</div>'
-    +   ((featuresRow || whereRow) ? '<div class="back-info">'+featuresRow+whereRow+'</div>' : '')
+    +   '<div class="back-info">'+featuresRow+whereRow+'</div>'
     + '</div>';
+
+  var featTextarea = back.querySelector('.back-info-input[data-field="features"]');
+  var whereTextarea = back.querySelector('.back-info-input[data-field="where"]');
+  if (featTextarea) featTextarea.addEventListener('input', function(){ setTextOverride(sp.name, 'features', featTextarea.value); });
+  if (whereTextarea) whereTextarea.addEventListener('input', function(){ setTextOverride(sp.name, 'where', whereTextarea.value); });
 
   inner.appendChild(front);
   inner.appendChild(back);
@@ -570,6 +607,7 @@ function buildTile(sp) {
 
   /* Click: circle toggles observed, lower-right flips */
   scene.addEventListener('click', function(e) {
+    if (e.target.closest('.back-edit')) return; /* let the Features/Where text fields be edited normally */
     var obBtn = e.target.closest('.pt-ob');
     if (obBtn) {
       var name = obBtn.dataset.name;
