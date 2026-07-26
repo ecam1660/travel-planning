@@ -271,6 +271,11 @@ body {
 .info-val { font-size: 12.5px; color: var(--ink); padding: 10px 12px 10px 0; line-height: 1.45; }
 .info-notes { font-size: 11px; line-height: 1.5; color: var(--ink-mid, #4a5548); padding: 8px 14px 4px; }
 .info-val.empty { color: var(--ink-light); }
+.info-icon-row { display: flex; align-items: flex-start; gap: 8px; padding: 8px 14px; border-bottom: .5px solid var(--border); }
+.info-icon-row:last-child { border-bottom: none; }
+.info-icon { flex-shrink: 0; width: 13px; height: 13px; margin-top: 2px; color: var(--ink-light); }
+.info-icon svg { display: block; }
+.info-icon-text { font-size: 11px; line-height: 1.5; color: var(--ink-mid, #4a5548); }
 
 .next-btn {
   width: 100%; font-size: 13px; font-weight: 600; padding: 9px;
@@ -462,6 +467,10 @@ var GROUP_ORDER = [
   'Stately Perchers', 'Bulbul & Star', 'Babblers', 'Flower & Spider', 'Others'
 ];
 var selectedGroups = null; /* Set of group names currently selected; null until initialized */
+
+/* ── Answer-panel icons (magnifying glass = Features, pin = Likely location) ── */
+var ICON_MAGNIFIER = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
+var ICON_PIN = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
 
 /* ── Star helpers ── */
 function starKey() { return STAR_KEY + TITLE.replace(/\s/g,'_'); }
@@ -760,9 +769,13 @@ function submitGuess(mcGuess) {
     html += '<div class="info-row"><span class="info-label">Category</span>'
           + '<span class="info-value">' + sp.cats.map(catPillHTML).join(' ') + '</span></div>';
   }
-  // Features: unlabeled text block, wrapping, only if present
+  // Features row (magnifying glass icon)
   if (sp.features) {
-    html += '<div class="info-notes">' + sp.features + '</div>';
+    html += '<div class="info-icon-row"><span class="info-icon" title="Features">' + ICON_MAGNIFIER + '</span><span class="info-icon-text">' + sp.features + '</span></div>';
+  }
+  // Where row (pin icon)
+  if (sp.where) {
+    html += '<div class="info-icon-row"><span class="info-icon" title="Likely location">' + ICON_PIN + '</span><span class="info-icon-text">' + sp.where + '</span></div>';
   }
   document.getElementById('info-card').innerHTML = html;
 
@@ -998,7 +1011,7 @@ function parseCSV(txt) {
   }
   var iName = col('malaysia & singapore'), iFamily = col('family'),
       iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes'), iCat = col('categories'),
-      iSGroup = col('sgroup');
+      iSGroup = col('sgroup'), iWhere = col('where');
 
   var map = {};
   for (var i = 1; i < lines.length; i++) {
@@ -1014,12 +1027,14 @@ function parseCSV(txt) {
         spots: (c[iSpots] || '').trim(),
         lookalikes: (c[iLook] || '').trim(),
         sgroup: (iSGroup >= 0 ? (c[iSGroup] || '').trim() : ''),
+        where: (iWhere >= 0 ? (c[iWhere] || '').trim() : ''),
         cats: []
       };
     }
     if (!map[name].features && iFeat >= 0) map[name].features = (c[iFeat] || '').trim();
     if (!map[name].spots    && iSpots >= 0) map[name].spots    = (c[iSpots] || '').trim();
     if (!map[name].lookalikes && iLook >= 0) map[name].lookalikes = (c[iLook] || '').trim();
+    if (!map[name].where    && iWhere >= 0) map[name].where    = (c[iWhere] || '').trim();
     if (iCat >= 0) { var cv = (c[iCat] || '').trim(); if (cv && map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv); }
   }
   var list = Object.values(map);
