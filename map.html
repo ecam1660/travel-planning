@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/png" href="travelfav_3.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Map – Travel Planning</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+:root {
+  --ochre:    #D8B47A;
+  --ochre-dk: #C39A5D;
+  --ochre-lt: #EAD7AA;
+  --ink:      #2e2218;
+  --ink-mid:  #5a4a38;
+  --ink-light:#9a8870;
+  --cream:    #f7f2eb;
+  --white:    #ffffff;
+  --border:   rgba(46,34,24,0.12);
+  --border-s: rgba(46,34,24,0.20);
+  --shadow:   0 1px 6px rgba(46,34,24,0.08);
+  --shadow-h: 0 4px 18px rgba(46,34,24,0.14);
+  --radius:   10px;
+  --green:    #4a7c5e;
+  --header-bg:#4a6e68;
+  --header-border:#6F928A;
+  --header-text:#C4D4C8;
+  --header-text-strong:#e8f0ee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  display: flex; flex-direction: column; height: 100vh; overflow: hidden;
+}
+
+/* ── HEADER ── */
+.header {
+  background: var(--header-bg);
+  padding: 12px 24px;
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; border-bottom: 3px solid var(--header-border); z-index: 500; position: relative;
+}
+.header h1 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 18px; font-weight: 400; letter-spacing: .01em;
+  color: var(--header-text); flex: 1;
+}
+.header h1 span { color: var(--header-text-strong); font-weight: 600; }
+.nav-btn {
+  font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 99px;
+  border: 1px solid rgba(234,215,170,.3); background: rgba(255,255,255,.08);
+  color: var(--header-text); cursor: pointer; letter-spacing: .02em;
+  transition: background .15s, border-color .15s; white-space: nowrap;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(196,212,200,.5); }
+
+/* ── MAP ── */
+.map-wrap { flex: 1; position: relative; min-height: 0; }
+#map { position: absolute; inset: 0; }
+.map-hint {
+  position: absolute; top: 12px; left: 12px; z-index: 400;
+  background: var(--white); border: 1px solid var(--border-s); border-radius: 99px;
+  padding: 7px 16px; font-size: 12px; color: var(--ink-mid); box-shadow: var(--shadow);
+}
+
+/* ── PIN WIDGET (Leaflet popup content) ── */
+.leaflet-popup-content-wrapper { border-radius: var(--radius); box-shadow: var(--shadow-h); }
+.leaflet-popup-content { margin: 0; width: auto !important; }
+.pin-widget { width: 340px; padding: 12px 14px 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.pin-widget-hdr { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.pin-title-input {
+  flex: 1; font-size: 14.5px; font-weight: 600; font-family: Georgia, serif;
+  border: none; border-bottom: 1.5px solid transparent; outline: none;
+  color: var(--ink); background: transparent; padding: 3px 2px; min-width: 0;
+}
+.pin-title-input:focus { border-bottom-color: var(--ochre-dk); }
+.pin-title-input::placeholder { color: var(--ink-light); font-weight: 400; }
+.pin-delete-btn {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; border: none;
+  background: transparent; color: var(--ink-light); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .12s, color .12s;
+}
+.pin-delete-btn:hover { background: #f0d4d4; color: #a03030; }
+.pin-desc-input {
+  width: 100%; font-size: 11.5px; line-height: 1.4; color: var(--ink-mid);
+  border: 1px solid var(--border-s); border-radius: 8px; background: var(--cream);
+  padding: 6px 8px; resize: vertical; min-height: 34px; outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin-bottom: 10px;
+}
+.pin-desc-input:focus { border-color: var(--ochre-dk); background: var(--white); }
+
+.pin-cols { display: flex; border-top: 1px solid var(--border); padding-top: 8px; gap: 0; }
+.pin-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 4px; border-right: 1px solid var(--border); }
+.pin-col:last-child { border-right: none; }
+.pin-col-label {
+  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-light); margin-bottom: 2px;
+}
+.pin-col-body { display: flex; flex-direction: column; gap: 6px; width: 100%; align-items: center; }
+
+.pin-sp-tile { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; position: relative; }
+.pin-sp-photo {
+  width: 52px; height: 52px; border-radius: 8px; overflow: hidden; position: relative;
+  background: var(--tan-lt, #E2D3BD); flex-shrink: 0;
+}
+.pin-sp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pin-sp-ini {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
+}
+.pin-sp-check {
+  position: absolute; top: 3px; right: 3px; width: 15px; height: 15px; border-radius: 50%;
+  background: rgba(255,255,255,.85); border: 1.5px solid var(--ink-light);
+  display: flex; align-items: center; justify-content: center; font-size: 9px; color: transparent;
+}
+.pin-sp-check.obs { background: var(--green); border-color: var(--green); color: #fff; }
+.pin-sp-name {
+  font-size: 9.5px; line-height: 1.25; text-align: center; color: var(--ink); width: 100%;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+}
+.pin-sp-remove {
+  position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
+  border: none; background: var(--white); color: var(--ink-light); font-size: 10px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); z-index: 2;
+}
+.pin-sp-remove:hover { background: #f0d4d4; color: #a03030; }
+
+.pin-sp-slot { width: 100%; position: relative; }
+.pin-sp-search {
+  width: 100%; font-size: 10.5px; padding: 6px 6px; border-radius: 8px;
+  border: 1px dashed var(--border-s); background: var(--cream); color: var(--ink);
+  outline: none; text-align: center;
+}
+.pin-sp-search:focus { border-style: solid; border-color: var(--ochre-dk); background: var(--white); }
+.pin-sp-ac {
+  position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
+  width: 220px; max-height: 180px; overflow-y: auto; z-index: 20;
+  background: var(--white); border: 1px solid var(--border-s); border-radius: 8px;
+  box-shadow: var(--shadow-h); display: none;
+}
+.pin-sp-ac.show { display: block; }
+.pin-ac-item {
+  display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer;
+  font-size: 11.5px; color: var(--ink); border-bottom: .5px solid var(--border);
+}
+.pin-ac-item:last-child { border-bottom: none; }
+.pin-ac-item:hover { background: var(--cream); }
+.pin-ac-tag {
+  font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--ink-light); padding: 1px 5px; border: 1px solid var(--border-s); border-radius: 99px;
+  flex-shrink: 0;
+}
+.pin-ac-empty { padding: 8px 10px; font-size: 11px; color: var(--ink-light); font-style: italic; }
+
+.pin-add-btn {
+  width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed var(--border-s);
+  background: transparent; color: var(--ink-light); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .12s, border-color .12s, color .12s;
+  margin-top: 2px;
+}
+.pin-add-btn:hover { border-color: var(--ochre-dk); border-style: solid; color: var(--ochre-dk); background: var(--ochre-lt); }
+
+.custom-pin { background: transparent; border: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Travel Planning: <span id="trip-title">—</span> · Map</h1>
+  <a class="nav-btn" href="index.html">Home</a>
+  <a class="nav-btn" href="nonbirds.html">Non-Birds</a>
+  <a class="nav-btn" href="flashcards.html">ID Flashcards</a>
+</div>
+
+<div class="map-wrap">
+  <div id="map"></div>
+  <div class="map-hint">Click the map to drop a pin &middot; click a pin to edit it</div>
+</div>
+
+<script>
+/* ── State ── */
+var BIRDS = [];       /* {name, slug, baseline, type:'bird'} */
+var NONBIRDS = [];    /* {name, slug, baseline, type:'nonbird'} */
+var SPECIES = [];      /* combined */
+var SPECIES_BY_NAME = {};
+var BIRD_TITLE = '';
+var NB_TITLE = '';
+var PINS = [];
+var MARKERS = {};
+var map = null;
+var PIN_ICON = null;
+
+/* ── CSV helpers (shared pattern with the other pages) ── */
+function splitRow(line) {
+  var out = [], cur = '', inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (ch === '"') { inQ = !inQ; }
+    else if (ch === ',' && !inQ) { out.push(cur); cur = ''; }
+    else cur += ch;
+  }
+  out.push(cur);
+  return out;
+}
+function makeCol(heads) {
+  return function() {
+    var names = Array.prototype.slice.call(arguments);
+    for (var n = 0; n < names.length; n++)
+      for (var i = 0; i < heads.length; i++)
+        if (heads[i] === names[n].toLowerCase()) return i;
+    return -1;
+  };
+}
+function slug(n) {
+  return n.toLowerCase().replace(/[‘’']/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
+}
+function initials(n) {
+  return n.split(/[\s\-]+/).slice(0,2).map(function(w){ return (w[0]||'').toUpperCase(); }).join('');
+}
+
+/* ── Parse location.csv (birds) — mirrors index.html's "New" == 'no' => observed convention ── */
+function parseBirds(txt) {
+  var lines = txt.split(/\r?\n/);
+  if (lines.length < 2) return [];
+  var firstLine = lines[0];
+  var rawTitle = splitRow(firstLine)[0].trim();
+  BIRD_TITLE = (rawTitle.toLowerCase() === 'name') ? 'Malaysia & Singapore' : rawTitle;
+  var heads = splitRow(firstLine).map(function(h){ return h.trim().toLowerCase(); });
+  var col = makeCol(heads);
+  var iName = col('name','malaysia & singapore'), iNew = col('new');
+  var byName = {};
+  for (var i = 1; i < lines.length; i++) {
+    var c = splitRow(lines[i]);
+    if (!c || !c[iName] || !c[iName].trim()) continue;
+    var name = c[iName].trim();
+    if (!byName[name]) {
+      byName[name] = {
+        name: name,
+        slug: slug(name),
+        baseline: (c[iNew]||'').trim().toLowerCase() === 'no',
+        type: 'bird'
+      };
+    } else if ((c[iNew]||'').trim().toLowerCase() === 'no') {
+      byName[name].baseline = true;
+    }
+  }
+  return Object.values(byName);
+}
+
+/* ── Parse nonbirds.csv — mirrors nonbirds.html's "observed" == 'yes' convention ── */
+function parseNonbirds(txt) {
+  var lines = txt.split(/\r?\n/);
+  if (lines.length < 2) return [];
+  var firstLine = lines[0];
+  NB_TITLE = splitRow(firstLine)[0].trim();
+  var heads = splitRow(firstLine).map(function(h){ return h.trim().toLowerCase(); });
+  var col = makeCol(heads);
+  var iName = col('name'), iObs = col('observed');
+  var byName = {};
+  for (var i = 1; i < lines.length; i++) {
+    var c = splitRow(lines[i]);
+    var name = iName >= 0 ? (c[iName]||'').trim() : '';
+    if (!name) continue;
+    if (!byName[name]) {
+      byName[name] = {
+        name: name,
+        slug: slug(name),
+        baseline: iObs >= 0 && (c[iObs]||'').trim().toLowerCase() === 'yes',
+        type: 'nonbird'
+      };
+    }
+    if (iObs >= 0 && (c[iObs]||'').trim().toLowerCase() === 'yes') byName[name].baseline = true;
+  }
+  return Object.values(byName);
+}
+
+/* ── Observed lookups (same localStorage keys as index.html / nonbirds.html) ── */
+function birdOverridesKey() { return 'travel_observed_' + BIRD_TITLE.replace(/\s/g,'_'); }
+function nonbirdOverridesKey() { return 'nonbirds_observed_' + NB_TITLE.replace(/\s/g,'_'); }
+function getBirdOverrides() { try { return JSON.parse(localStorage.getItem(birdOverridesKey())||'{}'); } catch(e){ return {}; } }
+function getNonbirdOverrides() { try { return JSON.parse(localStorage.getItem(nonbirdOverridesKey())||'{}'); } catch(e){ return {}; } }
+function isObserved(sp) {
+  if (!sp) return false;
+  if (sp.type === 'bird') {
+    var o = getBirdOverrides();
+    return o.hasOwnProperty(sp.name) ? o[sp.name] : sp.baseline;
+  } else {
+    var o = getNonbirdOverrides();
+    return o.hasOwnProperty(sp.name) ? o[sp.name] : sp.baseline;
+  }
+}
+
+/* ── Pins persistence ── */
+function pinsKey() { return 'travel_map_pins_' + BIRD_TITLE.replace(/\s/g,'_'); }
+function loadPins() {
+  try { return JSON.parse(localStorage.getItem(pinsKey())||'[]'); } catch(e){ return []; }
+}
+function saveState() {
+  var clean = PINS.map(function(p) {
+    return {
+      id: p.id, lat: p.lat, lng: p.lng, title: p.title, desc: p.desc,
+      many: p.many.filter(function(n){return n;}),
+      some: p.some.filter(function(n){return n;}),
+      few:  p.few.filter(function(n){return n;})
+    };
+  });
+  try { localStorage.setItem(pinsKey(), JSON.stringify(clean)); } catch(e){}
+}
+
+/* ── Escaping ── */
+function escAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+function escHTML(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ── Popup / widget rendering ── */
+function renderFilledSlotHTML(pinId, col, idx, name) {
+  var sp = SPECIES_BY_NAME[name];
+  if (!sp) return renderEmptySlotHTML(pinId, col, idx);
+  var obs = isObserved(sp);
+  return '<div class="pin-sp-tile">'
+    + '<button type="button" class="pin-sp-remove" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'" title="Remove">&times;</button>'
+    + '<div class="pin-sp-photo">'
+    +   '<img src="photos/'+sp.slug+'.jpg" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+    +   '<div class="pin-sp-ini" style="display:none">'+initials(sp.name)+'</div>'
+    +   '<div class="pin-sp-check'+(obs?' obs':'')+'">'+(obs?'&#10003;':'')+'</div>'
+    + '</div>'
+    + '<div class="pin-sp-name" title="'+escAttr(sp.name)+'">'+escHTML(sp.name)+'</div>'
+    + '</div>';
+}
+function renderEmptySlotHTML(pinId, col, idx) {
+  return '<div class="pin-sp-slot">'
+    + '<input type="text" class="pin-sp-search" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'" placeholder="Search species&hellip;" autocomplete="off">'
+    + '<div class="pin-sp-ac" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'"></div>'
+    + '</div>';
+}
+function renderColumn(pin, colKey, label) {
+  var arr = pin[colKey];
+  var rows = arr.map(function(name, idx) {
+    return name ? renderFilledSlotHTML(pin.id, colKey, idx, name) : renderEmptySlotHTML(pin.id, colKey, idx);
+  }).join('');
+  return '<div class="pin-col">'
+    + '<div class="pin-col-label">'+label+'</div>'
+    + '<div class="pin-col-body">'+rows+'</div>'
+    + '<button type="button" class="pin-add-btn" data-pin="'+pin.id+'" data-col="'+colKey+'" title="Add species">+</button>'
+    + '</div>';
+}
+function buildPopupHTML(pin) {
+  return '<div class="pin-widget" data-pin="'+pin.id+'">'
+    + '<div class="pin-widget-hdr">'
+    +   '<input type="text" class="pin-title-input" data-pin="'+pin.id+'" value="'+escAttr(pin.title)+'" placeholder="Location name">'
+    +   '<button type="button" class="pin-delete-btn" data-pin="'+pin.id+'" title="Delete pin">&times;</button>'
+    + '</div>'
+    + '<textarea class="pin-desc-input" data-pin="'+pin.id+'" placeholder="How to get there, hours, etc.">'+escHTML(pin.desc)+'</textarea>'
+    + '<div class="pin-cols">'
+    +   renderColumn(pin, 'many', 'Many')
+    +   renderColumn(pin, 'some', 'Some')
+    +   renderColumn(pin, 'few', 'Few')
+    + '</div>'
+    + '</div>';
+}
+
+/* ── Pin lookups / marker management ── */
+function findPin(id) { return PINS.filter(function(p){ return p.id === id; })[0]; }
+function refreshPinPopup(id) {
+  var pin = findPin(id);
+  var marker = MARKERS[id];
+  if (!pin || !marker) return;
+  marker.setPopupContent(buildPopupHTML(pin));
+}
+function addMarkerForPin(pin) {
+  var marker = L.marker([pin.lat, pin.lng], { icon: PIN_ICON }).addTo(map);
+  marker.bindPopup(buildPopupHTML(pin), { maxWidth: 400, minWidth: 300, autoPanPadding: [20,20] });
+  MARKERS[pin.id] = marker;
+  return marker;
+}
+
+/* ── Mutations ── */
+function deletePin(id) {
+  var marker = MARKERS[id];
+  if (marker) { map.removeLayer(marker); delete MARKERS[id]; }
+  PINS = PINS.filter(function(p){ return p.id !== id; });
+  saveState();
+}
+function addSlot(pinId, col) {
+  var pin = findPin(pinId);
+  if (!pin) return;
+  pin[col].push('');
+  saveState();
+  refreshPinPopup(pinId);
+}
+function removeSlot(pinId, col, idx) {
+  var pin = findPin(pinId);
+  if (!pin) return;
+  pin[col].splice(idx, 1);
+  saveState();
+  refreshPinPopup(pinId);
+}
+function chooseSpecies(pinId, col, idx, name) {
+  var pin = findPin(pinId);
+  if (!pin) return;
+  pin[col][idx] = name;
+  saveState();
+  refreshPinPopup(pinId);
+}
+
+/* ── Autocomplete rendering ── */
+function showSuggestions(input) {
+  var q = input.value.trim().toLowerCase();
+  var acEl = input.nextElementSibling;
+  if (!acEl) return;
+  if (!q) { acEl.classList.remove('show'); acEl.innerHTML=''; return; }
+  var matches = SPECIES.filter(function(sp){ return sp.name.toLowerCase().indexOf(q) >= 0; }).slice(0, 8);
+  if (!matches.length) {
+    acEl.innerHTML = '<div class="pin-ac-empty">No matches</div>';
+    acEl.classList.add('show');
+    return;
+  }
+  acEl.innerHTML = matches.map(function(sp) {
+    return '<div class="pin-ac-item" data-name="'+escAttr(sp.name)+'" data-pin="'+input.dataset.pin+'" data-col="'+input.dataset.col+'" data-idx="'+input.dataset.idx+'">'
+      + '<span>'+escHTML(sp.name)+'</span>'
+      + '<span class="pin-ac-tag">'+(sp.type==='bird'?'Bird':'Non-bird')+'</span>'
+      + '</div>';
+  }).join('');
+  acEl.classList.add('show');
+}
+
+/* ── Event delegation ── */
+document.addEventListener('input', function(e) {
+  var t = e.target;
+  if (t.classList.contains('pin-title-input')) {
+    var pin = findPin(t.dataset.pin);
+    if (pin) { pin.title = t.value; saveState(); }
+  } else if (t.classList.contains('pin-desc-input')) {
+    var pin2 = findPin(t.dataset.pin);
+    if (pin2) { pin2.desc = t.value; saveState(); }
+  } else if (t.classList.contains('pin-sp-search')) {
+    showSuggestions(t);
+  }
+});
+
+document.addEventListener('mousedown', function(e) {
+  var acItem = e.target.closest('.pin-ac-item');
+  if (acItem) {
+    e.preventDefault();
+    chooseSpecies(acItem.dataset.pin, acItem.dataset.col, parseInt(acItem.dataset.idx,10), acItem.dataset.name);
+  }
+});
+
+document.addEventListener('click', function(e) {
+  var delBtn = e.target.closest('.pin-delete-btn');
+  if (delBtn) { deletePin(delBtn.dataset.pin); return; }
+  var addBtn = e.target.closest('.pin-add-btn');
+  if (addBtn) { addSlot(addBtn.dataset.pin, addBtn.dataset.col); return; }
+  var rmBtn = e.target.closest('.pin-sp-remove');
+  if (rmBtn) { removeSlot(rmBtn.dataset.pin, rmBtn.dataset.col, parseInt(rmBtn.dataset.idx,10)); return; }
+});
+
+document.addEventListener('focusout', function(e) {
+  if (e.target.classList && e.target.classList.contains('pin-sp-search')) {
+    var acEl = e.target.nextElementSibling;
+    setTimeout(function(){ if (acEl) acEl.classList.remove('show'); }, 150);
+  }
+});
+
+/* ── Map init ── */
+function initMap() {
+  map = L.map('map', { zoomControl: true }).setView([1.3400, 103.8300], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+  var pinSVG = '<svg width="30" height="42" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg">'
+    + '<path d="M12 0C5.4 0 0 5.4 0 12c0 9 12 20 12 20s12-11 12-20c0-6.6-5.4-12-12-12z" fill="#C39A5D" stroke="#2e2218" stroke-width="1"/>'
+    + '<circle cx="12" cy="12" r="5" fill="#fff"/>'
+    + '</svg>';
+  PIN_ICON = L.divIcon({ html: pinSVG, className: 'custom-pin', iconSize: [30,42], iconAnchor: [15,42], popupAnchor: [0,-38] });
+
+  PINS = loadPins();
+  PINS.forEach(function(p) {
+    if (!p.many) p.many = []; if (!p.some) p.some = []; if (!p.few) p.few = [];
+    addMarkerForPin(p);
+  });
+
+  map.on('click', function(e) {
+    var id = 'p' + Date.now() + Math.floor(Math.random()*1000);
+    var pin = { id: id, lat: e.latlng.lat, lng: e.latlng.lng, title: 'New location', desc: '', many: [], some: [], few: [] };
+    PINS.push(pin);
+    saveState();
+    var marker = addMarkerForPin(pin);
+    marker.openPopup();
+  });
+}
+
+/* ── Load data (birds + nonbirds), then init ── */
+var pending = 2;
+function onDataReady() {
+  SPECIES = BIRDS.concat(NONBIRDS);
+  SPECIES_BY_NAME = {};
+  SPECIES.forEach(function(sp){ SPECIES_BY_NAME[sp.name] = sp; });
+  document.getElementById('trip-title').textContent = BIRD_TITLE || '—';
+  initMap();
+}
+function tick() { if (--pending <= 0) onDataReady(); }
+
+(function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'location.csv');
+  xhr.onload = function(){ if (xhr.status===200) BIRDS = parseBirds(xhr.responseText); tick(); };
+  xhr.onerror = function(){ tick(); };
+  try { xhr.send(); } catch(e) { tick(); }
+})();
+(function() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'nonbirds.csv');
+  xhr.onload = function(){ if (xhr.status===200) NONBIRDS = parseNonbirds(xhr.responseText); tick(); };
+  xhr.onerror = function(){ tick(); };
+  try { xhr.send(); } catch(e) { tick(); }
+})();
+</script>
+</body>
+</html>
