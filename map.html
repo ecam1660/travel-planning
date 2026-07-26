@@ -93,52 +93,66 @@ body {
 }
 .pin-desc-input:focus { border-color: var(--ochre-dk); background: var(--white); }
 
-.pin-cols { display: flex; border-top: 1px solid var(--border); padding-top: 10px; gap: 0; }
-.pin-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 4px; border-right: 1px solid var(--border); }
-.pin-col:last-child { border-right: none; }
-.pin-col-label {
-  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ink-light); margin-bottom: 3px;
+/* Species section (single ordered list) */
+.pin-sp-section { border-top: 1px solid var(--border); padding-top: 10px; }
+.pin-sp-list {
+  display: flex; flex-direction: column; gap: 2px; width: 100%;
+  max-height: 280px; overflow-y: auto; margin-bottom: 8px;
 }
-.pin-col-body { display: flex; flex-direction: column; gap: 8px; width: 100%; align-items: center; }
-
-.pin-sp-tile { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; position: relative; }
-.pin-sp-photo {
-  width: 72px; height: 72px; border-radius: 8px; overflow: hidden; position: relative;
-  background: var(--tan-lt, #E2D3BD); flex-shrink: 0;
+.pin-sp-row {
+  display: flex; align-items: center; gap: 8px; width: 100%;
+  padding: 5px 4px; border-radius: 8px; transition: background .12s;
 }
-.pin-sp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.pin-sp-ini {
+.pin-sp-row.drag-over { background: var(--ochre-lt); }
+.pin-sp-drag-handle {
+  cursor: grab; color: var(--ink-light); font-size: 13px; line-height: 1; flex-shrink: 0;
+  padding: 4px 1px; user-select: none; letter-spacing: -2px;
+}
+.pin-sp-drag-handle:active { cursor: grabbing; }
+.pin-sp-photo-sm {
+  width: 40px; height: 40px; border-radius: 6px; overflow: hidden; position: relative;
+  flex-shrink: 0; background: #E2D3BD;
+}
+.pin-sp-photo-sm img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pin-sp-ini-sm {
   width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-size: 19px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
+  font-size: 12px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
 }
-.pin-sp-check {
-  position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
-  background: rgba(255,255,255,.9); border: 1.5px solid var(--ink-light);
-  display: flex; align-items: center; justify-content: center; font-size: 10.5px; color: transparent;
+.pin-sp-check-sm {
+  position: absolute; bottom: 1px; right: 1px; width: 13px; height: 13px; border-radius: 50%;
+  background: rgba(255,255,255,.9); border: 1.3px solid var(--ink-light);
+  display: flex; align-items: center; justify-content: center; font-size: 8px; color: transparent;
 }
-.pin-sp-check.obs { background: var(--green); border-color: var(--green); color: #fff; }
-.pin-sp-name {
-  font-size: 11px; line-height: 1.3; text-align: center; color: var(--ink); width: 100%;
-  overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+.pin-sp-check-sm.obs { background: var(--green); border-color: var(--green); color: #fff; }
+.pin-sp-row-name {
+  font-size: 12px; font-weight: 600; color: var(--ink); flex: 0 0 108px; width: 108px; min-width: 0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.pin-sp-remove {
-  position: absolute; top: -4px; right: -4px; width: 17px; height: 17px; border-radius: 50%;
-  border: none; background: var(--white); color: var(--ink-light); font-size: 11px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); z-index: 2;
+.pin-sp-notes-input {
+  flex: 1; min-width: 0; font-size: 11.5px; padding: 7px 9px; border-radius: 8px;
+  border: 1px solid var(--border-s); background: var(--cream); color: var(--ink-mid); outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-.pin-sp-remove:hover { background: #f0d4d4; color: #a03030; }
+.pin-sp-notes-input:focus { border-color: var(--ochre-dk); background: var(--white); }
+.pin-sp-remove-row {
+  flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; border: none;
+  background: transparent; color: var(--ink-light); font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .12s, color .12s;
+}
+.pin-sp-remove-row:hover { background: #f0d4d4; color: #a03030; }
+.pin-sp-empty-hint { font-size: 11.5px; color: var(--ink-light); font-style: italic; padding: 6px 4px 10px; }
 
-.pin-sp-slot { width: 100%; position: relative; }
-.pin-sp-search {
-  width: 100%; font-size: 11.5px; padding: 8px 6px; border-radius: 8px;
-  border: 1px dashed var(--border-s); background: var(--cream); color: var(--ink);
-  outline: none; text-align: center;
+/* Add-species row */
+.pin-sp-add-row { position: relative; width: 100%; }
+.pin-sp-add-input {
+  width: 100%; font-size: 12px; padding: 9px 12px; border-radius: 8px;
+  border: 1px dashed var(--border-s); background: var(--cream); color: var(--ink); outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
-.pin-sp-search:focus { border-style: solid; border-color: var(--ochre-dk); background: var(--white); }
+.pin-sp-add-input:focus { border-style: solid; border-color: var(--ochre-dk); background: var(--white); }
 .pin-sp-ac {
-  position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
-  width: 240px; max-height: 200px; overflow-y: auto; z-index: 20;
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 20;
+  max-height: 220px; overflow-y: auto;
   background: var(--white); border: 1px solid var(--border-s); border-radius: 8px;
   box-shadow: var(--shadow-h); display: none;
 }
@@ -155,14 +169,6 @@ body {
   flex-shrink: 0;
 }
 .pin-ac-empty { padding: 8px 10px; font-size: 11px; color: var(--ink-light); font-style: italic; }
-
-.pin-add-btn {
-  width: 26px; height: 26px; border-radius: 50%; border: 1.5px dashed var(--border-s);
-  background: transparent; color: var(--ink-light); font-size: 15px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: background .12s, border-color .12s, color .12s;
-  margin-top: 2px;
-}
-.pin-add-btn:hover { border-color: var(--ochre-dk); border-style: solid; color: var(--ochre-dk); background: var(--ochre-lt); }
 
 .custom-pin { background: transparent; border: none; }
 </style>
@@ -193,6 +199,7 @@ var PINS = [];
 var MARKERS = {};
 var map = null;
 var PIN_ICON = null;
+var DRAG_STATE = null; /* {pinId, fromIdx} while a row is being dragged */
 
 /* ── CSV helpers (shared pattern with the other pages) ── */
 function splitRow(line) {
@@ -299,13 +306,27 @@ function pinsKey() { return 'travel_map_pins_' + BIRD_TITLE.replace(/\s/g,'_'); 
 function loadPins() {
   try { return JSON.parse(localStorage.getItem(pinsKey())||'[]'); } catch(e){ return []; }
 }
+/* Migrate older pins saved under the previous Many/Some/Few column format
+   into the new single ordered species[] list, so nothing already saved is lost. */
+function migratePin(p) {
+  if (!p.species) {
+    var combined = [];
+    ['many','some','few'].forEach(function(col) {
+      (p[col]||[]).forEach(function(name) {
+        if (name) combined.push({ name: name, notes: '' });
+      });
+    });
+    p.species = combined;
+  }
+  delete p.many; delete p.some; delete p.few;
+  p.species.forEach(function(s) { if (typeof s.notes !== 'string') s.notes = ''; });
+  return p;
+}
 function saveState() {
   var clean = PINS.map(function(p) {
     return {
       id: p.id, lat: p.lat, lng: p.lng, title: p.title, desc: p.desc,
-      many: p.many.filter(function(n){return n;}),
-      some: p.some.filter(function(n){return n;}),
-      few:  p.few.filter(function(n){return n;})
+      species: p.species.map(function(s){ return { name: s.name, notes: s.notes || '' }; })
     };
   });
   try { localStorage.setItem(pinsKey(), JSON.stringify(clean)); } catch(e){}
@@ -316,35 +337,35 @@ function escAttr(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;'
 function escHTML(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 /* ── Popup / widget rendering ── */
-function renderFilledSlotHTML(pinId, col, idx, name) {
-  var sp = SPECIES_BY_NAME[name];
-  if (!sp) return renderEmptySlotHTML(pinId, col, idx);
-  var obs = isObserved(sp);
-  return '<div class="pin-sp-tile">'
-    + '<button type="button" class="pin-sp-remove" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'" title="Remove">&times;</button>'
-    + '<div class="pin-sp-photo">'
-    +   '<img src="photos/'+sp.slug+'.jpg" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-    +   '<div class="pin-sp-ini" style="display:none">'+initials(sp.name)+'</div>'
-    +   '<div class="pin-sp-check'+(obs?' obs':'')+'">'+(obs?'&#10003;':'')+'</div>'
+function renderSpeciesRow(pin, idx) {
+  var entry = pin.species[idx];
+  var sp = SPECIES_BY_NAME[entry.name];
+  var obs = sp ? isObserved(sp) : false;
+  var slugVal = sp ? sp.slug : slug(entry.name);
+  var displayName = sp ? sp.name : entry.name;
+  return '<div class="pin-sp-row" data-pin="'+pin.id+'" data-idx="'+idx+'">'
+    + '<span class="pin-sp-drag-handle" draggable="true" data-pin="'+pin.id+'" data-idx="'+idx+'" title="Drag to reorder">&#8942;&#8942;</span>'
+    + '<div class="pin-sp-photo-sm">'
+    +   '<img src="photos/'+slugVal+'.jpg" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+    +   '<div class="pin-sp-ini-sm" style="display:none">'+initials(displayName)+'</div>'
+    +   '<div class="pin-sp-check-sm'+(obs?' obs':'')+'">'+(obs?'&#10003;':'')+'</div>'
     + '</div>'
-    + '<div class="pin-sp-name" title="'+escAttr(sp.name)+'">'+escHTML(sp.name)+'</div>'
+    + '<div class="pin-sp-row-name" title="'+escAttr(displayName)+'">'+escHTML(displayName)+'</div>'
+    + '<input type="text" class="pin-sp-notes-input" data-pin="'+pin.id+'" data-idx="'+idx+'" placeholder="Notes on where to look&hellip;" value="'+escAttr(entry.notes||'')+'">'
+    + '<button type="button" class="pin-sp-remove-row" data-pin="'+pin.id+'" data-idx="'+idx+'" title="Remove">&times;</button>'
     + '</div>';
 }
-function renderEmptySlotHTML(pinId, col, idx) {
-  return '<div class="pin-sp-slot">'
-    + '<input type="text" class="pin-sp-search" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'" placeholder="Search species&hellip;" autocomplete="off">'
-    + '<div class="pin-sp-ac" data-pin="'+pinId+'" data-col="'+col+'" data-idx="'+idx+'"></div>'
-    + '</div>';
+function renderSpeciesList(pin) {
+  if (!pin.species.length) {
+    return '<div class="pin-sp-empty-hint">No species added yet — search below to add one.</div>';
+  }
+  var rows = pin.species.map(function(_, idx){ return renderSpeciesRow(pin, idx); }).join('');
+  return '<div class="pin-sp-list">' + rows + '</div>';
 }
-function renderColumn(pin, colKey, label) {
-  var arr = pin[colKey];
-  var rows = arr.map(function(name, idx) {
-    return name ? renderFilledSlotHTML(pin.id, colKey, idx, name) : renderEmptySlotHTML(pin.id, colKey, idx);
-  }).join('');
-  return '<div class="pin-col">'
-    + '<div class="pin-col-label">'+label+'</div>'
-    + '<div class="pin-col-body">'+rows+'</div>'
-    + '<button type="button" class="pin-add-btn" data-pin="'+pin.id+'" data-col="'+colKey+'" title="Add species">+</button>'
+function renderAddRow(pin) {
+  return '<div class="pin-sp-add-row">'
+    + '<input type="text" class="pin-sp-add-input" data-pin="'+pin.id+'" placeholder="Search species to add&hellip;" autocomplete="off">'
+    + '<div class="pin-sp-ac" data-pin="'+pin.id+'"></div>'
     + '</div>';
 }
 function buildPopupHTML(pin) {
@@ -354,10 +375,9 @@ function buildPopupHTML(pin) {
     +   '<button type="button" class="pin-delete-btn" data-pin="'+pin.id+'" title="Delete pin">&times;</button>'
     + '</div>'
     + '<textarea class="pin-desc-input" data-pin="'+pin.id+'" placeholder="How to get there, hours, etc.">'+escHTML(pin.desc)+'</textarea>'
-    + '<div class="pin-cols">'
-    +   renderColumn(pin, 'many', 'Many')
-    +   renderColumn(pin, 'some', 'Some')
-    +   renderColumn(pin, 'few', 'Few')
+    + '<div class="pin-sp-section">'
+    +   renderSpeciesList(pin)
+    +   renderAddRow(pin)
     + '</div>'
     + '</div>';
 }
@@ -384,24 +404,27 @@ function deletePin(id) {
   PINS = PINS.filter(function(p){ return p.id !== id; });
   saveState();
 }
-function addSlot(pinId, col) {
+function addSpecies(pinId, name) {
   var pin = findPin(pinId);
   if (!pin) return;
-  pin[col].push('');
+  pin.species.push({ name: name, notes: '' });
   saveState();
   refreshPinPopup(pinId);
 }
-function removeSlot(pinId, col, idx) {
+function removeSpecies(pinId, idx) {
   var pin = findPin(pinId);
   if (!pin) return;
-  pin[col].splice(idx, 1);
+  pin.species.splice(idx, 1);
   saveState();
   refreshPinPopup(pinId);
 }
-function chooseSpecies(pinId, col, idx, name) {
+function reorderSpecies(pinId, fromIdx, toIdx) {
   var pin = findPin(pinId);
-  if (!pin) return;
-  pin[col][idx] = name;
+  if (!pin || fromIdx === toIdx || fromIdx == null || toIdx == null) return;
+  if (fromIdx < 0 || fromIdx >= pin.species.length) return;
+  var item = pin.species.splice(fromIdx, 1)[0];
+  toIdx = Math.max(0, Math.min(toIdx, pin.species.length));
+  pin.species.splice(toIdx, 0, item);
   saveState();
   refreshPinPopup(pinId);
 }
@@ -419,7 +442,7 @@ function showSuggestions(input) {
     return;
   }
   acEl.innerHTML = matches.map(function(sp) {
-    return '<div class="pin-ac-item" data-name="'+escAttr(sp.name)+'" data-pin="'+input.dataset.pin+'" data-col="'+input.dataset.col+'" data-idx="'+input.dataset.idx+'">'
+    return '<div class="pin-ac-item" data-name="'+escAttr(sp.name)+'" data-pin="'+input.dataset.pin+'">'
       + '<span>'+escHTML(sp.name)+'</span>'
       + '<span class="pin-ac-tag">'+(sp.type==='bird'?'Bird':'Non-bird')+'</span>'
       + '</div>';
@@ -436,14 +459,20 @@ document.addEventListener('input', function(e) {
   } else if (t.classList.contains('pin-desc-input')) {
     var pin2 = findPin(t.dataset.pin);
     if (pin2) { pin2.desc = t.value; saveState(); }
-  } else if (t.classList.contains('pin-sp-search')) {
+  } else if (t.classList.contains('pin-sp-notes-input')) {
+    var pin3 = findPin(t.dataset.pin);
+    if (pin3) {
+      var idx = parseInt(t.dataset.idx, 10);
+      if (pin3.species[idx]) { pin3.species[idx].notes = t.value; saveState(); }
+    }
+  } else if (t.classList.contains('pin-sp-add-input')) {
     showSuggestions(t);
   }
 });
 
 document.addEventListener('keydown', function(e) {
   var t = e.target;
-  if (!t.classList || !t.classList.contains('pin-sp-search')) return;
+  if (!t.classList || !t.classList.contains('pin-sp-add-input')) return;
   var acEl = t.nextElementSibling;
   if (!acEl) return;
   var items = Array.prototype.slice.call(acEl.querySelectorAll('.pin-ac-item'));
@@ -465,7 +494,7 @@ document.addEventListener('keydown', function(e) {
     e.preventDefault();
     var chosen = items[hi >= 0 ? hi : 0];
     if (chosen && chosen.dataset.name) {
-      chooseSpecies(chosen.dataset.pin, chosen.dataset.col, parseInt(chosen.dataset.idx,10), chosen.dataset.name);
+      addSpecies(chosen.dataset.pin, chosen.dataset.name);
     }
   }
 });
@@ -473,22 +502,56 @@ document.addEventListener('keydown', function(e) {
 document.addEventListener('click', function(e) {
   var acItem = e.target.closest('.pin-ac-item');
   if (acItem && acItem.dataset.name) {
-    chooseSpecies(acItem.dataset.pin, acItem.dataset.col, parseInt(acItem.dataset.idx,10), acItem.dataset.name);
+    addSpecies(acItem.dataset.pin, acItem.dataset.name);
     return;
   }
   var delBtn = e.target.closest('.pin-delete-btn');
   if (delBtn) { deletePin(delBtn.dataset.pin); return; }
-  var addBtn = e.target.closest('.pin-add-btn');
-  if (addBtn) { addSlot(addBtn.dataset.pin, addBtn.dataset.col); return; }
-  var rmBtn = e.target.closest('.pin-sp-remove');
-  if (rmBtn) { removeSlot(rmBtn.dataset.pin, rmBtn.dataset.col, parseInt(rmBtn.dataset.idx,10)); return; }
+  var rmBtn = e.target.closest('.pin-sp-remove-row');
+  if (rmBtn) { removeSpecies(rmBtn.dataset.pin, parseInt(rmBtn.dataset.idx, 10)); return; }
 });
 
 document.addEventListener('focusout', function(e) {
-  if (e.target.classList && e.target.classList.contains('pin-sp-search')) {
+  if (e.target.classList && e.target.classList.contains('pin-sp-add-input')) {
     var acEl = e.target.nextElementSibling;
     setTimeout(function(){ if (acEl) acEl.classList.remove('show'); }, 150);
   }
+});
+
+/* ── Drag-to-reorder ── */
+document.addEventListener('dragstart', function(e) {
+  var handle = e.target.closest('.pin-sp-drag-handle');
+  if (!handle) return;
+  DRAG_STATE = { pinId: handle.dataset.pin, fromIdx: parseInt(handle.dataset.idx, 10) };
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move';
+    try { e.dataTransfer.setData('text/plain', ''); } catch(err) {}
+  }
+});
+document.addEventListener('dragover', function(e) {
+  if (!DRAG_STATE) return;
+  var row = e.target.closest('.pin-sp-row');
+  if (!row || row.dataset.pin !== DRAG_STATE.pinId) return;
+  e.preventDefault();
+  row.classList.add('drag-over');
+});
+document.addEventListener('dragleave', function(e) {
+  var row = e.target.closest('.pin-sp-row');
+  if (row) row.classList.remove('drag-over');
+});
+document.addEventListener('drop', function(e) {
+  if (!DRAG_STATE) return;
+  var row = e.target.closest('.pin-sp-row');
+  if (!row || row.dataset.pin !== DRAG_STATE.pinId) return;
+  e.preventDefault();
+  row.classList.remove('drag-over');
+  var toIdx = parseInt(row.dataset.idx, 10);
+  reorderSpecies(DRAG_STATE.pinId, DRAG_STATE.fromIdx, toIdx);
+  DRAG_STATE = null;
+});
+document.addEventListener('dragend', function() {
+  Array.prototype.slice.call(document.querySelectorAll('.pin-sp-row.drag-over')).forEach(function(r){ r.classList.remove('drag-over'); });
+  DRAG_STATE = null;
 });
 
 /* ── Map init ── */
@@ -505,15 +568,12 @@ function initMap() {
     + '</svg>';
   PIN_ICON = L.divIcon({ html: pinSVG, className: 'custom-pin', iconSize: [30,42], iconAnchor: [15,42], popupAnchor: [0,-38] });
 
-  PINS = loadPins();
-  PINS.forEach(function(p) {
-    if (!p.many) p.many = []; if (!p.some) p.some = []; if (!p.few) p.few = [];
-    addMarkerForPin(p);
-  });
+  PINS = loadPins().map(migratePin);
+  PINS.forEach(function(p) { addMarkerForPin(p); });
 
   map.on('click', function(e) {
     var id = 'p' + Date.now() + Math.floor(Math.random()*1000);
-    var pin = { id: id, lat: e.latlng.lat, lng: e.latlng.lng, title: 'New location', desc: '', many: [], some: [], few: [] };
+    var pin = { id: id, lat: e.latlng.lat, lng: e.latlng.lng, title: 'New location', desc: '', species: [] };
     PINS.push(pin);
     saveState();
     var marker = addMarkerForPin(pin);
