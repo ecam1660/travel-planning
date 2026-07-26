@@ -70,12 +70,12 @@ body {
 /* ── PIN WIDGET (Leaflet popup content) ── */
 .leaflet-popup-content-wrapper { border-radius: var(--radius); box-shadow: var(--shadow-h); }
 .leaflet-popup-content { margin: 0; width: auto !important; }
-.pin-widget { width: 340px; padding: 12px 14px 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
-.pin-widget-hdr { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
+.pin-widget { width: 460px; padding: 16px 18px 18px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.pin-widget-hdr { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; }
 .pin-title-input {
-  flex: 1; font-size: 14.5px; font-weight: 600; font-family: Georgia, serif;
+  flex: 1; font-size: 17px; font-weight: 600; font-family: Georgia, serif;
   border: none; border-bottom: 1.5px solid transparent; outline: none;
-  color: var(--ink); background: transparent; padding: 3px 2px; min-width: 0;
+  color: var(--ink); background: transparent; padding: 4px 2px; min-width: 0;
 }
 .pin-title-input:focus { border-bottom-color: var(--ochre-dk); }
 .pin-title-input::placeholder { color: var(--ink-light); font-weight: 400; }
@@ -86,69 +86,69 @@ body {
 }
 .pin-delete-btn:hover { background: #f0d4d4; color: #a03030; }
 .pin-desc-input {
-  width: 100%; font-size: 11.5px; line-height: 1.4; color: var(--ink-mid);
+  width: 100%; font-size: 13px; line-height: 1.45; color: var(--ink-mid);
   border: 1px solid var(--border-s); border-radius: 8px; background: var(--cream);
-  padding: 6px 8px; resize: vertical; min-height: 34px; outline: none;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin-bottom: 10px;
+  padding: 8px 10px; resize: vertical; min-height: 44px; outline: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin-bottom: 12px;
 }
 .pin-desc-input:focus { border-color: var(--ochre-dk); background: var(--white); }
 
-.pin-cols { display: flex; border-top: 1px solid var(--border); padding-top: 8px; gap: 0; }
+.pin-cols { display: flex; border-top: 1px solid var(--border); padding-top: 10px; gap: 0; }
 .pin-col { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0 4px; border-right: 1px solid var(--border); }
 .pin-col:last-child { border-right: none; }
 .pin-col-label {
-  font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
-  color: var(--ink-light); margin-bottom: 2px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--ink-light); margin-bottom: 3px;
 }
-.pin-col-body { display: flex; flex-direction: column; gap: 6px; width: 100%; align-items: center; }
+.pin-col-body { display: flex; flex-direction: column; gap: 8px; width: 100%; align-items: center; }
 
-.pin-sp-tile { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; position: relative; }
+.pin-sp-tile { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 100%; position: relative; }
 .pin-sp-photo {
-  width: 52px; height: 52px; border-radius: 8px; overflow: hidden; position: relative;
+  width: 72px; height: 72px; border-radius: 8px; overflow: hidden; position: relative;
   background: var(--tan-lt, #E2D3BD); flex-shrink: 0;
 }
 .pin-sp-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .pin-sp-ini {
   width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
-  font-size: 15px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
+  font-size: 19px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
 }
 .pin-sp-check {
-  position: absolute; top: 3px; right: 3px; width: 15px; height: 15px; border-radius: 50%;
-  background: rgba(255,255,255,.85); border: 1.5px solid var(--ink-light);
-  display: flex; align-items: center; justify-content: center; font-size: 9px; color: transparent;
+  position: absolute; top: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(255,255,255,.9); border: 1.5px solid var(--ink-light);
+  display: flex; align-items: center; justify-content: center; font-size: 10.5px; color: transparent;
 }
 .pin-sp-check.obs { background: var(--green); border-color: var(--green); color: #fff; }
 .pin-sp-name {
-  font-size: 9.5px; line-height: 1.25; text-align: center; color: var(--ink); width: 100%;
+  font-size: 11px; line-height: 1.3; text-align: center; color: var(--ink); width: 100%;
   overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
 }
 .pin-sp-remove {
-  position: absolute; top: -4px; right: -4px; width: 15px; height: 15px; border-radius: 50%;
-  border: none; background: var(--white); color: var(--ink-light); font-size: 10px; cursor: pointer;
+  position: absolute; top: -4px; right: -4px; width: 17px; height: 17px; border-radius: 50%;
+  border: none; background: var(--white); color: var(--ink-light); font-size: 11px; cursor: pointer;
   display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); z-index: 2;
 }
 .pin-sp-remove:hover { background: #f0d4d4; color: #a03030; }
 
 .pin-sp-slot { width: 100%; position: relative; }
 .pin-sp-search {
-  width: 100%; font-size: 10.5px; padding: 6px 6px; border-radius: 8px;
+  width: 100%; font-size: 11.5px; padding: 8px 6px; border-radius: 8px;
   border: 1px dashed var(--border-s); background: var(--cream); color: var(--ink);
   outline: none; text-align: center;
 }
 .pin-sp-search:focus { border-style: solid; border-color: var(--ochre-dk); background: var(--white); }
 .pin-sp-ac {
   position: absolute; top: calc(100% + 3px); left: 50%; transform: translateX(-50%);
-  width: 220px; max-height: 180px; overflow-y: auto; z-index: 20;
+  width: 240px; max-height: 200px; overflow-y: auto; z-index: 20;
   background: var(--white); border: 1px solid var(--border-s); border-radius: 8px;
   box-shadow: var(--shadow-h); display: none;
 }
 .pin-sp-ac.show { display: block; }
 .pin-ac-item {
-  display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer;
-  font-size: 11.5px; color: var(--ink); border-bottom: .5px solid var(--border);
+  display: flex; align-items: center; gap: 8px; padding: 7px 10px; cursor: pointer;
+  font-size: 12px; color: var(--ink); border-bottom: .5px solid var(--border);
 }
 .pin-ac-item:last-child { border-bottom: none; }
-.pin-ac-item:hover { background: var(--cream); }
+.pin-ac-item:hover, .pin-ac-item.highlighted { background: var(--cream); }
 .pin-ac-tag {
   font-size: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
   color: var(--ink-light); padding: 1px 5px; border: 1px solid var(--border-s); border-radius: 99px;
@@ -372,7 +372,7 @@ function refreshPinPopup(id) {
 }
 function addMarkerForPin(pin) {
   var marker = L.marker([pin.lat, pin.lng], { icon: PIN_ICON }).addTo(map);
-  marker.bindPopup(buildPopupHTML(pin), { maxWidth: 400, minWidth: 300, autoPanPadding: [20,20] });
+  marker.bindPopup(buildPopupHTML(pin), { maxWidth: 520, minWidth: 420, autoPanPadding: [20,20] });
   MARKERS[pin.id] = marker;
   return marker;
 }
@@ -446,6 +446,35 @@ document.addEventListener('mousedown', function(e) {
   if (acItem) {
     e.preventDefault();
     chooseSpecies(acItem.dataset.pin, acItem.dataset.col, parseInt(acItem.dataset.idx,10), acItem.dataset.name);
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  var t = e.target;
+  if (!t.classList || !t.classList.contains('pin-sp-search')) return;
+  var acEl = t.nextElementSibling;
+  if (!acEl) return;
+  var items = Array.prototype.slice.call(acEl.querySelectorAll('.pin-ac-item'));
+  if (e.key === 'Escape') {
+    acEl.classList.remove('show');
+    return;
+  }
+  if (!items.length) return;
+  var hi = items.findIndex(function(it){ return it.classList.contains('highlighted'); });
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    hi = Math.min(hi + 1, items.length - 1);
+    items.forEach(function(it, i){ it.classList.toggle('highlighted', i === hi); });
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    hi = Math.max(hi - 1, 0);
+    items.forEach(function(it, i){ it.classList.toggle('highlighted', i === hi); });
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    var chosen = items[hi >= 0 ? hi : 0];
+    if (chosen && chosen.dataset.name) {
+      chooseSpecies(chosen.dataset.pin, chosen.dataset.col, parseInt(chosen.dataset.idx,10), chosen.dataset.name);
+    }
   }
 });
 
