@@ -113,7 +113,7 @@ body {
   font-size: 19px; font-weight: 600; color: rgba(46,34,24,.4); font-family: Georgia, serif;
 }
 .pin-sp-check {
-  position: absolute; top: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
+  position: absolute; bottom: 4px; right: 4px; width: 18px; height: 18px; border-radius: 50%;
   background: rgba(255,255,255,.9); border: 1.5px solid var(--ink-light);
   display: flex; align-items: center; justify-content: center; font-size: 10.5px; color: transparent;
 }
@@ -441,14 +441,6 @@ document.addEventListener('input', function(e) {
   }
 });
 
-document.addEventListener('mousedown', function(e) {
-  var acItem = e.target.closest('.pin-ac-item');
-  if (acItem) {
-    e.preventDefault();
-    chooseSpecies(acItem.dataset.pin, acItem.dataset.col, parseInt(acItem.dataset.idx,10), acItem.dataset.name);
-  }
-});
-
 document.addEventListener('keydown', function(e) {
   var t = e.target;
   if (!t.classList || !t.classList.contains('pin-sp-search')) return;
@@ -479,6 +471,11 @@ document.addEventListener('keydown', function(e) {
 });
 
 document.addEventListener('click', function(e) {
+  var acItem = e.target.closest('.pin-ac-item');
+  if (acItem && acItem.dataset.name) {
+    chooseSpecies(acItem.dataset.pin, acItem.dataset.col, parseInt(acItem.dataset.idx,10), acItem.dataset.name);
+    return;
+  }
   var delBtn = e.target.closest('.pin-delete-btn');
   if (delBtn) { deletePin(delBtn.dataset.pin); return; }
   var addBtn = e.target.closest('.pin-add-btn');
