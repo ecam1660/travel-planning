@@ -583,9 +583,9 @@ function buildTile(sp) {
   var featuresVal = getFeaturesText(sp);
   var whereVal = getWhereText(sp);
   var featuresRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Features">'+ICON_MAGNIFIER+'</span>'
-    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="features" placeholder="Add features&hellip;">'+escHTML(featuresVal)+'</textarea></div>';
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="features" placeholder="Add features&hellip;" spellcheck="false">'+escHTML(featuresVal)+'</textarea></div>';
   var whereRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Likely location">'+ICON_PIN+'</span>'
-    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="where" placeholder="Add likely location&hellip;">'+escHTML(whereVal)+'</textarea></div>';
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="where" placeholder="Add likely location&hellip;" spellcheck="false">'+escHTML(whereVal)+'</textarea></div>';
 
   var back = document.createElement('div');
   back.className = 'face face-back';

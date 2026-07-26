@@ -479,7 +479,7 @@ function getStarred() {
   try { return JSON.parse(localStorage.getItem(starKey()) || '[]'); } catch(e){ return []; }
 }
 function saveStarred(arr) {
-  try { localStorage.setItem(starKey(), JSON.stringify(arr)); } catch(e){} 
+  try { localStorage.setItem(starKey(), JSON.stringify(arr)); } catch(e){}
 }
 function isStarred(name) { return getStarred().indexOf(name) >= 0; }
 function toggleStar() {
@@ -552,9 +552,25 @@ function abbrevFamily(name) {
 /* ── Photo slug (matches index.html logic) ── */
 function photoSlug(name) {
   return name.toLowerCase()
-    .replace(/[\u2018\u2019']/g, '')
+    .replace(/[‘’']/g, '')
     .replace(/[^a-z0-9]+/g, '_')
     .replace(/^_|_$/, '');
+}
+
+/* ── Extra photo variants (flashcards only — doesn't touch index.html/nonbirds.html) ──
+   List a species here with how many total numbered photos exist for it, e.g.:
+     'Great Argus': 3
+   expects photos/great_argus.jpg (the original), photos/great_argus_2.jpg, photos/great_argus_3.jpg
+   Species not listed here just use their one existing photo as before. */
+var PHOTO_VARIANTS = {
+  // 'Great Argus': 3,
+};
+function pickPhotoSlug(sp) {
+  var base = photoSlug(sp.name);
+  var count = PHOTO_VARIANTS[sp.name] || 1;
+  if (count <= 1) return base;
+  var n = 1 + Math.floor(Math.random() * count);
+  return n === 1 ? base : (base + '_' + n);
 }
 
 /* ── Initials ── */
@@ -568,7 +584,7 @@ function showCard(sp) {
   submitted = false;
 
   /* photo */
-  var slug = photoSlug(sp.name);
+  var slug = pickPhotoSlug(sp);
   var img = document.getElementById('card-photo');
   var ini = document.getElementById('card-initials');
   img.style.display = 'block';
