@@ -199,10 +199,12 @@ body {
   overflow: hidden; text-overflow: ellipsis;
 }
 .back-info-input {
-  flex: 1; min-width: 0; height: 25px; font-size: 9.5px; line-height: 1.35;
+  flex: 1; min-width: 0; font-size: 9.5px; line-height: 1.4;
   font-family: inherit; color: inherit; background: transparent; border: none; outline: none;
-  resize: none; padding: 1px 3px; margin: -1px -3px; border-radius: 4px; overflow-y: auto;
+  resize: none; padding: 1px 3px; margin: -1px -3px; border-radius: 4px; overflow: hidden;
 }
+.back-info-input[data-field="features"] { height: 30px; }
+.back-info-input[data-field="where"] { height: 16px; }
 .back-info-input::placeholder { color: inherit; opacity: .45; font-style: italic; }
 .back-info-row:hover .back-info-input { background: rgba(255,255,255,.35); }
 .back-info-input:focus { background: rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
