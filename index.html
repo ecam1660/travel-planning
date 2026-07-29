@@ -209,11 +209,15 @@ body {
 .back-info-row:hover .back-info-input { background: rgba(255,255,255,.35); }
 .back-info-input:focus { background: rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
 
-.pt-cat-pills { display:flex; flex-wrap:wrap; gap:3px; padding:2px 8px 4px 9px; }
+.pt-cat-pills { display:flex; flex-wrap:wrap; align-items:center; gap:3px; padding:2px 8px 4px 9px; }
 .pt-cat-pill {
-  font-size:8.5px; font-weight:700; padding:2px 7px; border-radius:99px;
+  display:inline-flex; align-items:center; justify-content:center;
+  box-sizing:border-box; height:15px; line-height:1;
+  font-size:8.5px; font-weight:700; padding:0 7px; border-radius:99px;
   letter-spacing:.03em; color:#fff;
 }
+.pt-cat-pill.pt-icon-pill { padding:0 6px; }
+.pt-cat-pill.pt-icon-pill svg { display:block; }
 
 .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px; font-size: 14px; font-style: italic; color: var(--ink-light); }
 
@@ -279,6 +283,7 @@ body {
     <button class="chip"    id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
     <button class="chip chip-new" id="st-new" onclick="toggleNew()">New Families</button>
     <button class="chip" id="st-nophoto" onclick="toggleNoPhoto()" title="No photo yet" style="padding:5px 12px;display:inline-flex;align-items:center;"><svg width="14" height="11" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;"><rect x="1.5" y="5.5" width="21" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M8.5 5.5V4a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 4v1.5" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="3" x2="21" y2="17" stroke="currentColor" stroke-width="1.8"/></svg></button>
+    <button class="chip" id="st-merlin" onclick="toggleMerlin()" title="Merlin sound ID only" style="padding:5px 12px;display:inline-flex;align-items:center;"><svg width="13" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
     <span class="fl" style="margin-left:8px">Sort</span>
     <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
       <option value="taxo">Taxo order ↓</option>
@@ -312,7 +317,7 @@ body {
 
 <script>
 var ALL = [];
-var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
+var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, MERLIN_ONLY = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
 var CATS = [];
 var LOCS = [];
 var LOCAL_KEY = 'travel_observed_';
@@ -321,6 +326,7 @@ var TITLE = '';
 /* ── Back-face icons (magnifying glass = Features, pin = Likely location) ── */
 var ICON_MAGNIFIER = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>';
 var ICON_PIN = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.58 7-12a7 7 0 1 0-14 0c0 4.42 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>';
+var ICON_SPEAKER = '<svg width="11" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>';
 
 /* ── Abbrev ── */
 function abbrevName(name, threshold) {
@@ -447,6 +453,11 @@ function toggleNoPhoto() {
   document.getElementById('st-nophoto').classList.toggle('on', NO_PHOTO);
   render();
 }
+function toggleMerlin() {
+  MERLIN_ONLY = !MERLIN_ONLY;
+  document.getElementById('st-merlin').classList.toggle('on', MERLIN_ONLY);
+  render();
+}
 function setSort(val) {
   SORT_BY = val;
   render();
@@ -499,7 +510,7 @@ function buildLocChips() {
 var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','#D9C3A6','#D98F77'];
 var CAT_COLOR_MAP = {};
 function getCatColor(cat) {
-  if (cat === 'Widespread' || cat === 'Infrequent') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
+  if (cat === 'Widespread' || cat === 'Infrequent' || cat === 'Infreq') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
   if (cat === 'Sing only')  return '#D98F77';  // fixed: terracotta
   if (!CAT_COLOR_MAP[cat]) {
     var idx = Object.keys(CAT_COLOR_MAP).length % CAT_PALETTE.length;
@@ -576,7 +587,10 @@ function buildTile(sp) {
     +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
     +   '</div>'
     +   '<div class="pt-fam-row"><span class="pt-fam" style="color:'+dark+'">'+abbrevFamily(sp.family)+'</span>'+newPill+'</div>'
-    +   (sp.cats&&sp.cats.length ? '<div class="pt-cat-pills">'+sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('')+'</div>' : '')
+    +   ((sp.cats&&sp.cats.length) || sp.merlin ? '<div class="pt-cat-pills">'
+    +     (sp.cats&&sp.cats.length ? sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent' || c === 'Infreq'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('') : '')
+    +     (sp.merlin ? '<span class="pt-cat-pill pt-icon-pill" style="background:transparent;color:'+dark+';border:1px solid '+dark+';opacity:.4;" title="Merlin sound ID">'+ICON_SPEAKER+'</span>' : '')
+    +   '</div>' : '')
     +   gridHTML
     + '</div>';
 
@@ -662,6 +676,7 @@ function render() {
     if (STATUS === 'unseen' && obs)  return false;
     if (NEW_FAM && !sp.famNew) return false;
     if (NO_PHOTO && hasPhoto(sp)) return false;
+    if (MERLIN_ONLY && !sp.merlin) return false;
     /* Location filter: species must have at least one loc in ACTIVE_LOCS */
     var hasLoc = sp.locs.some(function(l){ return l && ACTIVE_LOCS.indexOf(l[0]) >= 0; });
     if (!hasLoc) return false;
@@ -747,7 +762,7 @@ function parseCSV(txt) {
   var iName=col('name','malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
       iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
       iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2'), iPhoto=col('photo'),
-      iWhere=col('where');
+      iWhere=col('where'), iMerlin=col('merlin');
 
   var map = {};
   for (var i=1; i<lines.length; i++) {
@@ -767,7 +782,8 @@ function parseCSV(txt) {
         spots: (c[iSpots]||'').trim(),
         photo: iPhoto>=0 && (c[iPhoto]||'').trim().toLowerCase()==='yes',
         lookalikes: (c[iLook]||'').trim(),
-        where: (iWhere>=0 ? (c[iWhere]||'').trim() : '')
+        where: (iWhere>=0 ? (c[iWhere]||'').trim() : ''),
+        merlin: iMerlin>=0 && (c[iMerlin]||'').trim().toLowerCase()==='yes'
       };
     } else if ((c[iNew]||'').trim().toLowerCase() === 'no') {
       map[name].observed = true;
@@ -777,6 +793,7 @@ function parseCSV(txt) {
     if (!map[name].spots   && (c[iSpots]||'').trim()) map[name].spots    = c[iSpots].trim();
     if (!map[name].lookalikes && (c[iLook]||'').trim()) map[name].lookalikes = c[iLook].trim();
     if (!map[name].where && iWhere>=0 && (c[iWhere]||'').trim()) map[name].where = c[iWhere].trim();
+    if (!map[name].merlin && iMerlin>=0 && (c[iMerlin]||'').trim().toLowerCase()==='yes') map[name].merlin = true;
     var locName = (c[iLoc]||'').trim(), rarVal = (c[iRar]||'').trim();
     if (locName && rarVal) map[name].locs.push([locName, rarVal]);
     // First non-empty wins for text fields
