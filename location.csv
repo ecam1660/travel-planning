@@ -12,15 +12,15 @@ Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-011,2026-08-17,545
 Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-026,2026-08-10,545,S-PUbin,C-026,,4,,,2,,,,Yes,Groundbirds,Yes
 Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-039,2026-08-10,545,S-SBuloh,C-039,,4,,,3,,,,Yes,Groundbirds,Yes
 Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-150,2026-08-10,545,Sepilok,I-150,,4,,,4,,,,Yes,Groundbirds,Yes
-Red Collared-Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-073,2026-08-10,617,S-PUbin,I-073,,2,,,1,Sing only,Infreq,,Yes,Groundbirds,Yes
+Red Collared-Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-073,2026-08-10,617,S-PUbin,I-073,,2,Red dove with black neck collar,,1,Sing only,Infreq,,Yes,Groundbirds,Yes
 Red Collared-Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-106,2026-08-10,617,S-SBuloh,I-106,,2,,,2,Sing only,Infreq,,Yes,Groundbirds,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-004,2026-08-10,618,S-PUbin,C-004,,5,Familiar,,1,Widespread,,,Yes,Groundbirds,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-005,2026-08-10,618,S-SBuloh,C-005,,5,,,2,Widespread,,,Yes,Groundbirds,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-007,2026-08-17,618,FRIM,C-007,,5,,,3,Widespread,,,Yes,Groundbirds,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-040,2026-08-10,618,Mutiara,C-040,,5,,,4,Widespread,,,Yes,Groundbirds,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-049,2026-08-10,618,Sepilok,C-049,,5,,,5,Widespread,,,Yes,Groundbirds,Yes
-Little Cuckoo-Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-170,2026-08-10,634,Mutiara,I-170,,1,,,1,Mutiara only,Infreq,,,Groundbirds,
-Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-022,2026-08-10,647,Mutiara,C-022,,5,,,1,Widespread,,,,Groundbirds,Yes
+Little Cuckoo-Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-170,2026-08-10,634,Mutiara,I-170,,1,"Large, long-tailed, reddish brown; head lighter; spots on breast",,1,Mutiara only,Infreq,,,Groundbirds,
+Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-022,2026-08-10,647,Mutiara,C-022,,5,"Green back, white crown, pink neck all distinct",Forest floor,1,Widespread,,,,Groundbirds,Yes
 Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-056,2026-08-10,647,S-SBuloh,C-056,,5,,,2,Widespread,,,,Groundbirds,Yes
 Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-077,2026-08-10,647,Sepilok,C-077,,5,,,3,Widespread,,,,Groundbirds,Yes
 Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-073,2026-08-17,647,FRIM,I-073,,5,,,4,Widespread,,,,Groundbirds,Yes
@@ -30,22 +30,22 @@ Zebra Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-007,2026-08-10,67
 Zebra Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-010,2026-08-10,676,S-SBuloh,C-010,,5,,,3,Widespread,,,Yes,Groundbirds,
 Zebra Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-051,2026-08-10,676,Sepilok,C-051,,5,,,4,Widespread,,,Yes,Groundbirds,
 Zebra Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-098,2026-08-10,676,Mutiara,I-098,,5,,,5,Widespread,,,Yes,Groundbirds,
-Little Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-033,2026-08-10,756,Mutiara,C-033,,2,,,1,,,,,Groundbirds,
+Little Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-033,2026-08-10,756,Mutiara,C-033,,2,"Smallest green pigeon; male has distinct blue-gray head, orange patch on breast, maroon wings; female far less distinct",,1,,,,,Groundbirds,
 Little Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-079,2026-08-10,756,Sepilok,C-079,,2,,,2,,,,,Groundbirds,
-Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-004,2026-08-10,757,S-SBuloh,C-004,,4,,S: Widespread,1,Widespread,,,,Groundbirds,
+Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-004,2026-08-10,757,S-SBuloh,C-004,,4,Pink neck/nape; green wings; female far less distinct,S: Widespread,1,Widespread,,,,Groundbirds,
 Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-012,2026-08-17,757,FRIM,C-012,,4,,,2,,,,,Groundbirds,
 Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-012,2026-08-10,757,S-PUbin,C-012,,4,,,3,,,,,Groundbirds,
 Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-045,2026-08-10,757,Sepilok,C-045,,4,,,4,,,,,Groundbirds,
-Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-035,2026-08-10,766,Mutiara,C-035,,3,,,1,,,,,Groundbirds,
+Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-035,2026-08-10,766,Mutiara,C-035,,3,Prominent green eye ring; red base to bill; maroon mantle with yellow streaking,,1,,,,,Groundbirds,
 Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-096,2026-08-10,766,Sepilok,C-096,,3,,,2,,,,,Groundbirds,
 Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-119,2026-08-10,766,S-SBuloh,I-119,,3,,,3,,,,,Groundbirds,
-Large Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-055,2026-08-10,771,Mutiara,C-055,,1,,,1,Mutiara only,,,,Groundbirds,
+Large Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-055,2026-08-10,771,Mutiara,C-055,,1,"Largest; yellow legs/feet; almost all green with yellow-orange breast, chestnut vent",,1,Mutiara only,,,,Groundbirds,
 Rhinoceros Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-TemanNegara-Aug-020,2026-08-10,3322,Mutiara,C-020,New,3,,,2,,,,,Others,
-Jambu Fruit-Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-165,2026-08-10,791,Mutiara,I-165,,1,,,1,Mutiara only,Infreq,,,Groundbirds,
+Jambu Fruit-Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-165,2026-08-10,791,Mutiara,I-165,,1,Unique with red-pink face & breast spot; strong white/green contrast on body,,1,Mutiara only,Infreq,,,Groundbirds,
 Green Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-067,2026-08-10,853,S-PUbin,I-067,,2,,,2,Sing only,,,,Groundbirds,
-Green Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-024,2026-08-10,853,Sepilok,C-024,,2,,,1,,,,,Groundbirds,
-Mountain Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-124,2026-08-10,883,Mutiara,I-124,,1,,,1,Mutiara only,Infreq,,,Groundbirds,
-Pied Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-055,2026-08-10,886,S-SBuloh,C-055,,1,,"S: SBuloh, Jurong, SBot, BTimah, CCNR",1,Sing only,,,,Groundbirds,
+Green Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-024,2026-08-10,853,Sepilok,C-024,,2,Large; gray head; green back,,1,,,,,Groundbirds,
+Mountain Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-124,2026-08-10,883,Mutiara,I-124,,1,"Largest in region; pale head, gray underparts; maroon/brown mantle",,1,Mutiara only,Infreq,,,Groundbirds,
+Pied Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-055,2026-08-10,886,S-SBuloh,C-055,,1,All white except for black primaries and tail tip,"S: SBuloh, Jurong, SBot, BTimah, CCNR",1,Sing only,,,,Groundbirds,
 Greater Coucal,No,CUCULIFORMES,Cuckoos,MY-SepilokRDC-Aug-071,2026-08-10,1014,Sepilok,C-071,,2,,,2,,,,,Cuckoos,Yes
 Greater Coucal,No,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-019,2026-08-10,1014,Mutiara,C-019,,2,Large and unstreaked; glossy black with chestnut wings,,1,,,,,Cuckoos,Yes
 Lesser Coucal,Yes,CUCULIFORMES,Cuckoos,SG-SungeiBuloh-Aug-082,2026-08-10,1019,S-SBuloh,I-082,,2,,,2,Sing only,,,,Cuckoos,Yes
@@ -79,7 +79,7 @@ Square-tailed Drongo-Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-037,2026
 Sunda Brush Cuckoo,Yes,CUCULIFORMES,Cuckoos,SG-SungeiBuloh-Aug-104,2026-08-10,1090,S-SBuloh,I-104,,3,,,2,,Infreq,,,Cuckoos,
 Large-tailed Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-PalauUbin-Aug-084,2026-08-10,1194,S-PUbin,I-084,,2,"Larger; full white throat, long tail extending well past the wings; pale crown with dark center; richer patterning overall","""Chonk"" - one per second; also croaking ""croo croo croo""",1,Sing only,Infreq,,,Swifts & Nightjars,Yes
 Savanna Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-PalauUbin-Aug-072,2026-08-10,1210,S-PUbin,I-072,,2,"In flight, male has all white outer tail feathers (all the way to body); two small white patches on throat; shorter tailed; unifromally gray/brown","""Chwee"" repeated",1,Sing only,Infreq,,,Swifts & Nightjars,Yes
-Large Frogmouth,Yes,PODARGIFORMES,Frogmouths,MY-TemanNegara-Aug-178,2026-08-10,1232,Mutiara,I-178,,1,,,1,Mutiara only,Infreq,,,Swifts & Nightjars,
+Large Frogmouth,Yes,PODARGIFORMES,Frogmouths,MY-TemanNegara-Aug-178,2026-08-10,1232,Mutiara,I-178,,1,Unique,,1,Mutiara only,Infreq,,,Swifts & Nightjars,
 Large-tailed Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-SungeiBuloh-Aug-086,2026-08-10,1194,S-SBuloh,I-086,,2,,,2,Sing only,Infreq,,,Swifts & Nightjars,Yes
 Silver-rumped Spinetail,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-024,2026-08-10,1274,Mutiara,C-024,,2,,,1,,,,,Swifts & Nightjars,
 Savanna Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-SungeiBuloh-Aug-113,2026-08-10,1210,S-SBuloh,I-113,,2,,,2,Sing only,Infreq,,,Swifts & Nightjars,Yes
@@ -637,26 +637,26 @@ Scaly-breasted Munia,No,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-107,
 Scaly-breasted Munia,No,PASSERIFORMES,Waxbills and Allies,MY-KL-FRIM-Aug-086,2026-08-17,9804,FRIM,I-086,,5,,,4,Widespread,,,Yes,Reed & Leaf,Yes
 Scaly-breasted Munia,No,PASSERIFORMES,Waxbills and Allies,MY-TemanNegara-Aug-095,2026-08-10,9804,Mutiara,I-095,,5,,,5,Widespread,,,Yes,Reed & Leaf,Yes
 White-rumped Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-KL-FRIM-Aug-081,2026-08-17,9807,FRIM,I-081,,1,,,1,FRIM only,Infreq,,,Reed & Leaf,Yes
-Dusky Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-042,2026-08-10,9808,Sepilok,C-042,,1,,,1,Sepilok only,,,,Reed & Leaf,
-White-bellied Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-TemanNegara-Aug-164,2026-08-10,9809,Mutiara,I-164,,1,,,1,Mutiara only,Infreq,,,Reed & Leaf,
-Javan Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-097,2026-08-10,9810,S-SBuloh,I-097,,1,,,1,Sing only,Infreq,Jurong only,,Reed & Leaf,
-Chestnut Munia,No,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-032,2026-08-10,9812,Sepilok,C-032,,4,,,1,,,,Yes,Reed & Leaf,
+Dusky Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-042,2026-08-10,9808,Sepilok,C-042,,1,"All dark, unmistakeable in range",Borneo only,1,Sepilok only,,,,Reed & Leaf,
+White-bellied Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-TemanNegara-Aug-164,2026-08-10,9809,Mutiara,I-164,,1,Only bird like this in Mutiara,"Mutiara only, not likely",1,Mutiara only,Infreq,,,Reed & Leaf,
+Javan Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-097,2026-08-10,9810,S-SBuloh,I-097,,1,Unmistakable in range,Singapore only,1,Sing only,Infreq,Jurong only,,Reed & Leaf,
+Chestnut Munia,No,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-032,2026-08-10,9812,Sepilok,C-032,,4,Familiar,Most likely Borneo,1,,,,Yes,Reed & Leaf,
 Chestnut Munia,No,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-082,2026-08-10,9812,S-PUbin,I-082,,4,,,2,,,,Yes,Reed & Leaf,
 Chestnut Munia,No,PASSERIFORMES,Waxbills and Allies,MY-KL-FRIM-Aug-100,2026-08-17,9812,FRIM,I-100,,4,,,3,,,,Yes,Reed & Leaf,
 Chestnut Munia,No,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-120,2026-08-10,9812,S-SBuloh,I-120,,4,,,4,,,,Yes,Reed & Leaf,
-White-headed Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-088,2026-08-10,9814,S-PUbin,I-088,,2,,Marina East or Holland Green Linear Park,1,Sing only,Infreq,,,Reed & Leaf,
+White-headed Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-088,2026-08-10,9814,S-PUbin,I-088,,2,Unmistakable in range,Marina East or Holland Green Linear Park,1,Sing only,Infreq,,,Reed & Leaf,
 White-headed Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-110,2026-08-10,9814,S-SBuloh,I-110,,2,,,2,Sing only,Infreq,,,Reed & Leaf,
-Common Waxbill,No,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-062,2026-08-10,9873,S-PUbin,C-062,,2,,,1,Sing only,,,Yes,Reed & Leaf,Yes
+Common Waxbill,No,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-062,2026-08-10,9873,S-PUbin,C-062,,2,Familiar,,1,Sing only,,,Yes,Reed & Leaf,Yes
 Common Waxbill,No,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-109,2026-08-10,9873,S-SBuloh,I-109,,2,,,2,Sing only,,,Yes,Reed & Leaf,Yes
-Crimson-rumped Waxbill,Yes,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-086,2026-08-10,9876,S-PUbin,I-086,,1,,Likely extirpated from region,1,Sing only,Infreq,,,Reed & Leaf,
+Crimson-rumped Waxbill,Yes,PASSERIFORMES,Waxbills and Allies,SG-PalauUbin-Aug-086,2026-08-10,9876,S-PUbin,I-086,,1,Unlikely,Likely extirpated from region,1,Sing only,Infreq,,,Reed & Leaf,
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,MY-KL-FRIM-Aug-013,2026-08-17,9973,FRIM,C-013,,5,Familiar,,1,Widespread,,,Yes,Reed & Leaf,Yes
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,MY-SepilokRDC-Aug-022,2026-08-10,9973,Sepilok,C-022,,5,,,2,Widespread,,,Yes,Reed & Leaf,Yes
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,SG-PalauUbin-Aug-032,2026-08-10,9973,S-PUbin,C-032,,5,,,3,Widespread,,,Yes,Reed & Leaf,Yes
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,MY-TemanNegara-Aug-039,2026-08-10,9973,Mutiara,C-039,,5,,,4,Widespread,,,Yes,Reed & Leaf,Yes
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,SG-SungeiBuloh-Aug-052,2026-08-10,9973,S-SBuloh,C-052,,5,,,5,Widespread,,,Yes,Reed & Leaf,Yes
-Forest Wagtail,Yes,PASSERIFORMES,Wagtails and Pipits,MY-KL-FRIM-Aug-095,2026-08-17,9991,FRIM,I-095,,1,,,1,FRIM only,Infreq,,,Reed & Leaf,
+Forest Wagtail,Yes,PASSERIFORMES,Wagtails and Pipits,MY-KL-FRIM-Aug-095,2026-08-17,9991,FRIM,I-095,,1,Black double breast band,,1,FRIM only,Infreq,,,Reed & Leaf,
 Gray Wagtail,No,PASSERIFORMES,Wagtails and Pipits,MY-KL-FRIM-Aug-088,2026-08-17,9996,FRIM,I-088,,2,Familiar,,1,,Infreq,,Yes,Reed & Leaf,Yes
 Thick-billed Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-TemanNegara-Aug-179,2026-08-10,9625,Mutiara,I-179,,2,,,2,,,,,Flower & Spider,
-Paddyfield Pipit,Yes,PASSERIFORMES,Wagtails and Pipits,SG-PalauUbin-Aug-042,2026-08-10,10008,S-PUbin,C-042,,3,,,1,,,,,Reed & Leaf,Yes
+Paddyfield Pipit,Yes,PASSERIFORMES,Wagtails and Pipits,SG-PalauUbin-Aug-042,2026-08-10,10008,S-PUbin,C-042,,3,Only pipt in Singapore,Common in Singapore,1,,,,,Reed & Leaf,Yes
 Paddyfield Pipit,Yes,PASSERIFORMES,Wagtails and Pipits,MY-KL-FRIM-Aug-045,2026-08-17,10008,FRIM,C-045,,3,,,2,,,,,Reed & Leaf,Yes
 Paddyfield Pipit,Yes,PASSERIFORMES,Wagtails and Pipits,SG-SungeiBuloh-Aug-079,2026-08-10,10008,S-SBuloh,C-079,,3,,,3,,,,,Reed & Leaf,Yes
