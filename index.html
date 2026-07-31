@@ -287,7 +287,7 @@ body {
     <span class="fl" style="margin-left:8px">Sort</span>
     <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
       <option value="taxo">Taxo order ↓</option>
-      <option value="rarity">Rarity ↓</option>
+      <option value="rarity" selected>Rarity ↓</option>
       <option value="name">Name A–Z</option>
     </select>
     <span class="fl" style="margin-left:12px">C &#8805;</span>
@@ -317,7 +317,7 @@ body {
 
 <script>
 var ALL = [];
-var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, MERLIN_ONLY = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'taxo';
+var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, MERLIN_ONLY = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'rarity';
 var CATS = [];
 var LOCS = [];
 var LOCAL_KEY = 'travel_observed_';
