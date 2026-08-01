@@ -147,6 +147,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 .lightbox-cap .lb-name{font-family:Georgia,serif;font-size:18px;font-weight:600;}
 .lightbox-cap .lb-fam{font-size:12px;opacity:.7;margin-top:2px;}
 .lightbox-close{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;background:#fff;border:none;font-size:18px;color:#2e2238;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;}
+
+/* ── MOBILE (iPhone-width screens) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .header { padding: 10px 12px; gap: 8px; flex-wrap: wrap; }
+  .header h1 { font-size: 17px; }
+  .nav-btn { font-size: 11px; padding: 6px 10px; }
+  .mobile-hide { display: none !important; }
+  .trow { padding: 8px 12px; }
+  .grid-wrap { padding: 12px 10px 30px; }
+  .grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -155,7 +166,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   <h1>Travel Planning: <span>Non-Birds</span></h1>
   <a href="index.html" class="nav-btn">← Birds</a>
   <a href="map.html" class="nav-btn">Map</a>
-  <span class="hcount" id="hcount"></span>
+  <span class="hcount mobile-hide" id="hcount"></span>
 </div>
 
 <div class="toolbar">

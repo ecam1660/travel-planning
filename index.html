@@ -256,18 +256,29 @@ body {
 .lightbox-cap .lb-name{font-family:Georgia,serif;font-size:18px;font-weight:600;}
 .lightbox-cap .lb-fam{font-size:12px;opacity:.7;margin-top:2px;}
 .lightbox-close{position:absolute;top:-14px;right:-14px;width:34px;height:34px;border-radius:50%;background:#fff;border:none;font-size:18px;color:#2e2238;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;}
+
+/* ── MOBILE (iPhone-width screens) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .header { padding: 10px 12px; gap: 8px; flex-wrap: wrap; }
+  .header h1 { font-size: 17px; }
+  .nav-btn { font-size: 11px; padding: 6px 10px; }
+  .mobile-hide { display: none !important; }
+  .trow { padding: 8px 12px; }
+  .grid-wrap { padding: 12px 10px 30px; }
+  .grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <div class="header">
-  <h1>Travel Planning: <span id="trip-title" style="font-weight:400">—</span></h1>
-  <span class="hcount" id="hcount"></span>
+  <h1>Travel Planning<span class="mobile-hide">: <span id="trip-title" style="font-weight:400">—</span></span></h1>
+  <span class="hcount mobile-hide" id="hcount"></span>
   <a class="nav-btn" href="nonbirds.html">Non-Birds</a>
   <a class="nav-btn" href="flashcards.html">ID Flashcards</a>
   <a class="nav-btn" href="map.html">Map</a>
-  <button class="nav-btn" onclick="document.getElementById('fi').click()">&#8593; Load CSV</button>
-  <button class="nav-btn" id="reset-btn" onclick="resetToCSV()" style="display:none">&#8635; Reset to CSV</button>
+  <button class="nav-btn mobile-hide" onclick="document.getElementById('fi').click()">&#8593; Load CSV</button>
+  <button class="nav-btn mobile-hide" id="reset-btn" onclick="resetToCSV()" style="display:none">&#8635; Reset to CSV</button>
   <input type="file" id="fi" accept=".csv" style="display:none">
 </div>
 
@@ -290,10 +301,10 @@ body {
       <option value="rarity" selected>Rarity ↓</option>
       <option value="name">Name A–Z</option>
     </select>
-    <span class="fl" style="margin-left:12px">C &#8805;</span>
-    <input type="number" class="count-input" id="min-c" value="0" min="0" max="99" oninput="render()">
-    <span class="fl" style="margin-left:8px">C+I &#8805;</span>
-    <input type="number" class="count-input" id="min-ci" value="0" min="0" max="99" oninput="render()">
+    <span class="fl mobile-hide" style="margin-left:12px">C &#8805;</span>
+    <input type="number" class="count-input mobile-hide" id="min-c" value="0" min="0" max="99" oninput="render()">
+    <span class="fl mobile-hide" style="margin-left:8px">C+I &#8805;</span>
+    <input type="number" class="count-input mobile-hide" id="min-ci" value="0" min="0" max="99" oninput="render()">
   </div>
   <div class="trow">
     <span class="fl">Location</span>
@@ -316,6 +327,7 @@ body {
 
 
 <script>
+function isMobile() { return window.matchMedia('(max-width: 480px)').matches; }
 var ALL = [];
 var STATUS = 'all', NEW_FAM = false, NO_PHOTO = false, MERLIN_ONLY = false, ACTIVE_LOCS = [], ACTIVE_CATS = [], QUERY = '', SORT_BY = 'rarity';
 var CATS = [];
@@ -647,7 +659,9 @@ function buildTile(sp) {
       return;
     }
     // Lower-left corner (within photo width ~104px, bottom 35%) → toggle camera
+    // (disabled on mobile — too easy to hit by accident)
     if (x < 104 && y > rect.height * 0.65) {
+      if (isMobile()) return;
       var sp3 = ALL.filter(function(s){ return s.name === scene.dataset.name; })[0];
       if (sp3) {
         setCamOverride(sp3.name, !hasPhoto(sp3));

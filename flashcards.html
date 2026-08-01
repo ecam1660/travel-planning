@@ -324,6 +324,30 @@ body {
 /* Fade transitions */
 .fade-in { animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ── MOBILE (iPhone-width screens) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .header { padding: 8px 10px; gap: 6px; flex-wrap: wrap; justify-content: center; }
+  .header h1 { display: none; }
+  .nav-btn { font-size: 11px; padding: 4px 9px; }
+  .mode-label { display: none; }
+  .mode-pill { font-size: 10px; padding: 3px 8px; }
+
+  .main { padding: 10px 10px 16px; }
+  .progress-bar-wrap { margin-bottom: 8px; }
+
+  .arena-row { grid-template-columns: 44px 1fr 44px; gap: 6px; }
+  .pile { gap: 4px; padding-top: 0; }
+  .pile-stack { width: 44px; height: 44px; }
+  .pile-count { font-size: 15px; }
+  .pile-label, .pile-sublabel { font-size: 8px; }
+
+  .card-center { gap: 8px; }
+  .photo-frame { width: 100%; max-width: 210px; height: 210px; }
+  .photo-initials { font-size: 32px; }
+
+  .input-wrap, .mc-wrap, #result-panel { width: 100%; max-width: 280px; }
+}
 </style>
 </head>
 <body>
