@@ -12,7 +12,7 @@ House Crow,No,PASSERIFORMES,"Crows, Jays, and Magpies",MY-KL-FRIM-Aug-010,2026-0
 Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-011,2026-08-17,545,FRIM,C-011,,4,Familiar,,1,,,,Yes,Groundbirds,Yes
 Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-KL-FRIM-Aug-012,2026-08-17,757,FRIM,C-012,,4,,,2,,,,,Groundbirds,
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,MY-KL-FRIM-Aug-013,2026-08-17,9973,FRIM,C-013,,5,Familiar,,1,Widespread,,,Yes,Reed & Leaf,Yes
-Common Myna,No,PASSERIFORMES,Starlings,MY-KL-FRIM-Aug-014,2026-08-17,8771,FRIM,C-014,,3,,,1,,,,Yes,Bulbul & Star,Yes
+Crested Partridge,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-155,2026-08-10,360,Mutiara,I-155,,1,Unique,,1,Mutiara only,Infreq,,,Groundbirds,
 Stripe-throated Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-KL-FRIM-Aug-015,2026-08-17,7897,FRIM,C-015,,2,,,2,,,,,Bulbul & Star,
 White-breasted Waterhen,No,GRUIFORMES,"Rails, Gallinules, and Coots",MY-KL-FRIM-Aug-016,2026-08-17,1859,FRIM,C-016,,4,,,3,,,,Yes,Waterbirds,Yes
 Blue-throated Bee-eater,Yes,CORACIIFORMES,Bee-eaters,MY-KL-FRIM-Aug-017,2026-08-17,3371,FRIM,C-017,,5,,,3,Widespread,,,,Others,
@@ -21,8 +21,8 @@ Common Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,MY-KL-FRIM-Aug-019,202
 Common Iora,Yes,PASSERIFORMES,Ioras,MY-KL-FRIM-Aug-020,2026-08-17,6603,FRIM,C-020,New,5,,,3,Widespread,,,,Reed & Leaf,
 Painted Stork,Yes,CICONIIFORMES,Storks,MY-KL-FRIM-Aug-021,2026-08-17,2540,FRIM,C-021,,2,"Similar to Milky, but has large black wing patch, pink near tail (tertials).",,1,,,,,Waterbirds,
 Gold-whiskered Barbet,Yes,PICIFORMES,Asian Barbets,MY-KL-FRIM-Aug-022,2026-08-17,3661,FRIM,C-022,,3,"Large, with large yellow patch on cheek; black/brown eye streak; pale crown & throat",,1,,,,,Woodpeckers,
-Brahminy Kite,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-023,2026-08-17,2901,FRIM,C-023,,4,,,1,,,,,Raptors,Yes
-House Swift,Yes,APODIFORMES,Swifts,MY-KL-FRIM-Aug-024,2026-08-17,1348,FRIM,C-024,,5,,,1,Widespread,,,,Swifts & Nightjars,Yes
+Malayan Crested Fireback,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-034,2026-08-10,443,Mutiara,C-034,,1,Unique,,1,Mutiara only,,,,Groundbirds,
+Great Argus,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-047,2026-08-10,447,Mutiara,C-047,,1,Unique,,1,Mutiara only,,,,Groundbirds,
 Malaysian Pied-Fantail,Yes,PASSERIFORMES,Fantails,MY-KL-FRIM-Aug-025,2026-08-17,6678,FRIM,C-025,,4,,,4,,,,,Stately Perchers,
 Greater Racket-tailed Drongo,Yes,PASSERIFORMES,Drongos,MY-KL-FRIM-Aug-026,2026-08-17,6747,FRIM,C-026,,5,,,4,Widespread,,,,Stately Perchers,
 Black-thighed Falconet,Yes,FALCONIFORMES,Falcons and Caracaras,MY-KL-FRIM-Aug-027,2026-08-17,4000,FRIM,C-027,,2,"Unique black ""earmuffs."" Dark above, white breast, rusty belly. Social, sometimes seen in small flocks.",,1,,,,,Raptors,
@@ -34,10 +34,10 @@ Little Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-KL-FRIM-Aug-03
 White-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-KL-FRIM-Aug-033,2026-08-17,1328,FRIM,C-033,,3,,,2,,,,,Swifts & Nightjars,
 Brown-throated Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-KL-FRIM-Aug-034,2026-08-17,9493,FRIM,C-034,,5,,,4,Widespread,,,,Flower & Spider,
 Scarlet-backed Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-KL-FRIM-Aug-035,2026-08-17,9485,FRIM,C-035,,4,,,2,,,,,Flower & Spider,
-Crimson-winged Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-036,2026-08-17,3904,FRIM,C-036,,3,,,1,,,,,Woodpeckers,
-Crested Serpent-Eagle,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-037,2026-08-17,2770,FRIM,C-037,,3,,,1,,,,,Raptors,Yes
-Hadada Ibis,Yes,PELECANIFORMES,Ibises and Spoonbills,MY-KL-FRIM-Aug-038,2026-08-17,2623,FRIM,C-038,,1,,,1,FRIM only,,,,Waterbirds,
-Banded Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-039,2026-08-17,3916,FRIM,C-039,,4,,,1,,,,,Woodpeckers,
+Sabah Partridge,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-SepilokRDC-Aug-086,2026-08-10,453,Sepilok,C-086,,1,Unique,,1,Sepilok only,,,,Groundbirds,
+Malayan Peacock-Pheasant,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-121,2026-08-10,460,Mutiara,I-121,,1,Unique,,1,Mutiara only,Infreq,,,Groundbirds,
+Silver-rumped Spinetail,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-024,2026-08-10,1274,Mutiara,C-024,,2,Knife shaped wings; blue black all over except white rump,,1,,,,,Swifts & Nightjars,
+Brown-backed Needletail,Yes,APODIFORMES,Swifts,MY-SepilokRDC-Aug-097,2026-08-10,1291,Sepilok,C-097,,1,Dark; pale brown sadle; white v near vent/tail,,1,Sepilok only,,,,Swifts & Nightjars,
 Pied Triller,Yes,PASSERIFORMES,Cuckooshrikes,MY-KL-FRIM-Aug-040,2026-08-17,6274,FRIM,C-040,,3,Unique plumage,,1,,,,,Stately Perchers,
 Dark-necked Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,MY-KL-FRIM-Aug-041,2026-08-17,7420,FRIM,C-041,,5,,,2,Widespread,,,,Reed & Leaf,
 Large Woodshrike,Yes,PASSERIFORMES,"Vangas, Helmetshrikes, and Allies",MY-KL-FRIM-Aug-042,2026-08-17,6573,FRIM,C-042,New,2,Similar-ish to shrike; should be distinct,,1,,,,,Stately Perchers,
@@ -51,7 +51,7 @@ Blue-crowned Hanging-Parrot,Yes,PSITTACIFORMES,Old World Parrots,MY-KL-FRIM-Aug-
 Raffles's Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-KL-FRIM-Aug-050,2026-08-17,1023,FRIM,C-050,,3,,,3,,,,,Cuckoos,
 Ornate Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-KL-FRIM-Aug-051,2026-08-17,9586,FRIM,C-051,,4,,,4,,,,,Flower & Spider,
 Black-crowned Night Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-KL-FRIM-Aug-052,2026-08-17,2654,FRIM,C-052,,3,Familiar,,1,,,,Yes,Waterbirds,Yes
-Buff-rumped Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-053,2026-08-17,3892,FRIM,C-053,,3,,,1,,,,,Woodpeckers,
+Plume-toed Swiftlet,Yes,APODIFORMES,Swifts,MY-SepilokRDC-Aug-016,2026-08-10,1298,Sepilok,C-016,,4,Blue-glossed above; grayish below with white belly,,1,,,,,Swifts & Nightjars,
 Little Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-KL-FRIM-Aug-054,2026-08-17,2672,FRIM,C-054,,3,,,2,,,,Yes,Waterbirds,Yes
 Lesser Green Leafbird,Yes,PASSERIFORMES,Leafbirds,MY-KL-FRIM-Aug-055,2026-08-17,9644,FRIM,C-055,New,3,,,2,,,,,Reed & Leaf,
 Purple Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-KL-FRIM-Aug-056,2026-08-17,2699,FRIM,C-056,,4,,,2,,,,Yes,Waterbirds,Yes
@@ -65,8 +65,8 @@ Black-bellied Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-KL-FRIM-Aug-063,2026-08-17,103
 Sooty Barbet,Yes,PICIFORMES,Asian Barbets,MY-KL-FRIM-Aug-064,2026-08-17,3634,FRIM,I-064,,2,"V similar to Brown, but no overalp; paler throat/belly",,1,,Infreq,,,Woodpeckers,
 Asian Koel,No,CUCULIFORMES,Cuckoos,MY-KL-FRIM-Aug-065,2026-08-17,1064,FRIM,I-065,,2,,,2,,,,,Cuckoos,Yes
 Black-winged Flycatcher-shrike,Yes,PASSERIFORMES,"Vangas, Helmetshrikes, and Allies",MY-KL-FRIM-Aug-066,2026-08-17,6577,FRIM,I-066,New,3,,,2,,,,,Stately Perchers,
-Rufescent Prinia,Yes,PASSERIFORMES,Cisticolas and Allies,MY-KL-FRIM-Aug-067,2026-08-17,7441,FRIM,I-067,,2,,,1,,Infreq,,,Reed & Leaf,
-Crested Goshawk,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-068,2026-08-17,2824,FRIM,I-068,,3,,,1,,Infreq,,Yes,Raptors,Yes
+Black-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-171,2026-08-10,1327,Mutiara,I-171,,1,,,1,Mutiara only,Infreq,,,Swifts & Nightjars,
+White-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-007,2026-08-10,1328,Mutiara,C-007,,3,,,1,,,,,Swifts & Nightjars,
 Blue-winged Leafbird,Yes,PASSERIFORMES,Leafbirds,MY-KL-FRIM-Aug-069,2026-08-17,9645,FRIM,I-069,New,3,,,2,,,,,Reed & Leaf,
 Barn Swallow,No,PASSERIFORMES,Swallows,MY-KL-FRIM-Aug-070,2026-08-17,7725,FRIM,I-070,,4,,,2,,Infreq,,Yes,Swifts & Nightjars,Yes
 Rufous Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-071,2026-08-17,3890,FRIM,I-071,,5,,,3,Widespread,,,,Woodpeckers,
@@ -79,7 +79,7 @@ Gray Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-KL-FRIM-Aug-077,2
 Collared Scops-Owl,Yes,STRIGIFORMES,Owls,MY-KL-FRIM-Aug-078,2026-08-17,3006,FRIM,I-078,,3,,,2,,Infreq,,,Raptors,Yes
 Little Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-KL-FRIM-Aug-079,2026-08-17,9629,FRIM,I-079,,4,,,3,,,,,Flower & Spider,
 Olive-winged Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-KL-FRIM-Aug-080,2026-08-17,7888,FRIM,I-080,,5,,,4,,,,,Bulbul & Star,
-White-rumped Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-KL-FRIM-Aug-081,2026-08-17,9807,FRIM,I-081,,1,,,1,FRIM only,Infreq,,,Reed & Leaf,Yes
+House Swift,Yes,APODIFORMES,Swifts,MY-KL-FRIM-Aug-024,2026-08-17,1348,FRIM,C-024,,5,White rump & throat; square tail,,1,Widespread,,,,Swifts & Nightjars,Yes
 Black-and-yellow Broadbill,Yes,PASSERIFORMES,Asian and Grauer's Broadbills,MY-KL-FRIM-Aug-082,2026-08-17,4471,FRIM,I-082,New,3,,,3,,,,,Broadbills & Pittas,
 Black-crested Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-KL-FRIM-Aug-083,2026-08-17,7878,FRIM,I-083,,1,Distinct black crest and pale iris,,1,FRIM only,Infreq,,,Bulbul & Star,
 Black-eared Barbet,Yes,PICIFORMES,Asian Barbets,MY-KL-FRIM-Aug-084,2026-08-17,3640,FRIM,I-084,,3,,,3,,,,,Woodpeckers,
@@ -106,7 +106,7 @@ Chestnut-winged Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and
 White-rumped Shama,No,PASSERIFORMES,Old World Flycatchers,MY-TemanNegara-Aug-004,2026-08-10,9119,Mutiara,C-004,,4,Key difference is lack of white crown,,1,,,,Yes,Stately Perchers,Yes
 Stripe-throated Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-005,2026-08-10,7897,Mutiara,C-005,,2,"Crown, ear coverts, throat are yellow with fine streaks",,1,,,,,Bulbul & Star,
 Black-and-red Broadbill,Yes,PASSERIFORMES,Asian and Grauer's Broadbills,MY-TemanNegara-Aug-006,2026-08-10,4469,Mutiara,C-006,New,3,"Red cheek, throat, underparts, & rump",,1,,,,,Broadbills & Pittas,
-White-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-007,2026-08-10,1328,Mutiara,C-007,,3,,,1,,,,,Swifts & Nightjars,
+Asian Palm Swift,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-108,2026-08-10,1357,Mutiara,I-108,,2,All dark; long wings; deeply forked,,1,,Infreq,,,Swifts & Nightjars,Yes
 Rufous-winged Philentoma,Yes,PASSERIFORMES,"Vangas, Helmetshrikes, and Allies",MY-TemanNegara-Aug-008,2026-08-10,6578,Mutiara,C-008,New,2,"Typical male has rufous wings, blue gray body, white vent (can lack rufous wing)",,1,,,,,Stately Perchers,
 Pacific Swallow,No,PASSERIFORMES,Swallows,MY-TemanNegara-Aug-009,2026-08-10,7720,Mutiara,C-009,,5,,,3,Widespread,,,Yes,Swifts & Nightjars,
 Black-and-yellow Broadbill,Yes,PASSERIFORMES,Asian and Grauer's Broadbills,MY-TemanNegara-Aug-010,2026-08-10,4471,Mutiara,C-010,New,3,,,2,,,,,Broadbills & Pittas,
@@ -123,7 +123,7 @@ Rhinoceros Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-TemanNegara-Aug-020,2026-08-
 Abbott's Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,MY-TemanNegara-Aug-021,2026-08-10,8370,Mutiara,C-021,New,3,Large billed; gray face with brown cheeks & crown; short tail,,1,,,,,Babblers,
 Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-022,2026-08-10,647,Mutiara,C-022,,5,"Green back, white crown, pink neck all distinct",Forest floor,1,Widespread,,,,Groundbirds,Yes
 Black-naped Monarch,No,PASSERIFORMES,Monarch Flycatchers,MY-TemanNegara-Aug-023,2026-08-10,6797,Mutiara,C-023,,2,Familiar,,1,,,,Yes,Stately Perchers,Yes
-Silver-rumped Spinetail,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-024,2026-08-10,1274,Mutiara,C-024,,2,,,1,,,,,Swifts & Nightjars,
+Slaty-breasted Rail,Yes,GRUIFORMES,"Rails, Gallinules, and Coots",SG-SungeiBuloh-Aug-087,2026-08-10,1769,S-SBuloh,I-087,,1,Gray face and underparts; barred upperparts; red bill; ruddy crown/nape,,1,Sing only,Infreq,,,Waterbirds,Yes
 Yellow-bellied Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-025,2026-08-10,7817,Mutiara,C-025,,1,Chunky with rich yellow underparts; gray head; white lores & throat; forages with treeshrews,,1,Mutiara only,,,,Bulbul & Star,
 Purple-naped Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-TemanNegara-Aug-026,2026-08-10,9624,Mutiara,C-026,,2,Small and greenish with bold chest stripes; male has purple irridescent nape and rump,,1,,,,,Flower & Spider,
 Malayan Black Magpie,Yes,PASSERIFORMES,"Crows, Jays, and Magpies",MY-TemanNegara-Aug-027,2026-08-10,6938,Mutiara,C-027,,2,Separated by range from Bornean; has white stripe on wing,,1,,,,,Stately Perchers,
@@ -133,11 +133,11 @@ Moustached Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,MY-TemanNegara-A
 Blue-winged Leafbird,Yes,PASSERIFORMES,Leafbirds,MY-TemanNegara-Aug-031,2026-08-10,9645,Mutiara,C-031,New,3,Vivid blue highlights on wings (unlike other leafbirds). Male has yellow-tinged head; female green headed with blue smudge on throat.,,1,,,,,Reed & Leaf,
 Pin-striped Tit-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",MY-TemanNegara-Aug-032,2026-08-10,8271,Mutiara,C-032,New,4,,,3,,,,,Babblers,
 Little Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-033,2026-08-10,756,Mutiara,C-033,,2,"Smallest green pigeon; male has distinct blue-gray head, orange patch on breast, maroon wings; female far less distinct",,1,,,,,Groundbirds,
-Malayan Crested Fireback,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-034,2026-08-10,443,Mutiara,C-034,,1,,,1,Mutiara only,,,,Groundbirds,
+Ruddy-breasted Crake,Yes,GRUIFORMES,"Rails, Gallinules, and Coots",SG-PalauUbin-Aug-077,2026-08-10,1867,S-PUbin,I-077,,2,,,1,Sing only,Infreq,,,Waterbirds,Yes
 Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-035,2026-08-10,766,Mutiara,C-035,,3,Prominent green eye ring; red base to bill; maroon mantle with yellow streaking,,1,,,,,Groundbirds,
 Scaly-crowned Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,MY-TemanNegara-Aug-036,2026-08-10,8330,Mutiara,C-036,New,1,"Sim to Rufous-crowned, but smaller with pink legs; more distinct black tips on crown feathers; slender bill; unstreaked breast",,1,Mutiara only,,,,Babblers,
 Square-tailed Drongo-Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-037,2026-08-10,1101,Mutiara,C-037,,1,Glossy black; white barred undertail; square-ended forked tail; juv is dotted with stars,,1,Mutiara only,,,,Cuckoos,Yes
-Buff-necked Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-038,2026-08-10,3891,Mutiara,C-038,,3,,,1,,,,,Woodpeckers,
+Tibetan Sand-Plover,Yes,CHARADRIIFORMES,Plovers and Lapwings,SG-SungeiBuloh-Aug-078,2026-08-10,2007,S-SBuloh,C-078,,2,Unique,,1,Sing only,,,,Waterbirds,
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,MY-TemanNegara-Aug-039,2026-08-10,9973,Mutiara,C-039,,5,,,4,Widespread,,,Yes,Reed & Leaf,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-040,2026-08-10,618,Mutiara,C-040,,5,,,4,Widespread,,,Yes,Groundbirds,Yes
 Common Hill Myna,Yes,PASSERIFORMES,Starlings,MY-TemanNegara-Aug-041,2026-08-10,8747,Mutiara,C-041,,4,,,2,,,,,Bulbul & Star,Yes
@@ -146,7 +146,7 @@ Black-headed Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-043,2026-08-10,
 Large Wren-Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,MY-TemanNegara-Aug-044,2026-08-10,8325,Mutiara,C-044,New,1,"Chunky; blue eye skin; white lores & throat, throat bounded by black necklace; black scaling on head and back ",,1,Mutiara only,,,,Babblers,
 Banded Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-045,2026-08-10,3916,Mutiara,C-045,,4,,,3,,,,,Woodpeckers,
 Chestnut-rumped Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",MY-TemanNegara-Aug-046,2026-08-10,8312,Mutiara,C-046,New,1,Relatively large; rufous rump; black throat; broad black streaks on white lower throat/belly; blue orbital skin,,1,Mutiara only,,,,Babblers,
-Great Argus,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-047,2026-08-10,447,Mutiara,C-047,,1,,,1,Mutiara only,,,,Groundbirds,
+Barred Buttonquail,Yes,CHARADRIIFORMES,Buttonquail,SG-SungeiBuloh-Aug-126,2026-08-10,2144,S-SBuloh,I-126,New,1,Unique,Few recents at Jurong & Neo Tiew Rd,1,Sing only,Infreq,,,Groundbirds,
 Stork-billed Kingfisher,Yes,CORACIIFORMES,Kingfishers,MY-TemanNegara-Aug-048,2026-08-10,3447,Mutiara,C-048,,4,,,3,,,,,Others,Yes
 Chestnut-breasted Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-049,2026-08-10,1028,Mutiara,C-049,,3,Far more extensive rufous underparts than C-bellied; rufous tail tip too; only upper bill is green,,1,,,,,Cuckoos,
 Asian Glossy Starling,No,PASSERIFORMES,Starlings,MY-TemanNegara-Aug-050,2026-08-10,8724,Mutiara,C-050,,5,,,5,Widespread,,,Yes,Bulbul & Star,Yes
@@ -177,11 +177,11 @@ Ochraceous Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-074,2026-08-10,78
 Dusky Broadbill,Yes,PASSERIFORMES,Asian and Grauer's Broadbills,MY-TemanNegara-Aug-075,2026-08-10,4464,Mutiara,C-075,New,1,"Dark with buffy throat, massive red bill",,1,Mutiara only,,,,Broadbills & Pittas,
 Blyth's Paradise-Flycatcher,Yes,PASSERIFORMES,Monarch Flycatchers,MY-TemanNegara-Aug-076,2026-08-10,6804,Mutiara,C-076,,2,White or rufous morph in males; both distinct,,1,,,,,Stately Perchers,
 Sunda Scimitar-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",MY-TemanNegara-Aug-077,2026-08-10,8301,Mutiara,C-077,New,1,"Compact size; nothing like it; decurved yellow bill, very bold face pattern",,1,Mutiara only,,,,Babblers,
-Checker-throated Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-078,2026-08-10,3918,Mutiara,C-078,,1,,,1,Mutiara only,,,,Woodpeckers,
+Black-naped Tern,Yes,CHARADRIIFORMES,"Gulls, Terns, and Skimmers",SG-PalauUbin-Aug-094,2026-08-10,2304,S-PUbin,I-094,,1,All white except for black band connecting eyes to hindnape,Only Marina East (maybe Pasir Ris),1,Sing only,Infreq,Marina only,,Waterbirds,
 Javan Myna,No,PASSERIFORMES,Starlings,MY-TemanNegara-Aug-079,2026-08-10,8777,Mutiara,C-079,,5,,,5,Widespread,,,Yes,Bulbul & Star,
 Bronzed Drongo,Yes,PASSERIFORMES,Drongos,MY-TemanNegara-Aug-080,2026-08-10,6734,Mutiara,C-080,,1,Small; greenish-blue gloss; shallow tail fork,,1,Mutiara only,,,,Stately Perchers,Yes
 Streaked Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-081,2026-08-10,7840,Mutiara,C-081,,2,Long bill; gray throat/chest with thick white streaks,,1,,,,,Bulbul & Star,
-Maroon Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-082,2026-08-10,3867,Mutiara,C-082,,2,,,1,,,,,Woodpeckers,
+Lesser Adjutant,Yes,CICONIIFORMES,Storks,SG-SungeiBuloh-Aug-098,2026-08-10,2534,S-SBuloh,I-098,,1,Unique,,1,Sing only,Infreq,SBuloh only,,Waterbirds,
 Dark-throated Oriole,Yes,PASSERIFORMES,Old World Orioles,MY-TemanNegara-Aug-083,2026-08-10,6475,Mutiara,C-083,,1,Separated by range from Ventriloquial,,1,Mutiara only,,,,Stately Perchers,
 Black-bellied Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-084,2026-08-10,1033,Mutiara,C-084,,2,Essentially identical to Chestnut-bellied except for black vent,,1,,,,,Cuckoos,
 Black-thighed Falconet,Yes,FALCONIFORMES,Falcons and Caracaras,MY-TemanNegara-Aug-085,2026-08-10,4000,Mutiara,C-085,,2,,,2,,,,,Raptors,
@@ -207,7 +207,7 @@ White-crowned Forktail,Yes,PASSERIFORMES,Old World Flycatchers,MY-TemanNegara-Au
 Dark-necked Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,MY-TemanNegara-Aug-105,2026-08-10,7420,Mutiara,I-105,,5,,,5,Widespread,,,,Reed & Leaf,
 Oriental Pied-Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-TemanNegara-Aug-106,2026-08-10,3333,Mutiara,I-106,New,4,,,4,,,,,Others,
 Chestnut-naped Forktail,Yes,PASSERIFORMES,Old World Flycatchers,MY-TemanNegara-Aug-107,2026-08-10,9270,Mutiara,I-107,,1,Unique; sexes alike,,1,Mutiara only,Infreq,,,Stately Perchers,
-Asian Palm Swift,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-108,2026-08-10,1357,Mutiara,I-108,,2,,,1,,Infreq,,,Swifts & Nightjars,Yes
+Hadada Ibis,Yes,PELECANIFORMES,Ibises and Spoonbills,MY-KL-FRIM-Aug-038,2026-08-17,2623,FRIM,C-038,,1,Unique,,1,FRIM only,,,,Waterbirds,
 Sunda Brush Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-109,2026-08-10,1090,Mutiara,I-109,,3,,,3,,Infreq,,,Cuckoos,
 Orange-backed Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-110,2026-08-10,3869,Mutiara,I-110,,2,,,2,,,,,Woodpeckers,
 Rufous-backed Dwarf-Kingfisher,Yes,CORACIIFORMES,Kingfishers,MY-TemanNegara-Aug-111,2026-08-10,3416,Mutiara,I-111,,2,,,2,,,,,Others,
@@ -220,7 +220,7 @@ Rufous-chested Flycatcher,Yes,PASSERIFORMES,Old World Flycatchers,MY-TemanNegara
 Gray-headed Canary-Flycatcher,Yes,PASSERIFORMES,Fairy Flycatchers,MY-TemanNegara-Aug-118,2026-08-10,7162,Mutiara,I-118,New,1,Small with gray hood and yellow underparts; olive back; black eyes. Only family member in area.,,1,Mutiara only,Infreq,,,Stately Perchers,Yes
 Gray Wagtail,No,PASSERIFORMES,Wagtails and Pipits,MY-TemanNegara-Aug-119,2026-08-10,9996,Mutiara,I-119,,2,,,2,,Infreq,,Yes,Reed & Leaf,Yes
 White-bellied Erpornis,Yes,PASSERIFORMES,"Vireos, Shrike-Babblers, and Erpornis",MY-TemanNegara-Aug-120,2026-08-10,6343,Mutiara,I-120,,2,,,2,,,,,Stately Perchers,Yes
-Malayan Peacock-Pheasant,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-121,2026-08-10,460,Mutiara,I-121,,1,,,1,Mutiara only,Infreq,,,Groundbirds,
+Little Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-022,2026-08-10,2672,S-SBuloh,C-022,,3,Familiar,,1,,,,Yes,Waterbirds,Yes
 Fluffy-backed Tit-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",MY-TemanNegara-Aug-122,2026-08-10,8273,Mutiara,I-122,New,2,,,2,,Infreq,,,Babblers,
 Yellow-bellied Prinia,No,PASSERIFORMES,Cisticolas and Allies,MY-TemanNegara-Aug-123,2026-08-10,7447,Mutiara,I-123,,4,,,4,,,,Yes,Reed & Leaf,Yes
 Mountain Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-124,2026-08-10,883,Mutiara,I-124,,1,"Largest in region; pale head, gray underparts; maroon/brown mantle",,1,Mutiara only,Infreq,,,Groundbirds,
@@ -254,10 +254,10 @@ Olive-winged Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-151,2026-08-10,
 Red-bearded Bee-eater,Yes,CORACIIFORMES,Bee-eaters,MY-TemanNegara-Aug-152,2026-08-10,3351,Mutiara,I-152,,2,,,2,,,,,Others,
 Rufous-collared Kingfisher,Yes,CORACIIFORMES,Kingfishers,MY-TemanNegara-Aug-153,2026-08-10,3493,Mutiara,I-153,,2,,,2,,Infreq,,,Others,
 White-bellied Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-154,2026-08-10,3939,Mutiara,I-154,,2,,,2,,,,,Woodpeckers,
-Crested Partridge,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-TemanNegara-Aug-155,2026-08-10,360,Mutiara,I-155,,1,,,1,Mutiara only,Infreq,,,Groundbirds,
+Little Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-029,2026-08-10,2680,S-SBuloh,C-029,,4,Familiar,,1,,,,,Waterbirds,
 Indochinese Blue Flycatcher,Yes,PASSERIFORMES,Old World Flycatchers,MY-TemanNegara-Aug-156,2026-08-10,9174,Mutiara,I-156,,1,Rich blue with orange breast/throat,,1,Mutiara only,Infreq,,,Stately Perchers,
 Finsch's Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-157,2026-08-10,7826,Mutiara,I-157,,1,Yellow throat; generally yellow-tinted olive-brown body; pale red eye,,1,Mutiara only,Infreq,,,Bulbul & Star,
-Lesser Fish-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-TemanNegara-Aug-158,2026-08-10,2911,Mutiara,I-158,,1,,,1,Mutiara only,Infreq,,,Raptors,
+Great Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-062,2026-08-10,2692,S-SBuloh,C-062,,1,Familiar,,1,Sing only,,,Yes,Waterbirds,Yes
 Banded Bay Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-159,2026-08-10,1087,Mutiara,I-159,,4,,,4,,Infreq,,,Cuckoos,
 Scarlet-rumped Trogon,Yes,TROGONIFORMES,Trogons,MY-TemanNegara-Aug-160,2026-08-10,3241,Mutiara,I-160,,2,,,2,,Infreq,,,Others,
 Violet Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-161,2026-08-10,1070,Mutiara,I-161,,2,,,2,,,,,Cuckoos,
@@ -270,7 +270,7 @@ Wrinkled Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-TemanNegara-Aug-167,2026-08-10
 Rufescent Prinia,Yes,PASSERIFORMES,Cisticolas and Allies,MY-TemanNegara-Aug-168,2026-08-10,7441,Mutiara,I-168,,2,,,2,,Infreq,,,Reed & Leaf,
 Plain Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-TemanNegara-Aug-169,2026-08-10,9458,Mutiara,I-169,,3,,,3,,,,,Flower & Spider,Yes
 Little Cuckoo-Dove,Yes,COLUMBIFORMES,Pigeons and Doves,MY-TemanNegara-Aug-170,2026-08-10,634,Mutiara,I-170,,1,"Large, long-tailed, reddish brown; head lighter; spots on breast",,1,Mutiara only,Infreq,,,Groundbirds,
-Black-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-TemanNegara-Aug-171,2026-08-10,1327,Mutiara,I-171,,1,,,1,Mutiara only,Infreq,,,Swifts & Nightjars,
+Medium Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-049,2026-08-10,2694,S-SBuloh,C-049,,1,Non-breeding: yellow bill with black tip,,1,Sing only,,,Yes,Waterbirds,
 Red-billed Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-TemanNegara-Aug-172,2026-08-10,1027,Mutiara,I-172,,2,,,2,,,,,Cuckoos,
 Coppersmith Barbet,Yes,PICIFORMES,Asian Barbets,MY-TemanNegara-Aug-173,2026-08-10,3638,Mutiara,I-173,,4,,,4,,,,,Woodpeckers,Yes
 Bushy-crested Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-TemanNegara-Aug-174,2026-08-10,3324,Mutiara,I-174,New,2,,,2,,,,,Others,
@@ -279,7 +279,7 @@ Lesser Cuckooshrike,Yes,PASSERIFORMES,Cuckooshrikes,MY-TemanNegara-Aug-176,2026-
 Scaly-breasted Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-TemanNegara-Aug-177,2026-08-10,7877,Mutiara,I-177,,1,Small and well-marked; black head; red iris; scalloped breast,,1,Mutiara only,Infreq,,,Bulbul & Star,
 Large Frogmouth,Yes,PODARGIFORMES,Frogmouths,MY-TemanNegara-Aug-178,2026-08-10,1232,Mutiara,I-178,,1,Unique,,1,Mutiara only,Infreq,,,Swifts & Nightjars,
 Thick-billed Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-TemanNegara-Aug-179,2026-08-10,9625,Mutiara,I-179,,2,,,2,,,,,Flower & Spider,
-Javan Myna,No,PASSERIFORMES,Starlings,SG-PalauUbin-Aug-001,2026-08-10,8777,S-PUbin,C-001,,5,,,1,Widespread,,,Yes,Bulbul & Star,
+Great-billed Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-070,2026-08-10,2702,S-SBuloh,C-070,,2,Largest in region; entirely gray,,1,Sing only,,,,Waterbirds,
 Yellow-vented Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-PalauUbin-Aug-002,2026-08-10,7909,S-PUbin,C-002,,5,Common; unique black crown/eye stripe; dirty white underparts; yellow vent,,1,Widespread,,,,Bulbul & Star,
 Black-naped Oriole,Yes,PASSERIFORMES,Old World Orioles,SG-PalauUbin-Aug-003,2026-08-10,6483,S-PUbin,C-003,,3,,,2,,,,,Stately Perchers,Yes
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-004,2026-08-10,618,S-PUbin,C-004,,5,Familiar,,1,Widespread,,,Yes,Groundbirds,Yes
@@ -309,7 +309,7 @@ Common Flameback,Yes,PICIFORMES,Woodpeckers,SG-PalauUbin-Aug-027,2026-08-10,3899
 Rose-ringed Parakeet,No,PSITTACIFORMES,Old World Parrots,SG-PalauUbin-Aug-028,2026-08-10,4110,S-PUbin,C-028,,2,Known; almost all green,,1,Sing only,,,Yes,Parrots,Yes
 Brahminy Kite,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-PalauUbin-Aug-029,2026-08-10,2901,S-PUbin,C-029,,4,,,2,,,,,Raptors,Yes
 Blue-throated Bee-eater,Yes,CORACIIFORMES,Bee-eaters,SG-PalauUbin-Aug-030,2026-08-10,3371,S-PUbin,C-030,,5,,,4,Widespread,,,,Others,
-Sunda Pygmy Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-PalauUbin-Aug-031,2026-08-10,3807,S-PUbin,C-031,,3,,,1,,,,,Woodpeckers,
+Oriental Honey-buzzard,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-111,2026-08-10,2746,S-SBuloh,I-111,,2,Variable; pigeon-like head; black-lining breast patch,S: Never all that likely,1,,Infreq,,,Raptors,Yes
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,SG-PalauUbin-Aug-032,2026-08-10,9973,S-PUbin,C-032,,5,,,3,Widespread,,,Yes,Reed & Leaf,Yes
 Little Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-PalauUbin-Aug-033,2026-08-10,2680,S-PUbin,C-033,,4,,,3,,,,,Waterbirds,
 Swinhoe's White-eye,No,PASSERIFORMES,"White-eyes, Yuhinas, and Allies",SG-PalauUbin-Aug-034,2026-08-10,8160,S-PUbin,C-034,,1,Familiar,,1,Sing only,,,Yes,Reed & Leaf,
@@ -325,7 +325,7 @@ Pied Triller,Yes,PASSERIFORMES,Cuckooshrikes,SG-PalauUbin-Aug-043,2026-08-10,627
 Common Sandpiper,No,CHARADRIIFORMES,Sandpipers and Allies,SG-PalauUbin-Aug-044,2026-08-10,2097,S-PUbin,C-044,,2,,,2,Sing only,,,Yes,Waterbirds,Yes
 Golden-bellied Gerygone,Yes,PASSERIFORMES,Thornbills and Allies,SG-PalauUbin-Aug-045,2026-08-10,6176,S-PUbin,C-045,,2,"Only Gerygone in region, and only in Singapore",,1,Sing only,,,,Reed & Leaf,
 Changeable Hawk-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-PalauUbin-Aug-046,2026-08-10,2791,S-PUbin,C-046,,4,"Massive rounded wings. Pale morph: dark brown, white breast with dark streaks; juvenile much paler. Dark morph: dark all over with paler outer feathers in flight. ",,1,,,,,Raptors,Yes
-Baya Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-047,2026-08-10,9742,S-PUbin,C-047,,4,,,1,,,,,Reed & Leaf,
+Crested Serpent-Eagle,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-037,2026-08-17,2770,FRIM,C-037,,3,"Distinct black crest & yellow face; brown body & wings, white flight feathers edged in black",,1,,,,,Raptors,Yes
 Little Tern,No,CHARADRIIFORMES,"Gulls, Terns, and Skimmers",SG-PalauUbin-Aug-048,2026-08-10,2279,S-PUbin,C-048,,2,Familiar,,1,Sing only,,,Yes,Waterbirds,Yes
 White-rumped Shama,No,PASSERIFORMES,Old World Flycatchers,SG-PalauUbin-Aug-049,2026-08-10,9119,S-PUbin,C-049,,4,,,2,,,,Yes,Stately Perchers,Yes
 Sooty-headed Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-PalauUbin-Aug-050,2026-08-10,7911,S-PUbin,C-050,,1,Unique black mask/crown; slight crest,,1,Sing only,,LHalus/PRis/Tamp only,,Bulbul & Star,
@@ -334,9 +334,9 @@ Straw-headed Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-PalauUbin-Aug-052,2026-08-10,78
 Stork-billed Kingfisher,Yes,CORACIIFORMES,Kingfishers,SG-PalauUbin-Aug-053,2026-08-10,3447,S-PUbin,C-053,,4,,,4,,,,,Others,Yes
 Tanimbar Corella,No,PSITTACIFORMES,Cockatoos,SG-PalauUbin-Aug-054,2026-08-10,4057,S-PUbin,C-054,,2,Unique,,1,Sing only,,,Yes,Parrots,
 Large-billed Crow,No,PASSERIFORMES,"Crows, Jays, and Magpies",SG-PalauUbin-Aug-055,2026-08-10,7058,S-PUbin,C-055,,4,,,2,,,,Yes,Stately Perchers,
-Rufous Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-PalauUbin-Aug-056,2026-08-10,3890,S-PUbin,C-056,,5,,,1,Widespread,,,,Woodpeckers,
+Wallace's Hawk-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-013,2026-08-10,2783,Sepilok,C-013,,1,Small; black crest; ruddy face; streaked underparts; mostly white/streaked in flight,,1,Sepilok only,,,,Raptors,
 Little Bronze-Cuckoo,Yes,CUCULIFORMES,Cuckoos,SG-PalauUbin-Aug-057,2026-08-10,1081,S-PUbin,C-057,,2,Bronzy green; barred underparts; bright red eye on male,,1,Sing only,,,,Cuckoos,
-Golden-backed Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-058,2026-08-10,9725,S-PUbin,C-058,,2,,,1,Sing only,,,,Reed & Leaf,
+Rufous-bellied Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-123,2026-08-10,2797,Sepilok,I-123,,1,Dark head & back; white breast; otherwise bold ruddy underneath,,1,Sepilok only,Infreq,,,Raptors,
 Spotted Wood-Owl,Yes,STRIGIFORMES,Owls,SG-PalauUbin-Aug-059,2026-08-10,3153,S-PUbin,C-059,,1,"Large with rufous face discs; loud barking ""whoo""",,1,Sing only,,PRis only,,Raptors,
 Crimson Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-PalauUbin-Aug-060,2026-08-10,9612,S-PUbin,C-060,,3,,,3,,,,,Flower & Spider,
 Dark-necked Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,SG-PalauUbin-Aug-061,2026-08-10,7420,S-PUbin,C-061,,5,,,3,Widespread,,,,Reed & Leaf,
@@ -347,7 +347,7 @@ Monk Parakeet,No,PSITTACIFORMES,New World and African Parrots,SG-PalauUbin-Aug-0
 Red-whiskered Bulbul,No,PASSERIFORMES,Bulbuls,SG-PalauUbin-Aug-066,2026-08-10,7908,S-PUbin,I-066,,3,Familiar,,1,,Infreq,,Yes,Bulbul & Star,Yes
 Green Imperial-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-067,2026-08-10,853,S-PUbin,I-067,,2,,,2,Sing only,,,,Groundbirds,
 Purple Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-PalauUbin-Aug-068,2026-08-10,2699,S-PUbin,I-068,,4,,,3,,,,Yes,Waterbirds,Yes
-Barn Swallow,No,PASSERIFORMES,Swallows,SG-PalauUbin-Aug-069,2026-08-10,7725,S-PUbin,I-069,,4,Familiar,,1,,Infreq,,Yes,Swifts & Nightjars,Yes
+Barn Swallow,No,PASSERIFORMES,Swallows,SG-PalauUbin-Aug-069,2026-08-10,7725,S-PUbin,I-069,,4,Blue-black breast band & deep tail fork separate from Pacific,,1,,Infreq,,Yes,Swifts & Nightjars,Yes
 Buffy Fish-Owl,Yes,STRIGIFORMES,Owls,SG-PalauUbin-Aug-070,2026-08-10,3099,S-PUbin,I-070,,2,"Large, buffy, streaked, ear tufts",,1,Sing only,Infreq,PRis only,,Raptors,
 Abbott's Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,SG-PalauUbin-Aug-071,2026-08-10,8370,S-PUbin,I-071,New,3,,,2,,,,,Babblers,
 Savanna Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-PalauUbin-Aug-072,2026-08-10,1210,S-PUbin,I-072,,2,"In flight, male has all white outer tail feathers (all the way to body); two small white patches on throat; shorter tailed; unifromally gray/brown","""Chwee"" repeated",1,Sing only,Infreq,,,Swifts & Nightjars,Yes
@@ -355,7 +355,7 @@ Red Collared-Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-073,2026-0
 Great-billed Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-PalauUbin-Aug-074,2026-08-10,2702,S-PUbin,I-074,,2,,,2,Sing only,,,,Waterbirds,
 Collared Scops-Owl,Yes,STRIGIFORMES,Owls,SG-PalauUbin-Aug-075,2026-08-10,3006,S-PUbin,I-075,,3,"Mournful ""whoul"" - see Sunda Scops Owl",,1,,Infreq,,,Raptors,Yes
 Crested Goshawk,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-PalauUbin-Aug-076,2026-08-10,2824,S-PUbin,I-076,,3,,,2,,Infreq,,Yes,Raptors,Yes
-Ruddy-breasted Crake,Yes,GRUIFORMES,"Rails, Gallinules, and Coots",SG-PalauUbin-Aug-077,2026-08-10,1867,S-PUbin,I-077,,2,,,1,Sing only,Infreq,,,Waterbirds,Yes
+Crested Goshawk,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-068,2026-08-17,2824,FRIM,I-068,,3,,,1,,Infreq,,Yes,Raptors,Yes
 Copper-throated Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-PalauUbin-Aug-078,2026-08-10,9533,S-PUbin,I-078,,3,,,3,,,,,Flower & Spider,
 Tibetan Sand-Plover,Yes,CHARADRIIFORMES,Plovers and Lapwings,SG-PalauUbin-Aug-079,2026-08-10,2007,S-PUbin,I-079,,2,,,2,Sing only,,,,Waterbirds,
 Asian Emerald Dove,Yes,COLUMBIFORMES,Pigeons and Doves,SG-PalauUbin-Aug-080,2026-08-10,647,S-PUbin,I-080,,5,,,5,Widespread,,,,Groundbirds,Yes
@@ -372,12 +372,12 @@ Lineated Barbet,Yes,PICIFORMES,Asian Barbets,SG-PalauUbin-Aug-090,2026-08-10,365
 Pin-striped Tit-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",SG-PalauUbin-Aug-091,2026-08-10,8271,S-PUbin,I-091,New,4,,,4,,,,,Babblers,
 Zitting Cisticola,No,PASSERIFORMES,Cisticolas and Allies,SG-PalauUbin-Aug-092,2026-08-10,7510,S-PUbin,I-092,,2,,,2,Sing only,Infreq,,Yes,Reed & Leaf,Yes
 Red-wattled Lapwing,No,CHARADRIIFORMES,Plovers and Lapwings,SG-PalauUbin-Aug-093,2026-08-10,1994,S-PUbin,I-093,,2,,,2,Sing only,,,,Waterbirds,Yes
-Black-naped Tern,Yes,CHARADRIIFORMES,"Gulls, Terns, and Skimmers",SG-PalauUbin-Aug-094,2026-08-10,2304,S-PUbin,I-094,,1,,Only Marina East (maybe Pasir Ris),1,Sing only,Infreq,Marina only,,Waterbirds,
+Brahminy Kite,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-KL-FRIM-Aug-023,2026-08-17,2901,FRIM,C-023,,4,,,1,,,,,Raptors,Yes
 Common Greenshank,No,CHARADRIIFORMES,Sandpipers and Allies,SG-PalauUbin-Aug-095,2026-08-10,2110,S-PUbin,I-095,,2,,,2,Sing only,,,Yes,Waterbirds,Yes
 Little Grebe,No,PODICIPEDIFORMES,Grebes,SG-PalauUbin-Aug-096,2026-08-10,2324,S-PUbin,I-096,,1,Familiar,,1,Sing only,Infreq,,Yes,Waterbirds,Yes
 Gray-headed Fish-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-PalauUbin-Aug-097,2026-08-10,2912,S-PUbin,I-097,,2,,,2,Sing only,,,,Raptors,
 Mangrove Pitta,Yes,PASSERIFORMES,Pittas,SG-PalauUbin-Aug-098,2026-08-10,4520,S-PUbin,I-098,New,1,Tan breast; only on Ubin,Only PUbin,1,Sing only,Infreq,PUbin only,,Broadbills & Pittas,
-Asian Golden Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-099,2026-08-10,9743,S-PUbin,I-099,,1,,Only Tampines Eco Green,1,Sing only,Infreq,Tampines only,,Reed & Leaf,
+Lesser Fish-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-TemanNegara-Aug-158,2026-08-10,2911,Mutiara,I-158,,1,"Sim to Gray-headed FE, but smaller, more compact; tails are different",,1,Mutiara only,Infreq,,,Raptors,
 Common Redshank,No,CHARADRIIFORMES,Sandpipers and Allies,SG-PalauUbin-Aug-100,2026-08-10,2105,S-PUbin,I-100,,2,,,2,Sing only,,,Yes,Waterbirds,Yes
 House Swift,Yes,APODIFORMES,Swifts,SG-PalauUbin-Aug-101,2026-08-10,1348,S-PUbin,I-101,,5,,,2,Widespread,,,,Swifts & Nightjars,Yes
 Brown-streaked Flycatcher,Yes,PASSERIFORMES,Old World Flycatchers,SG-PalauUbin-Aug-102,2026-08-10,9066,S-PUbin,I-102,,3,,,2,,Infreq,,,Stately Perchers,
@@ -387,29 +387,29 @@ Asian Glossy Starling,No,PASSERIFORMES,Starlings,SG-SungeiBuloh-Aug-003,2026-08-
 Pink-necked Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-004,2026-08-10,757,S-SBuloh,C-004,,4,Pink neck/nape; green wings; female far less distinct,S: Widespread,1,Widespread,,,,Groundbirds,
 Spotted Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-005,2026-08-10,618,S-SBuloh,C-005,,5,,,2,Widespread,,,Yes,Groundbirds,Yes
 House Crow,No,PASSERIFORMES,"Crows, Jays, and Magpies",SG-SungeiBuloh-Aug-006,2026-08-10,7026,S-SBuloh,C-006,,3,,,2,,,,,Stately Perchers,
-Pacific Swallow,No,PASSERIFORMES,Swallows,SG-SungeiBuloh-Aug-007,2026-08-10,7720,S-SBuloh,C-007,,5,,,1,Widespread,,,Yes,Swifts & Nightjars,
+Rufous Piculet,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-105,2026-08-10,3767,Sepilok,C-105,,2,Very small; olive back; rufous underparts; yellow forehead,,1,,,,,Woodpeckers,
 Ornate Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-SungeiBuloh-Aug-008,2026-08-10,9586,S-SBuloh,C-008,,4,"White tail edges in flight. Similar to Brown-throated, which has thicker bill and lacks white patches.",S: Widespread,1,Widespread,,,,Flower & Spider,
 Collared Kingfisher,No,CORACIIFORMES,Kingfishers,SG-SungeiBuloh-Aug-009,2026-08-10,3483,S-SBuloh,C-009,,4,,,2,,,,,Others,
 Zebra Dove,No,COLUMBIFORMES,Pigeons and Doves,SG-SungeiBuloh-Aug-010,2026-08-10,676,S-SBuloh,C-010,,5,,,3,Widespread,,,Yes,Groundbirds,
 White-breasted Waterhen,No,GRUIFORMES,"Rails, Gallinules, and Coots",SG-SungeiBuloh-Aug-011,2026-08-10,1859,S-SBuloh,C-011,,4,Familiar,,1,,,,Yes,Waterbirds,Yes
-Common Iora,Yes,PASSERIFORMES,Ioras,SG-SungeiBuloh-Aug-012,2026-08-10,6603,S-SBuloh,C-012,New,5,,,1,Widespread,,,,Reed & Leaf,
+Gray-and-buff Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-090,2026-08-10,3770,Sepilok,C-090,,2,Small with oversized crest; scales of black & buff on back,,1,,,,,Woodpeckers,
 Blue-throated Bee-eater,Yes,CORACIIFORMES,Bee-eaters,SG-SungeiBuloh-Aug-013,2026-08-10,3371,S-SBuloh,C-013,,5,,,2,Widespread,,,,Others,
 Pin-striped Tit-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",SG-SungeiBuloh-Aug-014,2026-08-10,8271,S-SBuloh,C-014,New,4,"Small; rufous crown; yellowish supercilium, throat, & sides of head; fine streaking on breast","S: SBuloh, SBot, BTimah, CCNR",1,,,,,Babblers,
 Brown-throated Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-SungeiBuloh-Aug-015,2026-08-10,9493,S-SBuloh,C-015,,5,,,2,Widespread,,,,Flower & Spider,
 Ashy Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,SG-SungeiBuloh-Aug-016,2026-08-10,7422,S-SBuloh,C-016,,3,,,3,,,,,Reed & Leaf,
-Common Flameback,Yes,PICIFORMES,Woodpeckers,SG-SungeiBuloh-Aug-017,2026-08-10,3899,S-SBuloh,C-017,,3,,S: Widespread,1,,,,,Woodpeckers,
+Sunda Pygmy Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-PalauUbin-Aug-031,2026-08-10,3807,S-PUbin,C-031,,3,Small & cute; unique,,1,,,,,Woodpeckers,
 Lineated Barbet,Yes,PICIFORMES,Asian Barbets,SG-SungeiBuloh-Aug-018,2026-08-10,3653,S-SBuloh,C-018,,3,Boldly streaked on head and breast; yellow orbital skin,"S: SBot, BTimah",1,,,,,Woodpeckers,
 Malaysian Pied-Fantail,Yes,PASSERIFORMES,Fantails,SG-SungeiBuloh-Aug-019,2026-08-10,6678,S-SBuloh,C-019,,4,,,3,,,,,Stately Perchers,
 Red Junglefowl,No,GALLIFORMES,"Pheasants, Grouse, and Allies",SG-SungeiBuloh-Aug-020,2026-08-10,470,S-SBuloh,C-020,,4,,,2,,,,Yes,Groundbirds,Yes
 Gray Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-021,2026-08-10,2696,S-SBuloh,C-021,,2,Familiar,,1,Sing only,,,Yes,Waterbirds,Yes
-Little Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-022,2026-08-10,2672,S-SBuloh,C-022,,3,,,1,,,,Yes,Waterbirds,Yes
+Maroon Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-082,2026-08-10,3867,Mutiara,C-082,,2,Small and reddish with yellow bill,,1,,,,,Woodpeckers,
 Oriental Magpie-Robin,No,PASSERIFORMES,Old World Flycatchers,SG-SungeiBuloh-Aug-023,2026-08-10,9114,S-SBuloh,C-023,,5,,,4,Widespread,,,Yes,Stately Perchers,Yes
 Greater Racket-tailed Drongo,Yes,PASSERIFORMES,Drongos,SG-SungeiBuloh-Aug-024,2026-08-10,6747,S-SBuloh,C-024,,5,,,3,Widespread,,,,Stately Perchers,
 Common Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,SG-SungeiBuloh-Aug-025,2026-08-10,7418,S-SBuloh,C-025,,4,,,3,,,,,Reed & Leaf,Yes
 White-bellied Sea-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-026,2026-08-10,2909,S-SBuloh,C-026,,3,,,2,,,,,Raptors,
 Olive-winged Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-SungeiBuloh-Aug-027,2026-08-10,7888,S-SBuloh,C-027,,5,,,2,,,,,Bulbul & Star,
 Scarlet-backed Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,SG-SungeiBuloh-Aug-028,2026-08-10,9485,S-SBuloh,C-028,,4,"Male b&w below, scarlet from crown to rump on top; female plain w red rump","S: Widespread, esp Jurong & SBot",1,,,,,Flower & Spider,
-Little Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-029,2026-08-10,2680,S-SBuloh,C-029,,4,,,1,,,,,Waterbirds,
+Orange-backed Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-102,2026-08-10,3869,Sepilok,C-102,,2,Large; broad white stripe down back; red belly & crown on male,,1,,,,,Woodpeckers,
 Crimson Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-SungeiBuloh-Aug-030,2026-08-10,9612,S-SBuloh,C-030,,3,,,2,,,,,Flower & Spider,
 Brahminy Kite,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-031,2026-08-10,2901,S-SBuloh,C-031,,4,,,3,,,,,Raptors,Yes
 Long-tailed Parakeet,Yes,PSITTACIFORMES,Old World Parrots,SG-SungeiBuloh-Aug-032,2026-08-10,4122,S-SBuloh,C-032,,3,Pink cheek unique; long blue tail,S: Widespread,1,,,,,Parrots,
@@ -429,7 +429,7 @@ Dollarbird,Yes,CORACIIFORMES,Rollers,SG-SungeiBuloh-Aug-045,2026-08-10,3529,S-SB
 Changeable Hawk-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-046,2026-08-10,2791,S-SBuloh,C-046,,4,,,2,,,,,Raptors,Yes
 Milky Stork,Yes,CICONIIFORMES,Storks,SG-SungeiBuloh-Aug-047,2026-08-10,2538,S-SBuloh,C-047,,1,"Similar to Painted, but lacks Painted's pink tertials and large black patches on wings.",,1,Sing only,,SBuloh only,,Waterbirds,
 Rose-ringed Parakeet,No,PSITTACIFORMES,Old World Parrots,SG-SungeiBuloh-Aug-048,2026-08-10,4110,S-SBuloh,C-048,,2,,,2,Sing only,,,Yes,Parrots,Yes
-Medium Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-049,2026-08-10,2694,S-SBuloh,C-049,,1,,,1,Sing only,,,Yes,Waterbirds,
+Rufous Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-PalauUbin-Aug-056,2026-08-10,3890,S-PUbin,C-056,,5,Light rufous; banded; dark bill,,1,Widespread,,,,Woodpeckers,
 Sunda Pygmy Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-SungeiBuloh-Aug-050,2026-08-10,3807,S-SBuloh,C-050,,3,,,2,,,,,Woodpeckers,
 Pied Triller,Yes,PASSERIFORMES,Cuckooshrikes,SG-SungeiBuloh-Aug-051,2026-08-10,6274,S-SBuloh,C-051,,3,,,3,,,,,Stately Perchers,
 Eurasian Tree Sparrow,No,PASSERIFORMES,Old World Sparrows,SG-SungeiBuloh-Aug-052,2026-08-10,9973,S-SBuloh,C-052,,5,,,5,Widespread,,,Yes,Reed & Leaf,Yes
@@ -442,7 +442,7 @@ Oriental Pied-Hornbill,Yes,BUCEROTIFORMES,Hornbills,SG-SungeiBuloh-Aug-058,2026-
 Painted Stork,Yes,CICONIIFORMES,Storks,SG-SungeiBuloh-Aug-059,2026-08-10,2540,S-SBuloh,C-059,,2,,,2,,,,,Waterbirds,
 Yellow-bellied Prinia,No,PASSERIFORMES,Cisticolas and Allies,SG-SungeiBuloh-Aug-060,2026-08-10,7447,S-SBuloh,C-060,,4,,,2,,,,Yes,Reed & Leaf,Yes
 Rufous-tailed Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,SG-SungeiBuloh-Aug-061,2026-08-10,7424,S-SBuloh,C-061,,4,,,2,,,,,Reed & Leaf,
-Great Egret,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-062,2026-08-10,2692,S-SBuloh,C-062,,1,,,1,Sing only,,,Yes,Waterbirds,Yes
+Buff-necked Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-038,2026-08-10,3891,Mutiara,C-038,,3,Dark head; buff neck patch,,1,,,,,Woodpeckers,
 Copper-throated Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-SungeiBuloh-Aug-063,2026-08-10,9533,S-SBuloh,C-063,,3,Large; copper throat (not purple) and upper breast; green shoulder patch,,1,,,,,Flower & Spider,
 Gray-headed Fish-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-064,2026-08-10,2912,S-SBuloh,C-064,,2,Mostly brown and white. Stark contrast between brown body & white belly/tail. Broad black bar at end of tail. Juvenile paler with more streaks and barring. Forages near water.,"S: SBuloh, Jurong, BTimah",1,Sing only,,,,Raptors,
 White-crested Laughingthrush,Yes,PASSERIFORMES,Laughingthrushes and Allies,SG-SungeiBuloh-Aug-065,2026-08-10,8493,S-SBuloh,C-065,,1,Unique,S: Dairy Farm/Bukit Timah/Hindhede,1,Sing only,,,,Babblers,Yes
@@ -450,7 +450,7 @@ Rufous Woodpecker,Yes,PICIFORMES,Woodpeckers,SG-SungeiBuloh-Aug-066,2026-08-10,3
 Red-eyed Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-SungeiBuloh-Aug-067,2026-08-10,7889,S-SBuloh,C-067,,4,,,4,,,,,Bulbul & Star,
 Coppersmith Barbet,Yes,PICIFORMES,Asian Barbets,SG-SungeiBuloh-Aug-068,2026-08-10,3638,S-SBuloh,C-068,,4,,,2,,,,,Woodpeckers,Yes
 Scaly-breasted Munia,No,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-069,2026-08-10,9804,S-SBuloh,C-069,,5,,,2,Widespread,,,Yes,Reed & Leaf,Yes
-Great-billed Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-070,2026-08-10,2702,S-SBuloh,C-070,,2,,,1,Sing only,,,,Waterbirds,
+Buff-rumped Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-053,2026-08-17,3892,FRIM,C-053,,3,Small & heavily barred all over,,1,,,,,Woodpeckers,
 Little Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,SG-SungeiBuloh-Aug-071,2026-08-10,9629,S-SBuloh,C-071,,4,,,2,,,,,Flower & Spider,
 Common Greenshank,No,CHARADRIIFORMES,Sandpipers and Allies,SG-SungeiBuloh-Aug-072,2026-08-10,2110,S-SBuloh,C-072,,2,Familiar,,1,Sing only,,,Yes,Waterbirds,Yes
 Asian Fairy-bluebird,Yes,PASSERIFORMES,Fairy-bluebirds,SG-SungeiBuloh-Aug-073,2026-08-10,9638,S-SBuloh,C-073,New,3,,,2,,,,,Stately Perchers,Yes
@@ -458,7 +458,7 @@ Common Myna,No,PASSERIFORMES,Starlings,SG-SungeiBuloh-Aug-074,2026-08-10,8771,S-
 Large-billed Crow,No,PASSERIFORMES,"Crows, Jays, and Magpies",SG-SungeiBuloh-Aug-075,2026-08-10,7058,S-SBuloh,C-075,,4,,,3,,,,Yes,Stately Perchers,
 Red-wattled Lapwing,No,CHARADRIIFORMES,Plovers and Lapwings,SG-SungeiBuloh-Aug-076,2026-08-10,1994,S-SBuloh,C-076,,2,Familiar,"S: Jurong, Kranji, MarinaE",1,Sing only,,,,Waterbirds,Yes
 Little Tern,No,CHARADRIIFORMES,"Gulls, Terns, and Skimmers",SG-SungeiBuloh-Aug-077,2026-08-10,2279,S-SBuloh,C-077,,2,,,2,Sing only,,,Yes,Waterbirds,Yes
-Tibetan Sand-Plover,Yes,CHARADRIIFORMES,Plovers and Lapwings,SG-SungeiBuloh-Aug-078,2026-08-10,2007,S-SBuloh,C-078,,2,,,1,Sing only,,,,Waterbirds,
+Common Flameback,Yes,PICIFORMES,Woodpeckers,SG-SungeiBuloh-Aug-017,2026-08-10,3899,S-SBuloh,C-017,,3,Three toes; golden back; dark eye,S: Widespread,1,,,,,Woodpeckers,
 Paddyfield Pipit,Yes,PASSERIFORMES,Wagtails and Pipits,SG-SungeiBuloh-Aug-079,2026-08-10,10008,S-SBuloh,C-079,,3,,,3,,,,,Reed & Leaf,Yes
 Blue-eared Kingfisher,Yes,CORACIIFORMES,Kingfishers,SG-SungeiBuloh-Aug-080,2026-08-10,3405,S-SBuloh,C-080,,3,,,2,,,,,Others,
 Black-crowned Night Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",SG-SungeiBuloh-Aug-081,2026-08-10,2654,S-SBuloh,C-081,,3,,,2,,,,Yes,Waterbirds,Yes
@@ -467,7 +467,7 @@ Barn Swallow,No,PASSERIFORMES,Swallows,SG-SungeiBuloh-Aug-083,2026-08-10,7725,S-
 Red-crowned Barbet,Yes,PICIFORMES,Asian Barbets,SG-SungeiBuloh-Aug-084,2026-08-10,3646,S-SBuloh,I-084,,1,All red crown; blue throat,,1,Sing only,Infreq,,,Woodpeckers,
 Zitting Cisticola,No,PASSERIFORMES,Cisticolas and Allies,SG-SungeiBuloh-Aug-085,2026-08-10,7510,S-SBuloh,I-085,,2,Familiar,,1,Sing only,Infreq,,Yes,Reed & Leaf,Yes
 Large-tailed Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-SungeiBuloh-Aug-086,2026-08-10,1194,S-SBuloh,I-086,,2,,,2,Sing only,Infreq,,,Swifts & Nightjars,Yes
-Slaty-breasted Rail,Yes,GRUIFORMES,"Rails, Gallinules, and Coots",SG-SungeiBuloh-Aug-087,2026-08-10,1769,S-SBuloh,I-087,,1,,,1,Sing only,Infreq,,,Waterbirds,Yes
+Crimson-winged Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-036,2026-08-17,3904,FRIM,C-036,,3,,,1,,,,,Woodpeckers,
 Asian Openbill,Yes,CICONIIFORMES,Storks,SG-SungeiBuloh-Aug-088,2026-08-10,2521,S-SBuloh,I-088,,1,"Small stork, known for gap in dull gray/yellow bill. Pinkish legs.",,1,Sing only,Infreq,,,Waterbirds,
 Chestnut-bellied Malkoha,Yes,CUCULIFORMES,Cuckoos,SG-SungeiBuloh-Aug-089,2026-08-10,1030,S-SBuloh,I-089,,1,Essentially identical to Black-bellied except for chestnut vent,,1,Sing only,Infreq,,,Cuckoos,
 Coconut Lorikeet,Yes,PSITTACIFORMES,Old World Parrots,SG-SungeiBuloh-Aug-090,2026-08-10,4237,S-SBuloh,I-090,,1,Like Rainbow lorikeet,Introduced to Singapore,1,Sing only,Infreq,SBotG only,,Parrots,
@@ -478,7 +478,7 @@ Abbott's Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,SG-SungeiBuloh-Aug
 Brown-streaked Flycatcher,Yes,PASSERIFORMES,Old World Flycatchers,SG-SungeiBuloh-Aug-095,2026-08-10,9066,S-SBuloh,I-095,,3,Familiar,S: Never all that likely,1,,Infreq,,,Stately Perchers,
 Little Bronze-Cuckoo,Yes,CUCULIFORMES,Cuckoos,SG-SungeiBuloh-Aug-096,2026-08-10,1081,S-SBuloh,I-096,,2,,,2,Sing only,,,,Cuckoos,
 Javan Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-097,2026-08-10,9810,S-SBuloh,I-097,,1,Unmistakable in range,Singapore only,1,Sing only,Infreq,Jurong only,,Reed & Leaf,
-Lesser Adjutant,Yes,CICONIIFORMES,Storks,SG-SungeiBuloh-Aug-098,2026-08-10,2534,S-SBuloh,I-098,,1,,,1,Sing only,Infreq,SBuloh only,,Waterbirds,
+Banded Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-KL-FRIM-Aug-039,2026-08-17,3916,FRIM,C-039,,4,,,1,,,,,Woodpeckers,
 Short-tailed Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,SG-SungeiBuloh-Aug-099,2026-08-10,8349,S-SBuloh,I-099,New,3,,,2,,Infreq,,,Babblers,
 Golden-backed Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-SungeiBuloh-Aug-100,2026-08-10,9725,S-SBuloh,I-100,,2,,,2,Sing only,,,,Reed & Leaf,
 Red-whiskered Bulbul,No,PASSERIFORMES,Bulbuls,SG-SungeiBuloh-Aug-101,2026-08-10,7908,S-SBuloh,I-101,,3,,,3,,Infreq,,Yes,Bulbul & Star,Yes
@@ -491,7 +491,7 @@ Gray-rumped Treeswift,Yes,APODIFORMES,Treeswifts,SG-SungeiBuloh-Aug-107,2026-08-
 White-rumped Shama,No,PASSERIFORMES,Old World Flycatchers,SG-SungeiBuloh-Aug-108,2026-08-10,9119,S-SBuloh,I-108,,4,,,4,,,,Yes,Stately Perchers,Yes
 Common Waxbill,No,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-109,2026-08-10,9873,S-SBuloh,I-109,,2,,,2,Sing only,,,Yes,Reed & Leaf,Yes
 White-headed Munia,Yes,PASSERIFORMES,Waxbills and Allies,SG-SungeiBuloh-Aug-110,2026-08-10,9814,S-SBuloh,I-110,,2,,,2,Sing only,Infreq,,,Reed & Leaf,
-Oriental Honey-buzzard,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",SG-SungeiBuloh-Aug-111,2026-08-10,2746,S-SBuloh,I-111,,2,,S: Never all that likely,1,,Infreq,,,Raptors,Yes
+Checker-throated Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-TemanNegara-Aug-078,2026-08-10,3918,Mutiara,C-078,,1,Medium green woodpecker; chestnut neck sides; b&w checker throat (both sexes),,1,Mutiara only,,,,Woodpeckers,
 Blue-winged Leafbird,Yes,PASSERIFORMES,Leafbirds,SG-SungeiBuloh-Aug-112,2026-08-10,9645,S-SBuloh,I-112,New,3,,,3,,,,,Reed & Leaf,
 Savanna Nightjar,Yes,CAPRIMULGIFORMES,Nightjars and Allies,SG-SungeiBuloh-Aug-113,2026-08-10,1210,S-SBuloh,I-113,,2,,,2,Sing only,Infreq,,,Swifts & Nightjars,Yes
 Tanimbar Corella,No,PSITTACIFORMES,Cockatoos,SG-SungeiBuloh-Aug-114,2026-08-10,4057,S-SBuloh,I-114,,2,,,2,Sing only,,,Yes,Parrots,
@@ -506,7 +506,7 @@ Little Ringed Plover,No,CHARADRIIFORMES,Plovers and Lapwings,SG-SungeiBuloh-Aug-
 Osprey,No,ACCIPITRIFORMES,Osprey,SG-SungeiBuloh-Aug-123,2026-08-10,2723,S-SBuloh,I-123,,1,Familiar,,1,Sing only,Infreq,,Yes,Raptors,Yes
 Pacific Golden-Plover,No,CHARADRIIFORMES,Plovers and Lapwings,SG-SungeiBuloh-Aug-124,2026-08-10,1962,S-SBuloh,I-124,,1,Familiar,,1,Sing only,Infreq,,Yes,Waterbirds,Yes
 Cream-vented Bulbul,Yes,PASSERIFORMES,Bulbuls,SG-SungeiBuloh-Aug-125,2026-08-10,7887,S-SBuloh,I-125,,3,,,3,,,,,Bulbul & Star,
-Barred Buttonquail,Yes,CHARADRIIFORMES,Buttonquail,SG-SungeiBuloh-Aug-126,2026-08-10,2144,S-SBuloh,I-126,New,1,,Few recents at Jurong & Neo Tiew Rd,1,Sing only,Infreq,,,Groundbirds,
+Great Slaty Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-115,2026-08-10,3935,Sepilok,I-115,,2,Very large & gray,,1,,Infreq,,,Woodpeckers,
 Ashy Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,MY-SepilokRDC-Aug-001,2026-08-10,7422,Sepilok,C-001,,3,"Gray tailorbird with rufous face; male has gray belly, female white",,1,,,,,Reed & Leaf,
 Black Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-SepilokRDC-Aug-002,2026-08-10,3330,Sepilok,C-002,New,2,Small; all black with cream casque/bill; white supercilium on some males; female has black bill/casque,,1,,,,,Others,
 Red-eyed Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-SepilokRDC-Aug-003,2026-08-10,7889,Sepilok,C-003,,4,"Common/plain; sim to Cream-v; on mainland, eye color separates; buffy indistinct vent",,1,,,,,Bulbul & Star,
@@ -519,11 +519,11 @@ Crimson Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-0
 Black-and-yellow Broadbill,Yes,PASSERIFORMES,Asian and Grauer's Broadbills,MY-SepilokRDC-Aug-010,2026-08-10,4471,Sepilok,C-010,New,3,White collar is key feature,,1,,,,,Broadbills & Pittas,
 Rhinoceros Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-SepilokRDC-Aug-011,2026-08-10,3322,Sepilok,C-011,New,3,Large with red upturned casque; all black except white vent/tail,,1,,,,,Others,
 Pacific Swallow,No,PASSERIFORMES,Swallows,MY-SepilokRDC-Aug-012,2026-08-10,7720,Sepilok,C-012,,5,,,5,Widespread,,,Yes,Swifts & Nightjars,
-Wallace's Hawk-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-013,2026-08-10,2783,Sepilok,C-013,,1,,,1,Sepilok only,,,,Raptors,
+White-bellied Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-061,2026-08-10,3939,Sepilok,C-061,,2,Like a big Costa Rican variety; white belly,,1,,,,,Woodpeckers,
 Greater Racket-tailed Drongo,Yes,PASSERIFORMES,Drongos,MY-SepilokRDC-Aug-014,2026-08-10,6747,Sepilok,C-014,,5,,,2,Widespread,,,,Stately Perchers,
 Malaysian Pied-Fantail,Yes,PASSERIFORMES,Fantails,MY-SepilokRDC-Aug-015,2026-08-10,6678,Sepilok,C-015,,4,"Dark above, white below; all white belly and plain back distinct amongst fantails in range",,1,,,,,Stately Perchers,
-Plume-toed Swiftlet,Yes,APODIFORMES,Swifts,MY-SepilokRDC-Aug-016,2026-08-10,1298,Sepilok,C-016,,4,,,1,,,,,Swifts & Nightjars,
-Green Iora,Yes,PASSERIFORMES,Ioras,MY-SepilokRDC-Aug-017,2026-08-10,6605,Sepilok,C-017,New,1,,,1,Sepilok only,,,,Reed & Leaf,
+White-fronted Falconet,Yes,FALCONIFORMES,Falcons and Caracaras,MY-SepilokRDC-Aug-138,2026-08-10,4001,Sepilok,I-138,,1,,,1,Sepilok only,Infreq,,,Raptors,
+White-breasted Woodswallow,Yes,PASSERIFORMES,"Woodswallows, Bellmagpies, and Allies",MY-SepilokRDC-Aug-139,2026-08-10,6509,Sepilok,I-139,,1,,,1,Sepilok only,Infreq,,,Swifts & Nightjars,
 Raffles's Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-SepilokRDC-Aug-018,2026-08-10,1023,Sepilok,C-018,,3,,,2,,,,,Cuckoos,
 Orange-bellied Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-SepilokRDC-Aug-019,2026-08-10,9454,Sepilok,C-019,,3,Mostly orange belly and (notably) big orange patch on male's back too; light blue throat also stands out,,1,,,,,Flower & Spider,
 Javan Myna,No,PASSERIFORMES,Starlings,MY-SepilokRDC-Aug-020,2026-08-10,8777,Sepilok,C-020,,5,,,4,Widespread,,,Yes,Bulbul & Star,
@@ -544,7 +544,7 @@ Rufous-tailed Tailorbird,Yes,PASSERIFORMES,Cisticolas and Allies,MY-SepilokRDC-A
 Brown Barbet,Yes,PICIFORMES,Asian Barbets,MY-SepilokRDC-Aug-035,2026-08-10,3635,Sepilok,C-035,,1,"Brown head/back, rufous throat, white belly",,1,Sepilok only,,,,Woodpeckers,
 Black-crowned Pitta,Yes,PASSERIFORMES,Pittas,MY-SepilokRDC-Aug-036,2026-08-10,4487,Sepilok,C-036,New,1,"Sim to Garnet Pitta, but no range overlap; no red cap",,1,Sepilok only,,,,Broadbills & Pittas,
 Long-tailed Parakeet,Yes,PSITTACIFORMES,Old World Parrots,MY-SepilokRDC-Aug-037,2026-08-10,4122,Sepilok,C-037,,3,,,2,,,,,Parrots,
-Common Hill Myna,Yes,PASSERIFORMES,Starlings,MY-SepilokRDC-Aug-038,2026-08-10,8747,Sepilok,C-038,,4,,,1,,,,,Bulbul & Star,Yes
+Common Iora,Yes,PASSERIFORMES,Ioras,SG-SungeiBuloh-Aug-012,2026-08-10,6603,S-SBuloh,C-012,New,5,"Light eye (except on dark-backed male, possible in Peninsula); ",,1,Widespread,,,,Reed & Leaf,
 Ornate Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-039,2026-08-10,9586,Sepilok,C-039,,4,,,3,,,,,Flower & Spider,
 Gray-rumped Treeswift,Yes,APODIFORMES,Treeswifts,MY-SepilokRDC-Aug-040,2026-08-10,1364,Sepilok,C-040,New,3,Very gray in flight; like swift with deeply forked tail and long wings; tuft on forehead,,1,,,,,Swifts & Nightjars,
 Blue-eared Kingfisher,Yes,CORACIIFORMES,Kingfishers,MY-SepilokRDC-Aug-041,2026-08-10,3405,Sepilok,C-041,,3,"Small and deep blue, with white patch near back of head; strong rufous belly/breast",,1,,,,,Others,
@@ -567,7 +567,7 @@ Common Iora,Yes,PASSERIFORMES,Ioras,MY-SepilokRDC-Aug-057,2026-08-10,6603,Sepilo
 Charlotte's Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-SepilokRDC-Aug-058,2026-08-10,7830,Sepilok,C-058,,1,"""Unmistakable in range"" - light iris, longish bill, paler eyebrow stripe.",Borneo only,1,Sepilok only,,,,Bulbul & Star,
 Chestnut-breasted Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-SepilokRDC-Aug-059,2026-08-10,1028,Sepilok,C-059,,3,,,2,,,,,Cuckoos,
 Fiery Minivet,Yes,PASSERIFORMES,Cuckooshrikes,MY-SepilokRDC-Aug-060,2026-08-10,6209,Sepilok,C-060,,2,"Smaller, lacks tertial spots; orangey rump on fem/juv (unlike Scarlet)",,1,,,,,Stately Perchers,
-White-bellied Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-061,2026-08-10,3939,Sepilok,C-061,,2,,,1,,,,,Woodpeckers,
+Green Iora,Yes,PASSERIFORMES,Ioras,MY-SepilokRDC-Aug-017,2026-08-10,6605,Sepilok,C-017,New,1,"Yellow eye ring, otherwise greenish all over; wing bars",,1,Sepilok only,,,,Reed & Leaf,
 Plain Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-062,2026-08-10,9492,Sepilok,C-062,,2,"Dull looking; short straight bill; male has dark purple forehead; otherwise greenish back, gray belly",,1,,,,,Flower & Spider,
 Yellow-rumped Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-SepilokRDC-Aug-063,2026-08-10,9434,Sepilok,C-063,,1,"Similar to Crimson-brst (note lack of white moustache, presence of yellow rump)",,1,Sepilok only,,,,Flower & Spider,
 Sunda Crow,Yes,PASSERIFORMES,"Crows, Jays, and Magpies",MY-SepilokRDC-Aug-064,2026-08-10,7029,Sepilok,C-064,,2,"Bill is notably more slender than LBC, with dry nasal kaws",Range with help (LBC not on Borneo),1,,,,,Stately Perchers,
@@ -592,26 +592,26 @@ Western Hooded Pitta,Yes,PASSERIFORMES,Pittas,MY-SepilokRDC-Aug-082,2026-08-10,4
 White-nest Swiftlet,Yes,APODIFORMES,Swifts,MY-SepilokRDC-Aug-083,2026-08-10,1328,Sepilok,C-083,,3,,,3,,,,,Swifts & Nightjars,
 Lesser Cuckooshrike,Yes,PASSERIFORMES,Cuckooshrikes,MY-SepilokRDC-Aug-084,2026-08-10,6280,Sepilok,C-084,,2,"Small and gray, with black wings and tail; white vent; female grayish brown, scaled",,1,,,,,Stately Perchers,
 Gray-cheeked Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-SepilokRDC-Aug-085,2026-08-10,7819,Sepilok,C-085,,2,,,2,,,,,Bulbul & Star,
-Sabah Partridge,Yes,GALLIFORMES,"Pheasants, Grouse, and Allies",MY-SepilokRDC-Aug-086,2026-08-10,453,Sepilok,C-086,,1,,,1,Sepilok only,,,,Groundbirds,
+Rufescent Prinia,Yes,PASSERIFORMES,Cisticolas and Allies,MY-KL-FRIM-Aug-067,2026-08-17,7441,FRIM,I-067,,2,"Very like Yellow-bellied Prinia, but with white underparts",,1,,Infreq,,,Reed & Leaf,
 Collared Kingfisher,No,CORACIIFORMES,Kingfishers,MY-SepilokRDC-Aug-087,2026-08-10,3483,Sepilok,C-087,,4,,,3,,,,,Others,
 Copper-throated Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-088,2026-08-10,9533,Sepilok,C-088,,3,,,2,,,,,Flower & Spider,
 Scarlet-backed Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-SepilokRDC-Aug-089,2026-08-10,9485,Sepilok,C-089,,4,,,4,,,,,Flower & Spider,
-Gray-and-buff Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-090,2026-08-10,3770,Sepilok,C-090,,2,,,1,,,,,Woodpeckers,
+Pacific Swallow,No,PASSERIFORMES,Swallows,SG-SungeiBuloh-Aug-007,2026-08-10,7720,S-SBuloh,C-007,,5,"Very like barn, but no blue line separating throat/body; squared tail",,1,Widespread,,,Yes,Swifts & Nightjars,
 Verditer Flycatcher,Yes,PASSERIFORMES,Old World Flycatchers,MY-SepilokRDC-Aug-091,2026-08-10,9150,Sepilok,C-091,,1,"Paler, smaller bill than ""Pale Blue Flycatcher""",No expected range overlap with PBF,1,Sepilok only,,,,Stately Perchers,Yes
 Thick-billed Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-092,2026-08-10,9625,Sepilok,C-092,,2,"Compact; stout bill hard to see; broken yellow eye ring, yellow underparts",,1,,,,,Flower & Spider,
 Buff-rumped Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-093,2026-08-10,3892,Sepilok,C-093,,3,,,2,,,,,Woodpeckers,
 Bushy-crested Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-SepilokRDC-Aug-094,2026-08-10,3324,Sepilok,C-094,New,2,Small; blue orbital/gular skin and male's partially cream bill are key; drooping black crest,,1,,,,,Others,
 Crested Serpent-Eagle,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-095,2026-08-10,2770,Sepilok,C-095,,3,,,2,,,,,Raptors,Yes
 Thick-billed Green-Pigeon,Yes,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-096,2026-08-10,766,Sepilok,C-096,,3,,,2,,,,,Groundbirds,
-Brown-backed Needletail,Yes,APODIFORMES,Swifts,MY-SepilokRDC-Aug-097,2026-08-10,1291,Sepilok,C-097,,1,,,1,Sepilok only,,,,Swifts & Nightjars,
+Common Hill Myna,Yes,PASSERIFORMES,Starlings,MY-SepilokRDC-Aug-038,2026-08-10,8747,Sepilok,C-038,,4,Distinct wattles on face,,1,,,,,Bulbul & Star,Yes
 Yellow-bellied Prinia,No,PASSERIFORMES,Cisticolas and Allies,MY-SepilokRDC-Aug-098,2026-08-10,7447,Sepilok,C-098,,4,,,3,,,,Yes,Reed & Leaf,Yes
 Rufous-winged Philentoma,Yes,PASSERIFORMES,"Vangas, Helmetshrikes, and Allies",MY-SepilokRDC-Aug-099,2026-08-10,6578,Sepilok,C-099,New,2,,,2,,,,,Stately Perchers,
 Van Hasselt's Sunbird,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-100,2026-08-10,9530,Sepilok,C-100,,1,Purple throat; sim to Copper-throated (which has red/copper throat and green shoulder),Only in Borneo,1,Sepilok only,,,,Flower & Spider,
 Bornean Bristlehead,Yes,PASSERIFORMES,Bristlehead,MY-SepilokRDC-Aug-101,2026-08-10,6602,Sepilok,C-101,New,1,"Unique; high pitched whistle ""pit-pit-piou""",,1,Sepilok only,,,,Others,
-Orange-backed Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-102,2026-08-10,3869,Sepilok,C-102,,2,,,1,,,,,Woodpeckers,
+Common Myna,No,PASSERIFORMES,Starlings,MY-KL-FRIM-Aug-014,2026-08-17,8771,FRIM,C-014,,3,Brown body,,1,,,,Yes,Bulbul & Star,Yes
 Baya Weaver,Yes,PASSERIFORMES,Weavers and Allies,MY-SepilokRDC-Aug-103,2026-08-10,9742,Sepilok,C-103,,4,,,3,,,,,Reed & Leaf,
 Maroon Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-104,2026-08-10,3867,Sepilok,C-104,,2,,,2,,,,,Woodpeckers,
-Rufous Piculet,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-105,2026-08-10,3767,Sepilok,C-105,,2,,,1,,,,,Woodpeckers,
+Javan Myna,No,PASSERIFORMES,Starlings,SG-PalauUbin-Aug-001,2026-08-10,8777,S-PUbin,C-001,,5,Yellow bill; white vent,,1,Widespread,,,Yes,Bulbul & Star,
 Crimson-winged Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-106,2026-08-10,3904,Sepilok,C-106,,3,,,3,,,,,Woodpeckers,
 Scaly-breasted Munia,No,PASSERIFORMES,Waxbills and Allies,MY-SepilokRDC-Aug-107,2026-08-10,9804,Sepilok,C-107,,5,,,3,Widespread,,,Yes,Reed & Leaf,Yes
 White-bellied Sea-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-108,2026-08-10,2909,Sepilok,C-108,,3,,,3,,,,,Raptors,
@@ -621,7 +621,7 @@ Spectacled Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokR
 Dollarbird,Yes,CORACIIFORMES,Rollers,MY-SepilokRDC-Aug-112,2026-08-10,3529,Sepilok,I-112,New,4,,,4,,,,,Others,
 Red-bearded Bee-eater,Yes,CORACIIFORMES,Bee-eaters,MY-SepilokRDC-Aug-113,2026-08-10,3351,Sepilok,I-113,,2,Large & chunky; unique bushy red throat; purple crown,,1,,Infreq,,,Others,
 Yellow-eared Spiderhunter,Yes,PASSERIFORMES,Sunbirds and Spiderhunters,MY-SepilokRDC-Aug-114,2026-08-10,9632,Sepilok,I-114,,2,Medium; yellow incomplete eye ring (unlike Spectacled); larger more distinct cheek patch ,,1,,Infreq,,,Flower & Spider,
-Great Slaty Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-115,2026-08-10,3935,Sepilok,I-115,,2,,,1,,Infreq,,,Woodpeckers,
+Crested Myna,No,PASSERIFORMES,Starlings,MY-SepilokRDC-Aug-147,2026-08-10,8781,Sepilok,I-147,,1,White bill; dark barred vent,,1,Sepilok only,Infreq,,Yes,Bulbul & Star,
 Little Heron,Yes,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-SepilokRDC-Aug-116,2026-08-10,2680,Sepilok,I-116,,4,,,4,,,,,Waterbirds,
 Red-billed Malkoha,Yes,CUCULIFORMES,Cuckoos,MY-SepilokRDC-Aug-117,2026-08-10,1027,Sepilok,I-117,,2,"Only malkoha with red bill; blue orbital skin, mostly rufous underparts",,1,,Infreq,,,Cuckoos,
 Crested Goshawk,No,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-118,2026-08-10,2824,Sepilok,I-118,,3,,,3,,Infreq,,Yes,Raptors,Yes
@@ -629,7 +629,7 @@ Ventriloquial Oriole,Yes,PASSERIFORMES,Old World Orioles,MY-SepilokRDC-Aug-119,2
 Rufous Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-120,2026-08-10,3890,Sepilok,I-120,,5,,,4,Widespread,,,,Woodpeckers,
 White-chested Babbler,Yes,PASSERIFORMES,Ground Babblers and Allies,MY-SepilokRDC-Aug-121,2026-08-10,8355,Sepilok,I-121,New,1,Medium; clean white underparts; plain; slender long bill,,1,Sepilok only,Infreq,,,Babblers,
 Fluffy-backed Tit-Babbler,Yes,PASSERIFORMES,"Tree-Babblers, Scimitar-Babblers, and Allies",MY-SepilokRDC-Aug-122,2026-08-10,8273,Sepilok,I-122,New,2,Drab brown except for rufous crown; blue lores/eye ring; blue neck skin visible when singing,,1,,Infreq,,,Babblers,
-Rufous-bellied Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-123,2026-08-10,2797,Sepilok,I-123,,1,,,1,Sepilok only,Infreq,,,Raptors,
+Golden-backed Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-058,2026-08-10,9725,S-PUbin,C-058,,2,Distinct black head,,1,Sing only,,,,Reed & Leaf,
 Streaked Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-SepilokRDC-Aug-124,2026-08-10,7840,Sepilok,I-124,,2,,,2,,,,,Bulbul & Star,
 Large Woodshrike,Yes,PASSERIFORMES,"Vangas, Helmetshrikes, and Allies",MY-SepilokRDC-Aug-125,2026-08-10,6573,Sepilok,I-125,New,2,,,2,,,,,Stately Perchers,
 Scarlet Minivet,Yes,PASSERIFORMES,Cuckooshrikes,MY-SepilokRDC-Aug-126,2026-08-10,6217,Sepilok,I-126,,3,,,2,,,,,Stately Perchers,
@@ -644,8 +644,8 @@ Rufous-collared Kingfisher,Yes,CORACIIFORMES,Kingfishers,MY-SepilokRDC-Aug-134,2
 Sunda Pygmy Woodpecker,Yes,PICIFORMES,Woodpeckers,MY-SepilokRDC-Aug-135,2026-08-10,3807,Sepilok,I-135,,3,,,3,,,,,Woodpeckers,
 Yellow-breasted Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-SepilokRDC-Aug-136,2026-08-10,9431,Sepilok,I-136,,2,,,2,,,,,Flower & Spider,
 White-crowned Hornbill,Yes,BUCEROTIFORMES,Hornbills,MY-SepilokRDC-Aug-137,2026-08-10,3307,Sepilok,I-137,New,1,Small with unique shaggy white crest; white tails and white belly on male; otherwise all black,,1,Sepilok only,Infreq,,,Others,
-White-fronted Falconet,Yes,FALCONIFORMES,Falcons and Caracaras,MY-SepilokRDC-Aug-138,2026-08-10,4001,Sepilok,I-138,,1,,,1,Sepilok only,Infreq,,,Raptors,
-White-breasted Woodswallow,Yes,PASSERIFORMES,"Woodswallows, Bellmagpies, and Allies",MY-SepilokRDC-Aug-139,2026-08-10,6509,Sepilok,I-139,,1,,,1,Sepilok only,Infreq,,,Swifts & Nightjars,
+Baya Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-047,2026-08-10,9742,S-PUbin,C-047,,4,"Duller brown & yellow face; huge, long bill with distinct yellow gape",,1,,,,,Reed & Leaf,
+Asian Golden Weaver,Yes,PASSERIFORMES,Weavers and Allies,SG-PalauUbin-Aug-099,2026-08-10,9743,S-PUbin,I-099,,1,"Brighter daffodil yellow & black; shorter bill with a 'punched-in' expression, lacks obvious gape line",Only Tampines Eco Green,1,Sing only,Infreq,Tampines only,,Reed & Leaf,
 Gray-bellied Bulbul,Yes,PASSERIFORMES,Bulbuls,MY-SepilokRDC-Aug-140,2026-08-10,7876,Sepilok,I-140,,2,,,2,,,,,Bulbul & Star,
 Yellow-vented Flowerpecker,Yes,PASSERIFORMES,Flowerpeckers,MY-SepilokRDC-Aug-141,2026-08-10,9440,Sepilok,I-141,,2,Vent is not the notable feature; olive head and back; white breast with dark streaks; white lores,,1,,Infreq,,,Flower & Spider,
 Purple Heron,No,PELECANIFORMES,"Herons, Egrets, and Bitterns",MY-SepilokRDC-Aug-142,2026-08-10,2699,Sepilok,I-142,,4,,,4,,,,Yes,Waterbirds,Yes
@@ -653,7 +653,7 @@ Changeable Hawk-Eagle,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokR
 Scarlet-rumped Trogon,Yes,TROGONIFORMES,Trogons,MY-SepilokRDC-Aug-144,2026-08-10,3241,Sepilok,I-144,,2,"Small, black limited to head; blue eyebrow both M/F",,1,,Infreq,,,Others,
 Asian Fairy-bluebird,Yes,PASSERIFORMES,Fairy-bluebirds,MY-SepilokRDC-Aug-145,2026-08-10,9638,Sepilok,I-145,New,3,,,3,,,,,Stately Perchers,Yes
 Blue-rumped Parrot,Yes,PSITTACIFORMES,Old World Parrots,MY-SepilokRDC-Aug-146,2026-08-10,4105,Sepilok,I-146,,3,,,2,,Infreq,,,Parrots,
-Crested Myna,No,PASSERIFORMES,Starlings,MY-SepilokRDC-Aug-147,2026-08-10,8781,Sepilok,I-147,,1,,,1,Sepilok only,Infreq,,Yes,Bulbul & Star,
+White-rumped Munia,Yes,PASSERIFORMES,Waxbills and Allies,MY-KL-FRIM-Aug-081,2026-08-17,9807,FRIM,I-081,,1,Barely visible white rump & low belly,,1,FRIM only,Infreq,,,Reed & Leaf,Yes
 Oriental Honey-buzzard,Yes,ACCIPITRIFORMES,"Hawks, Eagles, and Kites",MY-SepilokRDC-Aug-148,2026-08-10,2746,Sepilok,I-148,,2,,,2,,,,,Raptors,Yes
 Plaintive Cuckoo,Yes,CUCULIFORMES,Cuckoos,MY-SepilokRDC-Aug-149,2026-08-10,1088,Sepilok,I-149,,4,,,4,,Infreq,,,Cuckoos,
 Rock Pigeon,No,COLUMBIFORMES,Pigeons and Doves,MY-SepilokRDC-Aug-150,2026-08-10,545,Sepilok,I-150,,4,,,4,,,,Yes,Groundbirds,Yes
