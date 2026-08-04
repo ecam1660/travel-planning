@@ -33,7 +33,6 @@
   --header-border:#6F928A;
   --header-text:#C4D4C8;
   --header-text-strong:#e8f0ee;
-  --card-w: 360px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -79,7 +78,7 @@ body {
 }
 
 /* ── MAIN CONTENT ── */
-.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 18px 20px 24px; }
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 20px 40px; }
 
 /* ── PRE-GAME ── */
 #pre-game {
@@ -144,7 +143,7 @@ body {
 /* ── ARENA ── */
 #arena { display: none; width: 100%; max-width: 820px; }
 
-.progress-bar-wrap { margin-bottom: 10px; }
+.progress-bar-wrap { margin-bottom: 18px; }
 .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .progress-label { font-size: 12px; color: var(--ink-light); }
 .progress-track { height: 4px; background: var(--tan-lt); border-radius: 99px; overflow: hidden; }
@@ -183,11 +182,11 @@ body {
 .pile-redeal:hover { background: var(--red-lt); }
 
 /* ── CENTER ── */
-.card-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.card-center { display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
 /* Photo frame */
 .photo-frame {
-  width: min(var(--card-w), 32vh); height: min(var(--card-w), 32vh); border-radius: 12px;
+  width: 360px; height: 360px; border-radius: 12px;
   border: .5px solid var(--border-s); overflow: hidden;
   background: var(--tan-lt); flex-shrink: 0;
   box-shadow: var(--shadow-h); position: relative;
@@ -200,7 +199,7 @@ body {
 }
 
 /* Input area */
-.input-wrap { width: var(--card-w); position: relative; }
+.input-wrap { width: 360px; position: relative; }
 .species-input {
   width: 100%; font-size: 14px; padding: 9px 80px 9px 14px;
   border-radius: 99px; border: 1.5px solid var(--border-s);
@@ -221,9 +220,9 @@ body {
 .submit-btn:disabled { opacity: .45; cursor: default; }
 
 /* Multiple choice (Easy mode) */
-.mc-wrap { width: var(--card-w); display: none; flex-direction: column; gap: 6px; }
+.mc-wrap { width: 360px; display: none; flex-direction: column; gap: 8px; }
 .mc-option {
-  width: 100%; text-align: left; font-size: 14px; padding: 8px 16px;
+  width: 100%; text-align: left; font-size: 14px; padding: 10px 16px;
   border-radius: 99px; border: 1.5px solid var(--border-s);
   background: var(--white); color: var(--ink); cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -246,7 +245,7 @@ body {
 .ac-item:hover, .ac-item.highlighted { background: var(--cream); }
 
 /* Result panel */
-#result-panel { display: none; width: var(--card-w); }
+#result-panel { display: none; width: 360px; }
 .result-badge {
   display: flex; align-items: center; gap: 8px;
   font-size: 15px; font-weight: 600; padding: 0 2px; margin-bottom: 12px;
@@ -325,45 +324,6 @@ body {
 /* Fade transitions */
 .fade-in { animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-
-/* ── SHORT VIEWPORTS (laptops w/ limited window height, e.g. MacBook w/ bookmarks bar) ── */
-@media (max-height: 860px) and (min-width: 481px) {
-  :root { --card-w: 280px; }
-  .header { padding: 8px 24px; }
-  .main { padding: 12px 20px 20px; }
-  .progress-bar-wrap { margin-bottom: 8px; }
-  .card-center { gap: 8px; }
-  .mc-option { padding: 7px 16px; font-size: 13px; }
-  .mc-wrap { gap: 5px; }
-  .info-row, .info-icon-row { padding-top: 6px; padding-bottom: 6px; }
-}
-@media (max-height: 680px) and (min-width: 481px) {
-  :root { --card-w: 230px; }
-}
-
-/* ── MOBILE (iPhone-width screens) ─────────────────────────────────── */
-@media (max-width: 480px) {
-  .header { padding: 8px 10px; gap: 6px; flex-wrap: wrap; justify-content: center; }
-  .header h1 { display: none; }
-  .nav-btn { font-size: 11px; padding: 4px 9px; }
-  .mode-label { display: none; }
-  .mode-pill { font-size: 10px; padding: 3px 8px; }
-
-  .main { padding: 10px 10px 16px; }
-  .progress-bar-wrap { margin-bottom: 8px; }
-
-  .arena-row { grid-template-columns: 44px 1fr 44px; gap: 6px; }
-  .pile { gap: 4px; padding-top: 0; }
-  .pile-stack { width: 44px; height: 44px; }
-  .pile-count { font-size: 15px; }
-  .pile-label, .pile-sublabel { font-size: 8px; }
-
-  .card-center { gap: 8px; }
-  .photo-frame { width: 100%; max-width: 210px; height: 210px; }
-  .photo-initials { font-size: 32px; }
-
-  .input-wrap, .mc-wrap, #result-panel { width: 100%; max-width: 280px; }
-}
 </style>
 </head>
 <body>
