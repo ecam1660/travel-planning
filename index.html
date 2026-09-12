@@ -133,7 +133,9 @@ body {
   border-radius: var(--radius); border: .5px solid rgba(0,0,0,.12);
   overflow: hidden; display: flex;
 }
-.face-back { transform: rotateY(180deg); }
+.face-back { transform: rotateY(180deg); visibility: hidden; }
+.scene.flipped .face:not(.face-back) { visibility: hidden; }
+.scene.flipped .face-back { visibility: visible; }
 
 /* Photo */
 .pt-photo {
@@ -205,7 +207,6 @@ body {
 }
 .back-info-input[data-field="features"] { height: 30px; }
 .back-info-input[data-field="where"] { height: 16px; }
-.back-info-input::placeholder { color: inherit; opacity: .45; font-style: italic; }
 .back-info-row:hover .back-info-input { background: rgba(255,255,255,.35); }
 .back-info-input:focus { background: rgba(255,255,255,.6); box-shadow: 0 0 0 1px rgba(0,0,0,.15); }
 
@@ -608,10 +609,11 @@ function buildTile(sp) {
 
   var featuresVal = getFeaturesText(sp);
   var whereVal = getWhereText(sp);
+  var roAttr = isMobile() ? ' readonly' : '';
   var featuresRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Features">'+ICON_MAGNIFIER+'</span>'
-    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="features" placeholder="Add features&hellip;" spellcheck="false">'+escHTML(featuresVal)+'</textarea></div>';
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="features"'+roAttr+' spellcheck="false">'+escHTML(featuresVal)+'</textarea></div>';
   var whereRow = '<div class="back-info-row"><span class="back-info-icon" style="color:'+dark+'" title="Likely location">'+ICON_PIN+'</span>'
-    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="where" placeholder="Add likely location&hellip;" spellcheck="false">'+escHTML(whereVal)+'</textarea></div>';
+    + '<textarea class="back-edit back-info-input" style="color:'+dark+'" data-name="'+escAttr(sp.name)+'" data-field="where"'+roAttr+' spellcheck="false">'+escHTML(whereVal)+'</textarea></div>';
 
   var back = document.createElement('div');
   back.className = 'face face-back';
