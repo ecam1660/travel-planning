@@ -33,6 +33,7 @@
   --header-border:#6F928A;
   --header-text:#C4D4C8;
   --header-text-strong:#e8f0ee;
+  --card-w: 360px;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -55,6 +56,7 @@ body {
   color: var(--header-text); flex: 1;
 }
 .header h1 span { color: var(--header-text-strong); font-weight: 600; }
+.mobile-only { display: none; }
 .nav-btn {
   font-size: 12px; font-weight: 500; padding: 6px 14px; border-radius: 99px;
   border: 1px solid rgba(234,215,170,.3); background: rgba(255,255,255,.08);
@@ -78,7 +80,7 @@ body {
 }
 
 /* ── MAIN CONTENT ── */
-.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 28px 20px 40px; }
+.main { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 18px 20px 24px; }
 
 /* ── PRE-GAME ── */
 #pre-game {
@@ -143,7 +145,7 @@ body {
 /* ── ARENA ── */
 #arena { display: none; width: 100%; max-width: 820px; }
 
-.progress-bar-wrap { margin-bottom: 18px; }
+.progress-bar-wrap { margin-bottom: 10px; }
 .progress-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .progress-label { font-size: 12px; color: var(--ink-light); }
 .progress-track { height: 4px; background: var(--tan-lt); border-radius: 99px; overflow: hidden; }
@@ -182,11 +184,11 @@ body {
 .pile-redeal:hover { background: var(--red-lt); }
 
 /* ── CENTER ── */
-.card-center { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.card-center { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 
 /* Photo frame */
 .photo-frame {
-  width: 360px; height: 360px; border-radius: 12px;
+  width: min(var(--card-w), 32vh); height: min(var(--card-w), 32vh); border-radius: 12px;
   border: .5px solid var(--border-s); overflow: hidden;
   background: var(--tan-lt); flex-shrink: 0;
   box-shadow: var(--shadow-h); position: relative;
@@ -199,7 +201,7 @@ body {
 }
 
 /* Input area */
-.input-wrap { width: 360px; position: relative; }
+.input-wrap { width: var(--card-w); position: relative; }
 .species-input {
   width: 100%; font-size: 14px; padding: 9px 80px 9px 14px;
   border-radius: 99px; border: 1.5px solid var(--border-s);
@@ -220,9 +222,9 @@ body {
 .submit-btn:disabled { opacity: .45; cursor: default; }
 
 /* Multiple choice (Easy mode) */
-.mc-wrap { width: 360px; display: none; flex-direction: column; gap: 8px; }
+.mc-wrap { width: var(--card-w); display: none; flex-direction: column; gap: 6px; }
 .mc-option {
-  width: 100%; text-align: left; font-size: 14px; padding: 10px 16px;
+  width: 100%; text-align: left; font-size: 14px; padding: 8px 16px;
   border-radius: 99px; border: 1.5px solid var(--border-s);
   background: var(--white); color: var(--ink); cursor: pointer;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -245,7 +247,7 @@ body {
 .ac-item:hover, .ac-item.highlighted { background: var(--cream); }
 
 /* Result panel */
-#result-panel { display: none; width: 360px; }
+#result-panel { display: none; width: var(--card-w); }
 .result-badge {
   display: flex; align-items: center; gap: 8px;
   font-size: 15px; font-weight: 600; padding: 0 2px; margin-bottom: 12px;
@@ -324,6 +326,48 @@ body {
 /* Fade transitions */
 .fade-in { animation: fadeIn .3s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ── SHORT VIEWPORTS (laptops w/ limited window height, e.g. MacBook w/ bookmarks bar) ── */
+@media (max-height: 860px) and (min-width: 481px) {
+  :root { --card-w: 280px; }
+  .header { padding: 8px 24px; }
+  .main { padding: 12px 20px 20px; }
+  .progress-bar-wrap { margin-bottom: 8px; }
+  .card-center { gap: 8px; }
+  .mc-option { padding: 7px 16px; font-size: 13px; }
+  .mc-wrap { gap: 5px; }
+  .info-row, .info-icon-row { padding-top: 6px; padding-bottom: 6px; }
+}
+@media (max-height: 680px) and (min-width: 481px) {
+  :root { --card-w: 230px; }
+}
+
+/* ── MOBILE (iPhone-width screens) ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .header { padding: 8px 10px; gap: 5px 6px; flex-wrap: wrap; justify-content: center; }
+  .header h1 { flex: 0 1 auto; font-size: 13px; order: -1; width: 100%; text-align: center; margin-bottom: 2px; }
+  .mobile-hide { display: none !important; }
+  .mobile-only { display: inline; }
+  .nav-btn { font-size: 11px; padding: 4px 8px; }
+  .mode-label { display: none; }
+  .mode-pill { font-size: 10px; padding: 3px 8px; }
+  .star-mode-pill { padding: 3px 9px; }
+
+  .main { padding: 10px 10px 16px; }
+  .progress-bar-wrap { margin-bottom: 8px; }
+
+  .arena-row { grid-template-columns: 44px 1fr 44px; gap: 6px; }
+  .pile { gap: 4px; padding-top: 0; }
+  .pile-stack { width: 44px; height: 44px; }
+  .pile-count { font-size: 15px; }
+  .pile-label, .pile-sublabel { font-size: 8px; }
+
+  .card-center { gap: 8px; }
+  .photo-frame { width: 100%; max-width: 210px; height: 210px; }
+  .photo-initials { font-size: 32px; }
+
+  .input-wrap, .mc-wrap, #result-panel { width: 100%; max-width: 280px; }
+}
 </style>
 </head>
 <body>
@@ -331,21 +375,21 @@ body {
 <div class="header">
   <a class="nav-btn" href="index.html">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-    Home
+    <span class="mobile-hide">Home</span>
   </a>
-  <h1>Travel Planning: <span id="trip-title">—</span> · ID Flashcards</h1>
+  <h1>Travel Planning<span class="mobile-hide">: <span id="trip-title">—</span> · ID Flashcards</span></h1>
   <div class="mode-wrap">
     <span class="mode-label">Mode:</span>
     <button class="mode-pill" id="mode-easy" onclick="setMode('easy')">Easy</button>
-    <button class="mode-pill active" id="mode-medium" onclick="setMode('medium')">Medium</button>
+    <button class="mode-pill active" id="mode-medium" onclick="setMode('medium')"><span class="mobile-hide">Medium</span><span class="mobile-only">Med</span></button>
     <button class="mode-pill" id="mode-hard" onclick="setMode('hard')">Hard</button>
-    <button class="mode-pill star-mode-pill" id="mode-starred" onclick="toggleStarredMode()" title="Only shuffle starred species">★ Starred</button>
+    <button class="mode-pill star-mode-pill" id="mode-starred" onclick="toggleStarredMode()" title="Only shuffle starred species">★<span class="mobile-hide"> Starred</span></button>
   </div>
-  <button class="nav-btn" onclick="resetGame()">
+  <button class="nav-btn" onclick="resetGame()" title="Reset">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 019-9 9.75 9.75 0 016.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 01-9 9 9.75 9.75 0 01-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>
-    Reset
+    <span class="mobile-hide">Reset</span>
   </button>
-  <a class="nav-btn" href="map.html">Map</a>
+  <a class="nav-btn mobile-hide" href="map.html">Map</a>
 </div>
 
 <div class="main">
