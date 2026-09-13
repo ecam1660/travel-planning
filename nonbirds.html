@@ -40,6 +40,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 .header h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 20px; font-weight: 400;
   color: #C4D4C8; flex: 1; letter-spacing: .01em; }
 .header h1 span { color: #e8f0ee; font-weight: 400; }
+.mobile-only { display: none; }
 .hcount { font-size: 11px; color: #95B5AB; font-weight: 500; white-space: nowrap; }
 .nav-btn { font-size: 11px; font-weight: 500; padding: 7px 14px; border-radius: 99px;
   border: 1px solid rgba(196,212,200,.3); background: rgba(255,255,255,.08); color: #C4D4C8;
@@ -81,16 +82,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 10px; }
 
 /* Tiles */
-.scene { height: 104px; perspective: 900px; cursor: default; }
+.scene { height: 104px; cursor: default; }
 .pt-inner { position: relative; width: 100%; height: 100%;
-  transform-style: preserve-3d; transition: transform .45s cubic-bezier(.4,0,.2,1);
-  border-radius: var(--radius); box-shadow: var(--shadow); }
+  border-radius: var(--radius); box-shadow: var(--shadow); transition: box-shadow .15s; }
 .pt-inner:hover { box-shadow: var(--shadow-h); }
-.scene.flipped .pt-inner { transform: rotateY(180deg); }
 .face { position: absolute; width: 100%; height: 100%;
-  backface-visibility: hidden; -webkit-backface-visibility: hidden;
   border-radius: var(--radius); border: .5px solid rgba(0,0,0,.12); overflow: hidden; display: flex; }
-.face-back { transform: rotateY(180deg); }
 
 .pt-photo { flex-shrink: 0; width: 104px; height: 104px; position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: center;
@@ -120,15 +117,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 .pt-col-empty .pt-loc { background: #f0ece8; color: #b8a898; }
 .pt-col-empty .pt-rar { background: #f5f2ee; color: #c0b8b0; }
 
-/* Back face */
-.back-full { flex: 1; display: flex; flex-direction: column;
-  padding: 9px 11px 10px; background: var(--c2); }
-.back-hdr { display: flex; align-items: center; gap: 5px; margin-bottom: 7px;
-  padding-bottom: 6px; border-bottom: .5px solid rgba(0,0,0,.10); }
-.back-name { font-size: 12.5px; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden;
-  text-overflow: ellipsis; min-width: 0; font-family: Georgia, serif; color: var(--cd); }
-.back-notes { font-size: 9.5px; line-height: 1.45; color: var(--cd); }
-
 .empty-state { grid-column: 1/-1; text-align: center; padding: 60px 20px;
   font-size: 14px; font-style: italic; color: var(--ink-light); }
 .sort-select {
@@ -154,6 +142,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   .header h1 { font-size: 17px; }
   .nav-btn { font-size: 11px; padding: 6px 10px; }
   .mobile-hide { display: none !important; }
+  .mobile-only { display: inline; }
   .trow { padding: 8px 12px; }
   .grid-wrap { padding: 12px 10px 30px; }
   .grid { grid-template-columns: 1fr; }
@@ -178,7 +167,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     <span class="fl" style="margin-left:8px">Status</span>
     <button class="chip on" id="st-all" onclick="setStatus('all')">All</button>
     <button class="chip" id="st-seen" onclick="setStatus('seen')">Observed ✓</button>
-    <button class="chip" id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
+    <button class="chip" id="st-unseen" onclick="setStatus('unseen')"><span class="mobile-hide">Targets only</span><span class="mobile-only">Targets</span></button>
     <span class="fl" style="margin-left:8px">Sort</span>
     <select class="sort-select" id="sort-sel" onchange="setSort(this.value)">
       <option value="obs">Total obs ↓</option>
@@ -325,20 +314,7 @@ function buildTile(sp) {
     +   gridHTML
     + '</div>';
 
-  var back = document.createElement('div');
-  back.className = 'face face-back';
-  back.innerHTML =
-    '<div class="back-full">'
-    +   '<div class="back-hdr">'
-    +     '<span class="back-name">' + abbrevName(sp.name,32) + '</span>'
-    +     '<div class="pt-ob" style="' + obStyle + '" data-name="' + sp.name + '">' + obTxt + '</div>'
-    +   '</div>'
-    +   (sp.sci ? '<div style="font-size:9px;font-style:italic;opacity:.6;color:var(--cd);margin-bottom:4px;">' + sp.sci + '</div>' : '')
-    +   (sp.notes ? '<div class="back-notes">' + sp.notes + '</div>' : '')
-    + '</div>';
-
   inner.appendChild(front);
-  inner.appendChild(back);
   scene.appendChild(inner);
 
   scene.addEventListener('click', function(e) {
@@ -348,23 +324,18 @@ function buildTile(sp) {
       var sp2 = ALL.filter(function(s){return s.name===name;})[0];
       if (!sp2) return;
       setOverride(name, !isObserved(sp2));
-      var wasFlipped = scene.classList.contains('flipped');
       var newTile = buildTile(sp2);
-      if (wasFlipped) newTile.classList.add('flipped');
       scene.parentNode.replaceChild(newTile, scene);
       updateCount();
       return;
     }
     var rect = scene.getBoundingClientRect();
-    var x = e.clientX - rect.left, y = e.clientY - rect.top;
+    var x = e.clientX - rect.left;
     // Click on photo (left 104px) → expand image
     if (x < 104) {
       var spE = ALL.filter(function(s){ return s.name === scene.dataset.name; })[0];
       if (spE) openLightbox(spE);
       return;
-    }
-    if (x > rect.width * 0.6 && y > rect.height * 0.5) {
-      scene.classList.toggle('flipped');
     }
   });
 

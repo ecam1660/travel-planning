@@ -56,6 +56,7 @@ body {
   flex: 1;
 }
 .header h1 span { color: #e8f0ee; font-weight: 600; }
+.mobile-only { display: none; }
 .hcount { font-size: 11px; color: #95B5AB; font-weight: 500; white-space: nowrap; }
 
 /* ── TOOLBAR ─────────────────────────────────────────────────────── */
@@ -265,9 +266,12 @@ body {
   .header h1 { font-size: 17px; }
   .nav-btn { font-size: 11px; padding: 6px 10px; }
   .mobile-hide { display: none !important; }
+  .mobile-only { display: inline; }
   .trow { padding: 8px 12px; }
   .grid-wrap { padding: 12px 10px 30px; }
   .grid { grid-template-columns: 1fr; }
+  .sw input { font-size: 16px; }
+  .face-back { pointer-events: none; }
 }
 </style>
 </head>
@@ -293,8 +297,8 @@ body {
     <span class="fl" style="margin-left:8px">Status</span>
     <button class="chip on" id="st-all"    onclick="setStatus('all')">All</button>
     <button class="chip"    id="st-seen"   onclick="setStatus('seen')">Observed ✓</button>
-    <button class="chip"    id="st-unseen" onclick="setStatus('unseen')">Targets only</button>
-    <button class="chip chip-new" id="st-new" onclick="toggleNew()">New Families</button>
+    <button class="chip"    id="st-unseen" onclick="setStatus('unseen')"><span class="mobile-hide">Targets only</span><span class="mobile-only">Targets</span></button>
+    <button class="chip chip-new" id="st-new" onclick="toggleNew()"><span class="mobile-hide">New Families</span><span class="mobile-only">New Fam</span></button>
     <button class="chip" id="st-nophoto" onclick="toggleNoPhoto()" title="No photo yet" style="padding:5px 12px;display:inline-flex;align-items:center;"><svg width="14" height="11" viewBox="0 0 24 19" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;"><rect x="1.5" y="5.5" width="21" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="M8.5 5.5V4a1.5 1.5 0 0 1 1.5-1.5h4A1.5 1.5 0 0 1 15.5 4v1.5" stroke="currentColor" stroke-width="1.8"/><line x1="3" y1="3" x2="21" y2="17" stroke="currentColor" stroke-width="1.8"/></svg></button>
     <button class="chip" id="st-merlin" onclick="toggleMerlin()" title="Merlin sound ID only" style="padding:5px 12px;display:inline-flex;align-items:center;"><svg width="13" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" style="display:block;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" fill="currentColor" stroke="none"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></button>
     <span class="fl" style="margin-left:8px">Sort</span>
