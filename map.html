@@ -235,10 +235,10 @@ function parseBirds(txt) {
   if (lines.length < 2) return [];
   var firstLine = lines[0];
   var rawTitle = splitRow(firstLine)[0].trim();
-  BIRD_TITLE = (rawTitle.toLowerCase() === 'name') ? 'Malaysia & Singapore' : rawTitle;
+  BIRD_TITLE = rawTitle;
   var heads = splitRow(firstLine).map(function(h){ return h.trim().toLowerCase(); });
   var col = makeCol(heads);
-  var iName = col('name','malaysia & singapore'), iNew = col('new');
+  var iName = 0, iNew = col('new');
   var byName = {};
   for (var i = 1; i < lines.length; i++) {
     var c = splitRow(lines[i]);
@@ -556,7 +556,7 @@ document.addEventListener('dragend', function() {
 
 /* ── Map init ── */
 function initMap() {
-  map = L.map('map', { zoomControl: true }).setView([1.3400, 103.8300], 12);
+  map = L.map('map', { zoomControl: true }).setView([-9.5, -74.5], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

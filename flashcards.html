@@ -564,7 +564,6 @@ var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','
 var CAT_MAP = {};
 function getCatColor(cat) {
   if (cat === 'Widespread') return '#D9C3A6';
-  if (cat === 'Sing only')  return '#D98F77';
   if (!CAT_MAP[cat]) { CAT_MAP[cat] = CAT_PALETTE[Object.keys(CAT_MAP).length % CAT_PALETTE.length]; }
   return CAT_MAP[cat];
 }
@@ -1161,7 +1160,7 @@ function parseCSV(txt) {
         if (heads[i] === names[n].toLowerCase()) return i;
     return -1;
   }
-  var iName = col('malaysia & singapore'), iFamily = col('family'),
+  var iName = 0, iFamily = col('family'),
       iID = col('id'), iFeat = col('features'), iSpots = col('spots'), iLook = col('lookalikes'), iCat = col('categories'),
       iSGroup = col('sgroup'), iWhere = col('where');
 

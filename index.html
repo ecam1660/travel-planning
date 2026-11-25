@@ -493,6 +493,7 @@ function buildLocChips() {
   allBtn.textContent = 'All';
   allBtn.addEventListener('click', function() {
     // Re-select All, deselect individuals
+    clearRegionSel();
     ACTIVE_LOCS = LOCS.slice();
     document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){ x.classList.remove('on'); });
     allBtn.classList.add('on');
@@ -507,6 +508,7 @@ function buildLocChips() {
     b.dataset.loc = loc;
     b.addEventListener('click', function() {
       // Deselect All when picking individual locs
+      clearRegionSel();
       allBtn.classList.remove('on');
       b.classList.toggle('on');
       ACTIVE_LOCS = Array.from(document.querySelectorAll('.loc-chip[data-loc].on')).map(function(x){return x.dataset.loc;});
@@ -529,7 +531,6 @@ var CAT_PALETTE = ['#E6C47A','#C9A26D','#A8B89A','#7FA699','#B7C26B','#7CA6C9','
 var CAT_COLOR_MAP = {};
 function getCatColor(cat) {
   if (cat === 'Widespread' || cat === 'Infrequent' || cat === 'Infreq') return '#D9C3A6';  // fixed: warm tan, barely darker than unselected
-  if (cat === 'Sing only')  return '#D98F77';  // fixed: terracotta
   if (!CAT_COLOR_MAP[cat]) {
     var idx = Object.keys(CAT_COLOR_MAP).length % CAT_PALETTE.length;
     CAT_COLOR_MAP[cat] = CAT_PALETTE[idx];
@@ -537,6 +538,109 @@ function getCatColor(cat) {
   return CAT_COLOR_MAP[cat];
 }
 
+
+/* ── Region (North/South) + elevation, derived from each site's Region 1 / Region 2 ── */
+var SITE_REG = {}, SITE_ELEV = {};
+var REG_SEL = [], ELEV_SEL = [], ONLY_SEL = false;
+var REGION_ORDER = ['North','South'];
+var ELEV_ORDER = ['Highlands','Cloud Forest','Foothills','Lowlands'];
+var ELEV_SHORT = { 'Highlands':'Highlands', 'Cloud Forest':'Cloud', 'Foothills':'Foothills', 'Lowlands':'Lowlands' };
+var GEO_COLORS = { 'North':'#7CA6C9', 'South':'#D98F77',
+  'Highlands':'#9AA3B5', 'Cloud Forest':'#7FA699', 'Foothills':'#A9B562', 'Lowlands':'#D9B45F' };
+
+function elevRank(e) { var i = ELEV_ORDER.indexOf(e); return i < 0 ? 99 : i; }
+
+/* Tile pills: "North only"/"South only" when a species is in just one region;
+   elevation shown as the single level, or the top–bottom range with a gradient */
+function geoPillsHTML(sp) {
+  var out = '';
+  if (sp.regions && sp.regions.length === 1) {
+    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[sp.regions[0]]||'#A8B89A')+';">'+sp.regions[0]+' only</span>';
+  }
+  var ev = (sp.elevs||[]).slice().sort(function(a,b){ return elevRank(a) - elevRank(b); });
+  if (ev.length === 1) {
+    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[ev[0]]||'#A8B89A')+';">'+ev[0]+' only</span>';
+  } else if (ev.length > 1) {
+    var top = ev[0], bot = ev[ev.length-1];
+    out += '<span class="pt-cat-pill" title="'+ev.join(', ')+'" style="background:linear-gradient(90deg,'+(GEO_COLORS[top]||'#A8B89A')+','+(GEO_COLORS[bot]||'#A8B89A')+');">'
+        + ELEV_SHORT[top] + '–' + ELEV_SHORT[bot] + '</span>';
+  }
+  return out;
+}
+
+/* Region row: region + elevation chips pick the matching sites in the Location row;
+   "Only" hides species that also occur at sites outside the current selection */
+function buildRegionChips() {
+  var c = document.getElementById('reg-chips');
+  var row = document.getElementById('reg-row');
+  REG_SEL = []; ELEV_SEL = []; ONLY_SEL = false;
+  c.innerHTML = '';
+  var regs = REGION_ORDER.filter(function(r){ return LOCS.some(function(l){ return SITE_REG[l] === r; }); });
+  var elevs = ELEV_ORDER.filter(function(e){ return LOCS.some(function(l){ return SITE_ELEV[l] === e; }); });
+  if (!regs.length && !elevs.length) { row.style.display = 'none'; return; }
+  row.style.display = 'flex';
+
+  function addChip(label, sel) {
+    var b = document.createElement('button');
+    b.className = 'loc-chip reg-chip';
+    b.textContent = label;
+    b.dataset.reg = label;
+    b.addEventListener('click', function() {
+      var i = sel.indexOf(label);
+      if (i < 0) sel.push(label); else sel.splice(i, 1);
+      b.classList.toggle('on', i < 0);
+      applyRegionSel();
+    });
+    c.appendChild(b);
+  }
+  regs.forEach(function(r){ addChip(r, REG_SEL); });
+  if (regs.length && elevs.length) {
+    var sep = document.createElement('span');
+    sep.style.cssText = 'width:1px;height:16px;background:rgba(0,0,0,.15);margin:0 4px;';
+    c.appendChild(sep);
+  }
+  elevs.forEach(function(e){ addChip(e, ELEV_SEL); });
+
+  var sep2 = document.createElement('span');
+  sep2.style.cssText = 'width:1px;height:16px;background:rgba(0,0,0,.15);margin:0 4px;';
+  c.appendChild(sep2);
+  var only = document.createElement('button');
+  only.className = 'loc-chip';
+  only.id = 'reg-only';
+  only.title = 'Hide species also found at sites outside the current selection';
+  only.textContent = 'Only these sites';
+  only.addEventListener('click', function() {
+    ONLY_SEL = !ONLY_SEL;
+    only.classList.toggle('on', ONLY_SEL);
+    render();
+  });
+  c.appendChild(only);
+}
+
+function applyRegionSel() {
+  var allBtn = document.getElementById('loc-all');
+  if (!REG_SEL.length && !ELEV_SEL.length) {
+    ACTIVE_LOCS = LOCS.slice();
+    document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){ x.classList.remove('on'); });
+    allBtn.classList.add('on');
+  } else {
+    ACTIVE_LOCS = LOCS.filter(function(l) {
+      return (!REG_SEL.length || REG_SEL.indexOf(SITE_REG[l]) >= 0)
+          && (!ELEV_SEL.length || ELEV_SEL.indexOf(SITE_ELEV[l]) >= 0);
+    });
+    document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){
+      x.classList.toggle('on', ACTIVE_LOCS.indexOf(x.dataset.loc) >= 0);
+    });
+    allBtn.classList.remove('on');
+  }
+  render();
+}
+
+/* Picking sites by hand in the Location row clears the region/elevation chips (Only stays as-is) */
+function clearRegionSel() {
+  REG_SEL = []; ELEV_SEL = [];
+  document.querySelectorAll('.reg-chip').forEach(function(x){ x.classList.remove('on'); });
+}
 
 /* ── Lightbox ── */
 function openLightbox(sp) {
@@ -570,6 +674,7 @@ function buildTile(sp) {
   var ini = initials(sp.name);
   var slug = sp.name.toLowerCase().replace(/[\u2018\u2019']/g,'').replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'');
 
+  var geo = geoPillsHTML(sp);
   var gridHTML = '<div class="pt-grid">';
   for (var i = 0; i < 6; i++) {
     var l = sp.locs[i];
@@ -605,7 +710,7 @@ function buildTile(sp) {
     +     '<div class="pt-ob" style="'+obStyle+'" data-name="'+sp.name+'">'+obTxt+'</div>'
     +   '</div>'
     +   '<div class="pt-fam-row"><span class="pt-fam" style="color:'+dark+'">'+abbrevFamily(sp.family)+'</span>'+newPill+'</div>'
-    +   ((sp.cats&&sp.cats.length) || sp.merlin ? '<div class="pt-cat-pills">'
+    +   ((sp.cats&&sp.cats.length) || sp.merlin || geo ? '<div class="pt-cat-pills">' + geo
     +     (sp.cats&&sp.cats.length ? sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent' || c === 'Infreq'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('') : '')
     +     (sp.merlin ? '<span class="pt-cat-pill pt-icon-pill" style="background:transparent;color:'+dark+';border:1px solid '+dark+';opacity:.4;" title="Merlin sound ID">'+ICON_SPEAKER+'</span>' : '')
     +   '</div>' : '')
@@ -701,6 +806,8 @@ function render() {
     /* Location filter: species must have at least one loc in ACTIVE_LOCS */
     var hasLoc = sp.locs.some(function(l){ return l && ACTIVE_LOCS.indexOf(l[0]) >= 0; });
     if (!hasLoc) return false;
+    /* Only: species must not occur at any site outside the active ones */
+    if (ONLY_SEL && sp.sites.some(function(s){ return ACTIVE_LOCS.indexOf(s) < 0; })) return false;
     /* Category filter */
     if (CATS.length && ACTIVE_CATS.length < CATS.length) {
       var spCats = sp.cats || []; var hasCat = spCats.length === 0 ? false : spCats.some(function(c){ return ACTIVE_CATS.indexOf(c) >= 0; });
@@ -780,7 +887,7 @@ function parseCSV(txt) {
         if (heads[i] === names[n].toLowerCase()) return i;
     return -1;
   }
-  var iName=col('name','malaysia & singapore'), iNew=col('new'), iFamily=col('family'),
+  var iName=0, iNew=col('new'), iFamily=col('family'),
       iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
       iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2'), iPhoto=col('photo'),
       iWhere=col('where'), iMerlin=col('merlin');
@@ -864,7 +971,7 @@ function loadCSV(txt) {
   /* derive title from first column header */
   var firstLine = txt.split(/\r?\n/)[0];
   var rawTitle = splitRow(firstLine)[0].trim();
-  TITLE = (rawTitle.toLowerCase() === 'name') ? 'Malaysia & Singapore' : rawTitle;
+  TITLE = rawTitle;
   document.getElementById('trip-title').textContent = TITLE;
 
   /* unique locations */
@@ -875,15 +982,13 @@ function loadCSV(txt) {
   LOCS = Object.keys(locSet).sort();
   buildLocChips();
 
-  /* unique categories — Cat1 options first (alpha), then Cat2 options (alpha) */
-  var cat1Set = {}, cat2Set = {};
-  ALL.forEach(function(sp) {
-    (sp.cat1s||[]).forEach(function(c){ cat1Set[c]=1; });
-    (sp.cat2s||[]).forEach(function(c){ if(!cat1Set[c]) cat2Set[c]=1; });
-  });
-  CATS = Object.keys(cat1Set).sort().concat(Object.keys(cat2Set).sort());
+  /* unique categories (Category 3 — frequency), alpha */
+  var catSet = {};
+  ALL.forEach(function(sp) { (sp.cats||[]).forEach(function(c){ catSet[c]=1; }); });
+  CATS = Object.keys(catSet).sort();
   ACTIVE_CATS = CATS.slice();
   buildCatChips();
+  buildRegionChips();
 
 
 
