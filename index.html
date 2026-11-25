@@ -317,6 +317,10 @@ body {
     <span class="fl">Location</span>
     <div id="loc-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
   </div>
+  <div class="trow" id="reg-row" style="display:none;">
+    <span class="fl">Region</span>
+    <div id="reg-chips" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;"></div>
+  </div>
   <div class="trow" id="cat-row" style="display:none;">
     <span class="fl">Category</span>
     <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
@@ -891,10 +895,11 @@ function parseCSV(txt) {
   }
   var iName=0, iNew=col('new'), iFamily=col('family'),
       iID=col('id'), iLoc=col('location'), iRar=col('rarity'), iFam=col('fam'),
-      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat1=col('category 1'), iCat2=col('category 2'), iPhoto=col('photo'),
+      iFeat=col('features'), iSpots=col('spots'), iLook=col('lookalikes'), iCat3=col('category 3'), iReg1=col('region 1'), iReg2=col('region 2'), iPhoto=col('photo'),
       iWhere=col('where'), iMerlin=col('merlin');
 
   var map = {};
+  SITE_REG = {}; SITE_ELEV = {};
   for (var i=1; i<lines.length; i++) {
     var c = splitRow(lines[i]);
     if (!c || !c[iName] || !c[iName].trim()) continue;
@@ -907,7 +912,7 @@ function parseCSV(txt) {
         famNew: (c[iFam]||'').trim().toLowerCase() === 'new',
         id: parseInt((c[iID]||'9999').trim()) || 9999,
         locs: [],
-        cats: [], cat1s: [], cat2s: [],
+        cats: [], sites: [], regions: [], elevs: [],
         features: (c[iFeat]||'').trim(),
         spots: (c[iSpots]||'').trim(),
         photo: iPhoto>=0 && (c[iPhoto]||'').trim().toLowerCase()==='yes',
@@ -930,16 +935,17 @@ function parseCSV(txt) {
     if (!map[name].features && iFeat>=0) map[name].features = (c[iFeat]||'').trim();
     if (!map[name].spots    && iSpots>=0) map[name].spots   = (c[iSpots]||'').trim();
     if (!map[name].lookalikes && iLook>=0) map[name].lookalikes = (c[iLook]||'').trim();
-    // Categories — collect unique values
-    [[iCat1, 'cat1s'], [iCat2, 'cat2s']].forEach(function(pair) {
-      var ic = pair[0], arr = pair[1];
-      if (ic < 0) return;
-      var cv = (c[ic]||'').trim();
-      if (cv) {
-        if (map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv);
-        if (map[name][arr].indexOf(cv) < 0) map[name][arr].push(cv);
-      }
-    });
+    // Category 3 (frequency) — faded pills + Category filter
+    if (iCat3 >= 0) { var cv = (c[iCat3]||'').trim(); if (cv && map[name].cats.indexOf(cv) < 0) map[name].cats.push(cv); }
+    // Region 1 (North/South) + Region 2 (elevation) — derived per species from the sites it occurs at
+    var rg = iReg1>=0 ? (c[iReg1]||'').trim() : '', ev = iReg2>=0 ? (c[iReg2]||'').trim() : '';
+    if (locName) {
+      if (map[name].sites.indexOf(locName) < 0) map[name].sites.push(locName);
+      if (rg) SITE_REG[locName] = rg;
+      if (ev) SITE_ELEV[locName] = ev;
+    }
+    if (rg && map[name].regions.indexOf(rg) < 0) map[name].regions.push(rg);
+    if (ev && map[name].elevs.indexOf(ev) < 0) map[name].elevs.push(ev);
   }
 
   var list = Object.values(map);
