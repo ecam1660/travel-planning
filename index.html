@@ -551,16 +551,19 @@ var REGION_ORDER = ['North','South'];
 var ELEV_ORDER = ['Highlands','Cloud Forest','Foothills','Lowlands'];
 var ELEV_SHORT = { 'Highlands':'Highlands', 'Cloud Forest':'Cloud', 'Foothills':'Foothills', 'Lowlands':'Lowlands' };
 var GEO_COLORS = { 'Highlands':'#E6C47A', 'Cloud Forest':'#C9A26D', 'Foothills':'#A8B89A', 'Lowlands':'#7FA699',
-  'North':'#B7C26B', 'South':'#7CA6C9' };
+  'North':'#8EA4BA', 'South':'#A496B8' };
 
 function elevRank(e) { var i = ELEV_ORDER.indexOf(e); return i < 0 ? 99 : i; }
 
-/* Tile pills: "North only"/"South only" when a species is in just one region;
+/* Tile pills: region as N / S / N·S (split color when in both);
    elevation shown as the single level, or the top–bottom range with a gradient */
 function geoPillsHTML(sp) {
   var out = '';
-  if (sp.regions && sp.regions.length === 1) {
-    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[sp.regions[0]]||'#A8B89A')+';">'+sp.regions[0]+'</span>';
+  var rg = sp.regions || [];
+  if (rg.length === 1) {
+    out += '<span class="pt-cat-pill" title="'+rg[0]+' only" style="background:'+(GEO_COLORS[rg[0]]||'#A8B89A')+';padding:0 5px;">'+rg[0].charAt(0)+'</span>';
+  } else if (rg.length > 1) {
+    out += '<span class="pt-cat-pill" title="North and South" style="background:linear-gradient(90deg,'+GEO_COLORS['North']+' 50%,'+GEO_COLORS['South']+' 50%);padding:0 5px;">N·S</span>';
   }
   var ev = (sp.elevs||[]).slice().sort(function(a,b){ return elevRank(a) - elevRank(b); });
   if (ev.length === 1) {
