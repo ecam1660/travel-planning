@@ -105,6 +105,7 @@ body {
 }
 .loc-chip:hover { border-color: #95B5AB; }
 .loc-chip.on { background: #C4D4C8; color: var(--ink); border-color: #C4D4C8; }
+.reg-chip.on { background: var(--cat-color); border-color: var(--cat-color); color: #fff; }
 
 /* rbar */
 .rbar {
@@ -278,7 +279,7 @@ body {
 <body>
 
 <div class="header">
-  <h1>Travel Planning<span class="mobile-hide">: <span id="trip-title" style="font-weight:400">—</span></span></h1>
+  <h1>Travel Planning<span class="mobile-hide" style="font-weight:400">: <span id="trip-title" style="font-weight:400">—</span></span></h1>
   <span class="hcount mobile-hide" id="hcount"></span>
   <a class="nav-btn" href="nonbirds.html">Non-Birds</a>
   <a class="nav-btn" href="flashcards.html">ID Flashcards</a>
@@ -545,8 +546,8 @@ var REG_SEL = [], ELEV_SEL = [], ONLY_SEL = false;
 var REGION_ORDER = ['North','South'];
 var ELEV_ORDER = ['Highlands','Cloud Forest','Foothills','Lowlands'];
 var ELEV_SHORT = { 'Highlands':'Highlands', 'Cloud Forest':'Cloud', 'Foothills':'Foothills', 'Lowlands':'Lowlands' };
-var GEO_COLORS = { 'North':'#7CA6C9', 'South':'#D98F77',
-  'Highlands':'#9AA3B5', 'Cloud Forest':'#7FA699', 'Foothills':'#A9B562', 'Lowlands':'#D9B45F' };
+var GEO_COLORS = { 'Highlands':'#E6C47A', 'Cloud Forest':'#C9A26D', 'Foothills':'#A8B89A', 'Lowlands':'#7FA699',
+  'North':'#B7C26B', 'South':'#7CA6C9' };
 
 function elevRank(e) { var i = ELEV_ORDER.indexOf(e); return i < 0 ? 99 : i; }
 
@@ -555,11 +556,11 @@ function elevRank(e) { var i = ELEV_ORDER.indexOf(e); return i < 0 ? 99 : i; }
 function geoPillsHTML(sp) {
   var out = '';
   if (sp.regions && sp.regions.length === 1) {
-    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[sp.regions[0]]||'#A8B89A')+';">'+sp.regions[0]+' only</span>';
+    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[sp.regions[0]]||'#A8B89A')+';">'+sp.regions[0]+'</span>';
   }
   var ev = (sp.elevs||[]).slice().sort(function(a,b){ return elevRank(a) - elevRank(b); });
   if (ev.length === 1) {
-    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[ev[0]]||'#A8B89A')+';">'+ev[0]+' only</span>';
+    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[ev[0]]||'#A8B89A')+';">'+ev[0]+'</span>';
   } else if (ev.length > 1) {
     var top = ev[0], bot = ev[ev.length-1];
     out += '<span class="pt-cat-pill" title="'+ev.join(', ')+'" style="background:linear-gradient(90deg,'+(GEO_COLORS[top]||'#A8B89A')+','+(GEO_COLORS[bot]||'#A8B89A')+');">'
@@ -585,6 +586,7 @@ function buildRegionChips() {
     b.className = 'loc-chip reg-chip';
     b.textContent = label;
     b.dataset.reg = label;
+    b.style.setProperty('--cat-color', GEO_COLORS[label] || '#A8B89A');
     b.addEventListener('click', function() {
       var i = sel.indexOf(label);
       if (i < 0) sel.push(label); else sel.splice(i, 1);
