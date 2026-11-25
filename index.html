@@ -596,7 +596,14 @@ function buildRegionChips() {
     b.style.setProperty('--cat-color', GEO_COLORS[label] || '#A8B89A');
     b.addEventListener('click', function() {
       var i = sel.indexOf(label);
-      if (i < 0) sel.push(label); else sel.splice(i, 1);
+      if (i < 0) {
+        /* North/South act as one-or-the-other: picking one clears the other */
+        if (sel === REG_SEL) {
+          REG_SEL.length = 0;
+          document.querySelectorAll('.reg-chip').forEach(function(x){ if (REGION_ORDER.indexOf(x.dataset.reg) >= 0) x.classList.remove('on'); });
+        }
+        sel.push(label);
+      } else sel.splice(i, 1);
       b.classList.toggle('on', i < 0);
       applyRegionSel();
     });
