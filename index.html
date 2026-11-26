@@ -322,7 +322,7 @@ body {
     <div id="reg-chips" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;"></div>
   </div>
   <div class="trow" id="cat-row" style="display:none;">
-    <span class="fl">Category</span>
+    <span class="fl">Frequency</span>
     <div id="cat-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
   </div>
   
@@ -1029,7 +1029,11 @@ function loadCSV(txt) {
   /* unique categories (Category 3 — frequency), alpha */
   var catSet = {};
   ALL.forEach(function(sp) { (sp.cats||[]).forEach(function(c){ catSet[c]=1; }); });
-  CATS = Object.keys(catSet).sort();
+  var CAT_ORDER = ['Widespread', 'Infreq'];  /* shown as Freq, Infreq */
+  CATS = Object.keys(catSet).sort(function(a,b){
+    var ia = CAT_ORDER.indexOf(a), ib = CAT_ORDER.indexOf(b);
+    return (ia<0?99:ia) - (ib<0?99:ib) || a.localeCompare(b);
+  });
   ACTIVE_CATS = CATS.slice();
   buildCatChips();
   buildRegionChips();
@@ -1043,6 +1047,7 @@ function loadCSV(txt) {
 
 /* ── Category chips ── */
 function buildCatChips() {
+  function styleOff(x) { x.classList.remove('on'); x.style.background = ''; x.style.borderColor = ''; x.style.color = ''; }
   var c = document.getElementById('cat-chips');
   if (!c) return;
   c.innerHTML = '';
@@ -1058,7 +1063,7 @@ function buildCatChips() {
   allBtn.textContent = 'All';
   allBtn.addEventListener('click', function() {
     ACTIVE_CATS = CATS.slice();
-    document.querySelectorAll('.cat-chip[data-cat]').forEach(function(x){ x.classList.remove('on'); });
+    document.querySelectorAll('.cat-chip[data-cat]').forEach(styleOff);
     allBtn.classList.add('on');
     render();
   });
@@ -1067,20 +1072,24 @@ function buildCatChips() {
   CATS.forEach(function(cat) {
     var b = document.createElement('button');
     b.className = 'cat-chip loc-chip';
-    b.textContent = cat;
+    b.textContent = (cat === 'Widespread') ? 'Freq' : cat;
     b.dataset.cat = cat;
     b.dataset.color = getCatColor(cat);
     b.style.setProperty('--cat-color', getCatColor(cat));
     b.addEventListener('click', function() {
-      allBtn.classList.remove('on');
-      b.classList.toggle('on');
-      b.style.background = b.classList.contains('on') ? getCatColor(cat) : '';
-      b.style.borderColor = b.classList.contains('on') ? getCatColor(cat) : '';
-      b.style.color = b.classList.contains('on') ? '#fff' : '';
-      ACTIVE_CATS = Array.from(document.querySelectorAll('.cat-chip[data-cat].on')).map(function(x){return x.dataset.cat;});
-      if (ACTIVE_CATS.length === 0) {
+      /* one at a time: picking a chip clears the other; clicking the active one goes back to All */
+      var wasOn = b.classList.contains('on');
+      document.querySelectorAll('.cat-chip[data-cat]').forEach(styleOff);
+      if (wasOn) {
         allBtn.classList.add('on');
         ACTIVE_CATS = CATS.slice();
+      } else {
+        allBtn.classList.remove('on');
+        b.classList.add('on');
+        b.style.background = getCatColor(cat);
+        b.style.borderColor = getCatColor(cat);
+        b.style.color = '#fff';
+        ACTIVE_CATS = [cat];
       }
       render();
     });
