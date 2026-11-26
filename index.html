@@ -643,29 +643,43 @@ function buildRegionChips() {
   c.appendChild(only);
 }
 
+function regionActive() { return REG_SEL.length > 0 || ELEV_SEL.length > 0; }
+function regionLocs() {
+  return LOCS.filter(function(l) {
+    return (!REG_SEL.length || REG_SEL.indexOf(SITE_REG[l]) >= 0)
+        && (!ELEV_SEL.length || ELEV_SEL.indexOf(SITE_ELEV[l]) >= 0);
+  });
+}
+/* Sites the filters use: the region/elevation match when those are picked, otherwise the Location row */
+function effLocs() { return regionActive() ? regionLocs() : ACTIVE_LOCS; }
+
+/* Region/elevation chips reset the Location row and outline the matching sites (outline only, not selected) */
 function applyRegionSel() {
-  var allBtn = document.getElementById('loc-all');
-  if (!REG_SEL.length && !ELEV_SEL.length) {
-    ACTIVE_LOCS = LOCS.slice();
-    document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){ x.classList.remove('on'); });
-    allBtn.classList.add('on');
-  } else {
-    ACTIVE_LOCS = LOCS.filter(function(l) {
-      return (!REG_SEL.length || REG_SEL.indexOf(SITE_REG[l]) >= 0)
-          && (!ELEV_SEL.length || ELEV_SEL.indexOf(SITE_ELEV[l]) >= 0);
-    });
-    document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){
-      x.classList.toggle('on', ACTIVE_LOCS.indexOf(x.dataset.loc) >= 0);
-    });
-    allBtn.classList.remove('on');
-  }
+  ACTIVE_LOCS = LOCS.slice();
+  document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('loc-all').classList.toggle('on', !regionActive());
+  updateRegionOutlines();
   render();
 }
 
-/* Picking sites by hand in the Location row clears the region/elevation chips (Only stays as-is) */
+function updateRegionOutlines() {
+  var match = regionActive() ? regionLocs() : [];
+  var rc = REG_SEL.length ? GEO_COLORS[REG_SEL[0]] : null;
+  var ec = ELEV_SEL.length ? GEO_COLORS[ELEV_SEL[ELEV_SEL.length-1]] : null;
+  document.querySelectorAll('.loc-chip[data-loc]').forEach(function(x){
+    var on = match.indexOf(x.dataset.loc) >= 0;
+    var rings = [];
+    if (on && rc && ec) rings = ['inset 0 0 0 1.5px '+ec, '0 0 0 1.5px '+rc];
+    else if (on && (rc || ec)) rings = ['0 0 0 1.5px '+(rc || ec)];
+    x.style.boxShadow = rings.join(', ');
+  });
+}
+
+/* Picking a site (or All) in the Location row clears the region/elevation chips (Only stays as-is) */
 function clearRegionSel() {
-  REG_SEL = []; ELEV_SEL = [];
+  REG_SEL.length = 0; ELEV_SEL.length = 0;  /* empty in place: the chips hold references to these arrays */
   document.querySelectorAll('.reg-chip').forEach(function(x){ x.classList.remove('on'); });
+  updateRegionOutlines();
 }
 
 /* ── Lightbox ── */
@@ -820,6 +834,7 @@ function buildTile(sp) {
 
 /* ── Render ── */
 function render() {
+  var EFF = effLocs();
   var q = document.getElementById('search').value.toLowerCase();
   var f = ALL.filter(function(sp) {
     if (q && sp.name.toLowerCase().indexOf(q) < 0 && sp.family.toLowerCase().indexOf(q) < 0) return false;
@@ -830,10 +845,10 @@ function render() {
     if (NO_PHOTO && hasPhoto(sp)) return false;
     if (MERLIN_ONLY && !sp.merlin) return false;
     /* Location filter: species must have at least one loc in ACTIVE_LOCS */
-    var hasLoc = sp.allLocs.some(function(l){ return ACTIVE_LOCS.indexOf(l[0]) >= 0; });
+    var hasLoc = sp.allLocs.some(function(l){ return EFF.indexOf(l[0]) >= 0; });
     if (!hasLoc) return false;
     /* Only: species must not occur at any site outside the active ones */
-    if (ONLY_SEL && sp.sites.some(function(s){ return ACTIVE_LOCS.indexOf(s) < 0; })) return false;
+    if (ONLY_SEL && sp.sites.some(function(s){ return EFF.indexOf(s) < 0; })) return false;
     /* Category filter */
     if (CATS.length && ACTIVE_CATS.length < CATS.length) {
       var spCats = sp.cats || []; var hasCat = spCats.length === 0 ? false : spCats.some(function(c){ return ACTIVE_CATS.indexOf(c) >= 0; });
@@ -845,7 +860,7 @@ function render() {
     if (minC > 0 || minCI > 0) {
       var cCount = 0, ciCount = 0;
       sp.allLocs.forEach(function(l) {
-        if (!l || ACTIVE_LOCS.indexOf(l[0]) < 0) return;
+        if (!l || EFF.indexOf(l[0]) < 0) return;
         if (l[1].charAt(0) === 'C') cCount++;
         ciCount++;
       });
@@ -860,7 +875,7 @@ function render() {
     var best = null;
     sp.allLocs.forEach(function(l) {
       if (!l) return;
-      if (ACTIVE_LOCS.indexOf(l[0]) < 0) return;
+      if (EFF.indexOf(l[0]) < 0) return;
       var prefix = l[1].startsWith('C') ? 0 : 1;
       var num = parseInt(l[1].split('-')[1] || 9999);
       if (!best || prefix < best[0] || (prefix === best[0] && num < best[1])) {
