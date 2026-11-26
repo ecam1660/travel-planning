@@ -549,7 +549,7 @@ var SITE_REG = {}, SITE_ELEV = {};
 var REG_SEL = [], ELEV_SEL = [], ONLY_SEL = false;
 var REGION_ORDER = ['North','South'];
 var ELEV_ORDER = ['Highlands','Cloud Forest','Foothills','Lowlands'];
-var ELEV_SHORT = { 'Highlands':'Highlands', 'Cloud Forest':'Cloud', 'Foothills':'Foothills', 'Lowlands':'Lowlands' };
+var ELEV_SHORT = { 'Highlands':'High', 'Cloud Forest':'Cloud', 'Foothills':'Foot', 'Lowlands':'Low' };
 var GEO_COLORS = { 'Highlands':'#E6C47A', 'Cloud Forest':'#C9A26D', 'Foothills':'#A8B89A', 'Lowlands':'#7FA699',
   'North':'#8EA4BA', 'South':'#A496B8' };
 
@@ -567,7 +567,7 @@ function geoPillsHTML(sp) {
   }
   var ev = (sp.elevs||[]).slice().sort(function(a,b){ return elevRank(a) - elevRank(b); });
   if (ev.length === 1) {
-    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[ev[0]]||'#A8B89A')+';">'+ev[0]+'</span>';
+    out += '<span class="pt-cat-pill" style="background:'+(GEO_COLORS[ev[0]]||'#A8B89A')+';" title="'+ev[0]+' only">'+ELEV_SHORT[ev[0]]+'</span>';
   } else if (ev.length > 1) {
     var top = ev[0], bot = ev[ev.length-1];
     out += '<span class="pt-cat-pill" title="'+ev.join(', ')+'" style="background:linear-gradient(90deg,'+(GEO_COLORS[top]||'#A8B89A')+','+(GEO_COLORS[bot]||'#A8B89A')+');">'
@@ -597,10 +597,11 @@ function buildRegionChips() {
     b.addEventListener('click', function() {
       var i = sel.indexOf(label);
       if (i < 0) {
-        /* North/South act as one-or-the-other: picking one clears the other */
-        if (sel === REG_SEL) {
-          REG_SEL.length = 0;
-          document.querySelectorAll('.reg-chip').forEach(function(x){ if (REGION_ORDER.indexOf(x.dataset.reg) >= 0) x.classList.remove('on'); });
+        /* North/South are always one-or-the-other; elevations are too while "Only these sites" is on */
+        if (sel === REG_SEL || (sel === ELEV_SEL && ONLY_SEL)) {
+          var group = (sel === REG_SEL) ? REGION_ORDER : ELEV_ORDER;
+          sel.length = 0;
+          document.querySelectorAll('.reg-chip').forEach(function(x){ if (group.indexOf(x.dataset.reg) >= 0) x.classList.remove('on'); });
         }
         sel.push(label);
       } else sel.splice(i, 1);
@@ -628,7 +629,16 @@ function buildRegionChips() {
   only.addEventListener('click', function() {
     ONLY_SEL = !ONLY_SEL;
     only.classList.toggle('on', ONLY_SEL);
-    render();
+    /* turning Only on with several elevations picked keeps just the last one picked */
+    if (ONLY_SEL && ELEV_SEL.length > 1) {
+      ELEV_SEL.splice(0, ELEV_SEL.length - 1);
+      document.querySelectorAll('.reg-chip').forEach(function(x){
+        if (ELEV_ORDER.indexOf(x.dataset.reg) >= 0) x.classList.toggle('on', ELEV_SEL.indexOf(x.dataset.reg) >= 0);
+      });
+      applyRegionSel();
+    } else {
+      render();
+    }
   });
   c.appendChild(only);
 }
@@ -727,7 +737,7 @@ function buildTile(sp) {
     +   '</div>'
     +   '<div class="pt-fam-row"><span class="pt-fam" style="color:'+dark+'">'+abbrevFamily(sp.family)+'</span>'+newPill+'</div>'
     +   ((sp.cats&&sp.cats.length) || sp.merlin || geo ? '<div class="pt-cat-pills">' + geo
-    +     (sp.cats&&sp.cats.length ? sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent' || c === 'Infreq'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+c+'</span>';}).join('') : '')
+    +     (sp.cats&&sp.cats.length ? sp.cats.map(function(c){var isWide = (c === 'Widespread' || c === 'Infrequent' || c === 'Infreq'); return '<span class="pt-cat-pill" style="background:'+(isWide ? 'transparent' : getCatColor(c))+';color:'+(isWide ? dark : '#fff')+';border:'+(isWide ? '1px solid '+dark+';opacity:.4;' : 'none;')+'">'+(c === 'Widespread' ? 'Freq' : c)+'</span>';}).join('') : '')
     +     (sp.merlin ? '<span class="pt-cat-pill pt-icon-pill" style="background:transparent;color:'+dark+';border:1px solid '+dark+';opacity:.4;" title="Merlin sound ID">'+ICON_SPEAKER+'</span>' : '')
     +   '</div>' : '')
     +   gridHTML
@@ -820,7 +830,7 @@ function render() {
     if (NO_PHOTO && hasPhoto(sp)) return false;
     if (MERLIN_ONLY && !sp.merlin) return false;
     /* Location filter: species must have at least one loc in ACTIVE_LOCS */
-    var hasLoc = sp.locs.some(function(l){ return l && ACTIVE_LOCS.indexOf(l[0]) >= 0; });
+    var hasLoc = sp.allLocs.some(function(l){ return ACTIVE_LOCS.indexOf(l[0]) >= 0; });
     if (!hasLoc) return false;
     /* Only: species must not occur at any site outside the active ones */
     if (ONLY_SEL && sp.sites.some(function(s){ return ACTIVE_LOCS.indexOf(s) < 0; })) return false;
@@ -834,7 +844,7 @@ function render() {
     var minCI = parseInt(document.getElementById('min-ci').value) || 0;
     if (minC > 0 || minCI > 0) {
       var cCount = 0, ciCount = 0;
-      sp.locs.forEach(function(l) {
+      sp.allLocs.forEach(function(l) {
         if (!l || ACTIVE_LOCS.indexOf(l[0]) < 0) return;
         if (l[1].charAt(0) === 'C') cCount++;
         ciCount++;
@@ -848,7 +858,7 @@ function render() {
   // Sort BEFORE rendering
   function bestRarity(sp) {
     var best = null;
-    sp.locs.forEach(function(l) {
+    sp.allLocs.forEach(function(l) {
       if (!l) return;
       if (ACTIVE_LOCS.indexOf(l[0]) < 0) return;
       var prefix = l[1].startsWith('C') ? 0 : 1;
@@ -965,6 +975,7 @@ function parseCSV(txt) {
       if (ap !== bp) return ap - bp;
       return parseInt(a[1].split('-')[1]||0) - parseInt(b[1].split('-')[1]||0);
     });
+    sp.allLocs = sp.locs.slice();
     while (sp.locs.length < 6) sp.locs.push(null);
     sp.locs = sp.locs.slice(0,6);
   });
@@ -995,7 +1006,7 @@ function loadCSV(txt) {
   /* unique locations */
   var locSet = {};
   ALL.forEach(function(sp){
-    sp.locs.forEach(function(l){ if(l) locSet[l[0]]=1; });
+    sp.allLocs.forEach(function(l){ locSet[l[0]]=1; });
   });
   LOCS = Object.keys(locSet).sort();
   buildLocChips();
